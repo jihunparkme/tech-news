@@ -69,7 +69,7 @@ public class GitReleaseCrawlingTest {
             builder.version("Release " + releaseVersionMatcher.group(0));
             builder.url(generateReleaseUrl(repository, releaseVersionMatcher.group(1)));
         } else {
-            log.error("일치하는 버전이 없습니다.");
+            log.error("Not found matching version.");
         }
 
         final Matcher relaseDateMatcher = RELEASE_DATE_PATTERN.matcher(trim);
