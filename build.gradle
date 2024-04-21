@@ -27,6 +27,7 @@ dependencies {
 
     // util
     implementation 'org.jsoup:jsoup:1.17.1'
+    implementation 'org.apache.commons:commons-lang3'
 
     // lombok
     compileOnly 'org.projectlombok:lombok'
