@@ -88,12 +88,14 @@ public class GitReleaseCrawlingTest {
         return RELEASE_NOTE_BASE_URL + repository + RELEASE_NOTE_POSTFIX + version;
     }
 
-    @Builder
     private record ReleaseInfo(
             String version,
             String date,
             String url
     ) {
+        @Builder
+        private ReleaseInfo {
+        }
     }
 }
 
