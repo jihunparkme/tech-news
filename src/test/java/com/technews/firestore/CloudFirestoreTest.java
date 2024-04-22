@@ -9,7 +9,7 @@ import com.google.cloud.firestore.QuerySnapshot;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
-import com.technews.aggregate.springframework.dto.Release;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -148,5 +148,18 @@ public class CloudFirestoreTest {
         } catch (Exception e) {
             throw new RuntimeException("document search failed.");
         }
+    }
+
+    @Setter
+    @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    private class Release {
+        private String id;
+        private String project;
+        private String version;
+        private String date;
+        private String url;
     }
 }
