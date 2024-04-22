@@ -1,4 +1,4 @@
-package com.technews.springProjects.dto;
+package com.technews.springframework.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
