@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Locale;
 
 @Slf4j
@@ -23,6 +24,7 @@ public class SaveReleaseRequest {
     private String version;
     private String date;
     private String url;
+    private List<String> tags;
 
     public Release toRelease(final String id) {
         return Release.builder()
@@ -31,6 +33,7 @@ public class SaveReleaseRequest {
                 .version(this.version)
                 .date(this.date)
                 .url(this.url)
+                .tags(this.tags)
                 .build();
     }
 

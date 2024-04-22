@@ -79,6 +79,7 @@ public class GitReleaseScheduler {
     private static SaveReleaseRequest getReleaseInfo(final String repository, final String trim) {
         final SaveReleaseRequest.SaveReleaseRequestBuilder builder = SaveReleaseRequest.builder();
         builder.project(repository);
+        builder.tags(List.of(repository, "release"));
 
         final Matcher releaseVersionMatcher = RELEASE_VERSION_PATTERN.matcher(trim);
         if (releaseVersionMatcher.find()) {
