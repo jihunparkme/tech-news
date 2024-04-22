@@ -1,4 +1,4 @@
-package com.technews.aggregate.springframework.dto;
+package com.technews.aggregate.springframework.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
