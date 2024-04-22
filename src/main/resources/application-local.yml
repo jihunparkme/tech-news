@@ -1,0 +1,24 @@
+server:
+  port: 8080
+
+spring:
+
+  config:
+    activate:
+      on-profile: local
+
+  thymeleaf:
+    cache: 'false'
+
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /management/actuator

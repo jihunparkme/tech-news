@@ -1,0 +1,12 @@
+server:
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  application:
+    name: tech-news
+  profiles:
+    active: prod
+    group:
+      local: local
+      prod: prod
