@@ -15,6 +15,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+import static com.google.cloud.firestore.Query.Direction.DESCENDING;
 
 @Slf4j
 @Repository
@@ -22,7 +25,7 @@ public class ReleasesRepository {
 
     private static final String COLLECTION_NAME = Collections.RELEASES.key();
 
-    public void insertRelease(SaveReleaseRequest saveReleaseRequest) {
+    public void save(SaveReleaseRequest saveReleaseRequest) {
         Query query = FirestoreClient.getFirestore().collection(COLLECTION_NAME)
                 .whereEqualTo("project", saveReleaseRequest.getProject())
                 .whereEqualTo("version", saveReleaseRequest.getVersion());
@@ -40,7 +43,7 @@ public class ReleasesRepository {
         log.warn("this release information already exists.");
     }
 
-    public List<Release> findAllReleases() {
+    public List<Release> findAll() {
         try {
             ApiFuture<QuerySnapshot> future = FirestoreClient.getFirestore().collection(COLLECTION_NAME).get();
             List<QueryDocumentSnapshot> documents = future.get().getDocuments();
@@ -49,7 +52,26 @@ public class ReleasesRepository {
                 result.add(document.toObject(Release.class));
             }
             return result;
-        } catch (Exception e) {
+        } catch (InterruptedException | ExecutionException e) {
+            log.error("querySnapshot exception. {}", e.getMessage(), e);
+            throw new FirebaseQuerySnapshotException();
+        }
+    }
+
+    public List<Release> findLatestReleaseDate(final String project) {
+        try {
+            ApiFuture<QuerySnapshot> future = FirestoreClient.getFirestore().collection(COLLECTION_NAME)
+                    .whereEqualTo("project", project)
+                    .orderBy("version", DESCENDING)
+                    .limit(1)
+                    .get();
+            List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+            List<Release> result = new ArrayList<>();
+            for (QueryDocumentSnapshot document : documents) {
+                result.add(document.toObject(Release.class));
+            }
+            return result;
+        } catch (InterruptedException | ExecutionException e) {
             log.error("querySnapshot exception. {}", e.getMessage(), e);
             throw new FirebaseQuerySnapshotException();
         }
@@ -58,7 +80,7 @@ public class ReleasesRepository {
     private boolean isNotExistDocument(ApiFuture<QuerySnapshot> querySnapshot) {
         try {
             return querySnapshot.get().isEmpty();
-        } catch (Exception e) {
+        } catch (InterruptedException | ExecutionException e) {
             log.error("querySnapshot exception. {}", e.getMessage(), e);
             throw new FirebaseQuerySnapshotException();
         }
