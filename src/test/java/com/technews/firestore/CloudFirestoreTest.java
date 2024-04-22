@@ -155,7 +155,7 @@ public class CloudFirestoreTest {
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    private class Release {
+    private static class Release {
         private String id;
         private String project;
         private String version;
