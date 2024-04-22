@@ -63,6 +63,7 @@ public class GitReleaseCrawlingTest {
 
     private static ReleaseInfo getReleaseInfo(final String repository, final String trim) {
         final ReleaseInfo.ReleaseInfoBuilder builder = ReleaseInfo.builder();
+        builder.project(repository);
 
         final Matcher releaseVersionMatcher = RELEASE_VERSION_PATTERN.matcher(trim);
         if (releaseVersionMatcher.find()) {
@@ -89,6 +90,7 @@ public class GitReleaseCrawlingTest {
     }
 
     private record ReleaseInfo(
+            String project,
             String version,
             String date,
             String url
