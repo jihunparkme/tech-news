@@ -39,3 +39,6 @@ out/
 ### Custom ###
 .DS_Store
 **/resources/static/accountKey/**
+
+### application
+application-prod.yml
