@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Release {
+    public static final Release EMPTY = new Release("", "", "", "Apr 19, 1900", "");
+
     private String id;
     private String project;
     private String version;
