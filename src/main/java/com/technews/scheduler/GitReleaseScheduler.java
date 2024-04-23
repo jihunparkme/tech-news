@@ -1,8 +1,8 @@
 package com.technews.scheduler;
 
-import com.technews.aggregate.springframework.domain.Release;
-import com.technews.aggregate.springframework.dto.SaveReleaseRequest;
-import com.technews.aggregate.springframework.service.ReleasesSchedulerService;
+import com.technews.aggregate.releases.springframework.domain.Release;
+import com.technews.aggregate.releases.springframework.dto.SaveReleaseRequest;
+import com.technews.aggregate.releases.springframework.service.ReleasesSchedulerService;
 import com.technews.common.constant.SpringRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

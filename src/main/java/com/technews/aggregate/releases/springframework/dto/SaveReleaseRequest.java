@@ -1,6 +1,6 @@
-package com.technews.aggregate.springframework.dto;
+package com.technews.aggregate.releases.springframework.dto;
 
-import com.technews.aggregate.springframework.domain.Release;
+import com.technews.aggregate.releases.springframework.domain.Release;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

@@ -1,8 +1,8 @@
-package com.technews.aggregate.springframework.service;
+package com.technews.aggregate.releases.springframework.service;
 
-import com.technews.aggregate.springframework.domain.Release;
-import com.technews.aggregate.springframework.domain.repository.ReleasesRepository;
-import com.technews.aggregate.springframework.dto.SaveReleaseRequest;
+import com.technews.aggregate.releases.springframework.domain.Release;
+import com.technews.aggregate.releases.springframework.domain.repository.ReleasesRepository;
+import com.technews.aggregate.releases.springframework.dto.SaveReleaseRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -31,5 +31,10 @@ public class ReleasesSchedulerService {
         }
 
         return latestReleaseDate.get(0);
+    }
+
+    public List<Release> findAllRelease() {
+        final List<Release> releases = releasesRepository.findAll();
+        return releases;
     }
 }
