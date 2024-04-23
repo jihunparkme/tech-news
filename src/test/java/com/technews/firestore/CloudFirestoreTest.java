@@ -2,10 +2,7 @@ package com.technews.firestore;
 
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.Query;
-import com.google.cloud.firestore.QueryDocumentSnapshot;
-import com.google.cloud.firestore.QuerySnapshot;
+import com.google.cloud.firestore.*;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
@@ -19,6 +16,7 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.google.cloud.firestore.Query.Direction.DESCENDING;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Slf4j
@@ -106,6 +104,36 @@ public class CloudFirestoreTest {
         assertEquals("Release v3.3.0-RC1", result.get(0).getVersion());
         assertEquals("Apr 21, 2024", result.get(0).getDate());
         assertEquals("https://github.com/spring-projects/spring-boot/releases/tag/v3.3.0-RC1", result.get(0).getUrl());
+    }
+
+    @Test
+    void find_all_with_pagination() throws Exception {
+        final int page = 1;
+        final int size = 10;
+
+        List<Release> result = new ArrayList<>();
+        ApiFuture<QuerySnapshot> future = FirestoreClient.getFirestore().collection(COLLECTION_NAME)
+                .orderBy("createdDt", DESCENDING)
+                .limit(page * size)
+                .get();
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+
+        if (!documents.isEmpty()) {
+            DocumentSnapshot lastVisible = documents.get((page * size) - size);
+            ApiFuture<QuerySnapshot> nextFuture = FirestoreClient.getFirestore().collection(COLLECTION_NAME)
+                    .orderBy("createdDt", DESCENDING)
+                    .startAfter(lastVisible)
+                    .limit(size)
+                    .get();
+            List<QueryDocumentSnapshot> nextDocuments = nextFuture.get().getDocuments();
+
+
+            for (QueryDocumentSnapshot document : nextDocuments) {
+                result.add(document.toObject(Release.class));
+            }
+        }
+
+        assertEquals(10, result.size());
     }
 
     @Test
