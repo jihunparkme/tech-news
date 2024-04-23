@@ -1,10 +1,7 @@
 package com.technews.aggregate.releases.springframework.domain.repository;
 
 import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.Query;
-import com.google.cloud.firestore.QueryDocumentSnapshot;
-import com.google.cloud.firestore.QuerySnapshot;
+import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import com.technews.aggregate.releases.springframework.domain.Release;
 import com.technews.aggregate.releases.springframework.dto.SaveReleaseRequest;
@@ -56,6 +53,42 @@ public class ReleasesRepository {
             log.error("querySnapshot exception. {}", e.getMessage(), e);
             throw new FirebaseQuerySnapshotException();
         }
+    }
+
+    public List<Release> findAllWithPagination(final int page, final int size) {
+        try {
+            ApiFuture<QuerySnapshot> future = FirestoreClient.getFirestore().collection(COLLECTION_NAME)
+                    .orderBy("createdDt", DESCENDING)
+                    .limit(page * size)
+                    .get();
+            List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+
+            return getNextReleases(documents, page, size);
+        } catch (InterruptedException | ExecutionException e) {
+            log.error("querySnapshot exception. {}", e.getMessage(), e);
+            throw new FirebaseQuerySnapshotException();
+        }
+    }
+
+    private static List<Release> getNextReleases(
+            final List<QueryDocumentSnapshot> documents, final int page, final int size) throws InterruptedException, ExecutionException {
+        if (documents.isEmpty()) {
+            return java.util.Collections.EMPTY_LIST;
+        }
+
+        DocumentSnapshot lastVisible = documents.get((page * size) - size);
+        ApiFuture<QuerySnapshot> nextFuture = FirestoreClient.getFirestore().collection(COLLECTION_NAME)
+                .orderBy("createdDt", DESCENDING)
+                .startAfter(lastVisible)
+                .limit(size)
+                .get();
+        List<QueryDocumentSnapshot> nextDocuments = nextFuture.get().getDocuments();
+
+        final List<Release> result = new ArrayList<>();
+        for (QueryDocumentSnapshot document : nextDocuments) {
+            result.add(document.toObject(Release.class));
+        }
+        return result;
     }
 
     public List<Release> findLatestReleaseDate(final String project) {
