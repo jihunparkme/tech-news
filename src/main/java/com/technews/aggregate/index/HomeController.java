@@ -1,6 +1,5 @@
 package com.technews.aggregate.index;
 
-import com.technews.aggregate.releases.springframework.service.ReleasesSchedulerService;
 import com.technews.common.constant.Categories;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -13,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class HomeController {
 
-    private final ReleasesSchedulerService releasesSchedulerService;
-
-    @GetMapping({"", "/releases"})
+    @GetMapping
     public String home(Model model) {
         model.addAttribute("categories", Categories.values());
         return "index";

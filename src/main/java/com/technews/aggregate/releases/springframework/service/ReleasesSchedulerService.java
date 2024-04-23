@@ -13,6 +13,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ReleasesSchedulerService {
+
     private final ReleasesRepository releasesRepository;
 
     public void insertRelease(SaveReleaseRequest saveReleaseRequest) {
@@ -31,10 +32,5 @@ public class ReleasesSchedulerService {
         }
 
         return latestReleaseDate.get(0);
-    }
-
-    public List<Release> findAllRelease() {
-        final List<Release> releases = releasesRepository.findAll();
-        return releases;
     }
 }
