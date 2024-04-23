@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Release {
     public static final Release EMPTY =
-            new Release("", "", "", "Apr 19, 1900", "", Collections.EMPTY_LIST);
+            new Release("", "", "", "Apr 19, 1900", "", Collections.EMPTY_LIST, null);
 
     private String id;
     private String project;
@@ -22,4 +22,5 @@ public class Release {
     private String date;
     private String url;
     private List<String> tags;
+    private String createdDt;
 }

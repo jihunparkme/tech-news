@@ -25,6 +25,7 @@ public class SaveReleaseRequest {
     private String date;
     private String url;
     private List<String> tags;
+    private String createdDt;
 
     public Release toRelease(final String id) {
         return Release.builder()
@@ -34,6 +35,7 @@ public class SaveReleaseRequest {
                 .date(this.date)
                 .url(this.url)
                 .tags(this.tags)
+                .createdDt(this.createdDt)
                 .build();
     }
 

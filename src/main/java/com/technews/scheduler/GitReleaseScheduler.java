@@ -6,6 +6,7 @@ import com.technews.aggregate.releases.springframework.service.ReleasesScheduler
 import com.technews.common.constant.SpringRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -14,9 +15,13 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,6 +29,9 @@ import java.util.regex.Pattern;
 @Component
 @RequiredArgsConstructor
 public class GitReleaseScheduler {
+
+    private final static DateTimeFormatter beforeFormatter = DateTimeFormatter.ofPattern("MMM d, yyyy", Locale.ENGLISH);
+    private final static DateTimeFormatter afterFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     private static final String SPRING_PROJECT_REPOSITORY_URL = "https://github.com/spring-projects/";
     private static final String SPRING_PROJECT_REPOSITORY_TAGS = "/tags";
@@ -91,10 +99,21 @@ public class GitReleaseScheduler {
 
         final Matcher relaseDateMatcher = RELEASE_DATE_PATTERN.matcher(trim);
         if (relaseDateMatcher.find()) {
-            builder.date(relaseDateMatcher.group(0));
+            final String date = relaseDateMatcher.group(0);
+            builder.date(date);
+            builder.createdDt(convertDate(date));
         }
 
         return builder.build();
+    }
+
+    static String convertDate(final String date) {
+        try {
+            final LocalDate convertedDate = LocalDate.parse(date, beforeFormatter);
+            return convertedDate.format(afterFormatter);
+        } catch (DateTimeParseException e) {
+            return StringUtils.EMPTY;
+        }
     }
 
     private static String generateReleaseUrl(final String repository, final String version) {
