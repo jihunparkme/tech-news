@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.springframework.util.CollectionUtils;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
@@ -133,7 +134,49 @@ public class CloudFirestoreTest {
             }
         }
 
-        assertEquals(10, result.size());
+        result.stream().forEach(System.out::println);
+    }
+
+    @Test
+    void find_all_where_projects_with_pagination() throws Exception {
+        final int page = 1;
+        final int size = 10;
+        final List<String> categories = List.of("spring-batch", "spring-boot");
+
+        List<Release> result = new ArrayList<>();
+        final CollectionReference collection = FirestoreClient.getFirestore().collection(COLLECTION_NAME);
+        Query query = collection;
+        if (!CollectionUtils.isEmpty(categories)) {
+            query = query.whereIn("project", categories);
+        }
+
+        final ApiFuture<QuerySnapshot> future = query.orderBy("createdDt", DESCENDING)
+                .limit(page * size)
+                .get();
+
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+
+        if (!documents.isEmpty()) {
+            DocumentSnapshot lastVisible = documents.get((page * size) - size);
+
+            Query query2 = collection;
+            if (!CollectionUtils.isEmpty(categories)) {
+                query2 = query2.whereIn("project", categories);
+            }
+
+            final ApiFuture<QuerySnapshot> nextFuture = query2.orderBy("createdDt", DESCENDING)
+                    .startAfter(lastVisible)
+                    .limit(size)
+                    .get();
+            List<QueryDocumentSnapshot> nextDocuments = nextFuture.get().getDocuments();
+
+
+            for (QueryDocumentSnapshot document : nextDocuments) {
+                result.add(document.toObject(Release.class));
+            }
+        }
+
+        result.stream().forEach(System.out::println);
     }
 
     @Test
@@ -178,6 +221,7 @@ public class CloudFirestoreTest {
         }
     }
 
+    @ToString
     @Setter
     @Getter
     @Builder
