@@ -109,8 +109,6 @@ function getPost(data) {
 }
 
 function addPage(page) {
-    document.querySelector('#loading').classList.add('d-block');
-
     $.ajax({
         type: 'GET',
         url: '/releases',
@@ -146,15 +144,14 @@ function addPage(page) {
     }).fail(function (error) {
         let responseJson = error.responseJSON;
         alert("페이지 로드에 실패하였습니다. 다시 시도해 주세요.\n(" + responseJson.message + ")");
-    });
-
-    document.querySelector('#loading').classList.remove('d-block');
+    })
 }
 
 window.onscroll = function () {
     if ((getScrollTop() + 300) < getDocumentHeight() - window.innerHeight) return;
     // 스크롤이 페이지 하단에 도달할 경우 새 페이지 로드
     if (dataCount < pageSize) {
+        $('#loading').css('display', 'none');
         return;
     }
 

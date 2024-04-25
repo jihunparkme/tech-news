@@ -577,7 +577,6 @@ legend + * {
 }
 
 .loading {
-    display: none;
     background: #fff;
     text-align: center;
     padding: 15px;
