@@ -15,8 +15,8 @@ public class ReleasesService {
 
     private final ReleasesRepository releasesRepository;
 
-    public List<Release> findAllRelease(final int page, final int size) {
-        final List<Release> releases = releasesRepository.findAllWithPagination(page, size);
+    public List<Release> findAllRelease(final int page, final int size, final List<String> categories) {
+        final List<Release> releases = releasesRepository.findAllWithPagination(page, size, categories);
         return releases;
     }
 }

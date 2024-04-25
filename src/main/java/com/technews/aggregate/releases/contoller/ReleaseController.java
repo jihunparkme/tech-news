@@ -29,7 +29,7 @@ public class ReleaseController {
             @RequestParam(value = "page", required = false, defaultValue = "1") final int page,
             @RequestParam(value = "size", required = false, defaultValue = "10") final int size) {
 
-        final List<Release> releases = releasesService.findAllRelease(page, size);
+        final List<Release> releases = releasesService.findAllRelease(page, size, categories);
         final List<ReleaseResponse> result = releases.stream()
                 .map(release -> ReleaseResponse.of(release))
                 .collect(Collectors.toList());

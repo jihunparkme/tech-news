@@ -30,6 +30,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function initPage() {
     page = 1;
+    const releases = document.getElementById('releases-area');
+    while (releases.firstChild) {
+        releases.removeChild(releases.firstChild);
+    }
 }
 
 function getDocumentHeight() {

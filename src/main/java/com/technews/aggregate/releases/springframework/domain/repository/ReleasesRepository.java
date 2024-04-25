@@ -9,6 +9,7 @@ import com.technews.common.constant.Collections;
 import com.technews.common.exception.FirebaseQuerySnapshotException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,15 +56,21 @@ public class ReleasesRepository {
         }
     }
 
-    public List<Release> findAllWithPagination(final int page, final int size) {
+    public List<Release> findAllWithPagination(final int page, final int size, final List<String> categories) {
         try {
-            ApiFuture<QuerySnapshot> future = FirestoreClient.getFirestore().collection(COLLECTION_NAME)
+            final CollectionReference collection = FirestoreClient.getFirestore().collection(COLLECTION_NAME);
+            Query query = collection;
+            if (!CollectionUtils.isEmpty(categories)) {
+                query = query.whereIn("project", categories);
+            }
+            ApiFuture<QuerySnapshot> future = query
                     .orderBy("createdDt", DESCENDING)
+                    .orderBy("version", DESCENDING)
                     .limit(page * size)
                     .get();
             List<QueryDocumentSnapshot> documents = future.get().getDocuments();
 
-            return getNextReleases(documents, page, size);
+            return getNextReleases(documents, page, size, categories);
         } catch (InterruptedException | ExecutionException e) {
             log.error("querySnapshot exception. {}", e.getMessage(), e);
             throw new FirebaseQuerySnapshotException();
@@ -71,14 +78,20 @@ public class ReleasesRepository {
     }
 
     private static List<Release> getNextReleases(
-            final List<QueryDocumentSnapshot> documents, final int page, final int size) throws InterruptedException, ExecutionException {
+            final List<QueryDocumentSnapshot> documents, final int page, final int size, final List<String> categories) throws InterruptedException, ExecutionException {
         if (documents.isEmpty()) {
             return java.util.Collections.EMPTY_LIST;
         }
 
         DocumentSnapshot lastVisible = documents.get((page * size) - size);
-        ApiFuture<QuerySnapshot> nextFuture = FirestoreClient.getFirestore().collection(COLLECTION_NAME)
+        final CollectionReference collection = FirestoreClient.getFirestore().collection(COLLECTION_NAME);
+        Query query = collection;
+        if (!CollectionUtils.isEmpty(categories)) {
+            query = query.whereIn("project", categories);
+        }
+        ApiFuture<QuerySnapshot> nextFuture = query
                 .orderBy("createdDt", DESCENDING)
+                .orderBy("version", DESCENDING)
                 .startAfter(lastVisible)
                 .limit(size)
                 .get();
