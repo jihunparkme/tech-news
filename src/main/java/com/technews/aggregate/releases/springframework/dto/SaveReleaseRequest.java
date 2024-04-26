@@ -27,6 +27,17 @@ public class SaveReleaseRequest {
     private List<String> tags;
     private String createdDt;
 
+    public Release toRelease() {
+        return Release.builder()
+                .project(this.project)
+                .version(this.version)
+                .date(this.date)
+                .url(this.url)
+                .tags(this.tags)
+                .createdDt(this.createdDt)
+                .build();
+    }
+
     public Release toRelease(final String id) {
         return Release.builder()
                 .id(id)
