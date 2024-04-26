@@ -16,6 +16,10 @@ spring:
     livereload:
       enabled: true
 
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/tech_news
+
 management:
   endpoints:
     web:
