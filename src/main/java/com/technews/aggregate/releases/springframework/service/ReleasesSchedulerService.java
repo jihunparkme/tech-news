@@ -1,7 +1,7 @@
 package com.technews.aggregate.releases.springframework.service;
 
 import com.technews.aggregate.releases.springframework.domain.Release;
-import com.technews.aggregate.releases.springframework.domain.repository.ReleasesFireStoreRepository;
+import com.technews.aggregate.releases.springframework.domain.repository.ReleasesRepository;
 import com.technews.aggregate.releases.springframework.dto.SaveReleaseRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,11 +14,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReleasesSchedulerService {
 
-    private final ReleasesFireStoreRepository releasesFireStoreRepository;
+    private final ReleasesRepository releasesRepository;
 
     public void insertRelease(SaveReleaseRequest saveReleaseRequest) {
         try {
-            releasesFireStoreRepository.save(saveReleaseRequest);
+            releasesRepository.save(saveReleaseRequest.toRelease());
             log.info("add new release version. {}", saveReleaseRequest.getVersion());
         } catch (Exception e) {
             log.error("ReleasesSchedulerService.insertRelease exception", e);
@@ -26,7 +26,7 @@ public class ReleasesSchedulerService {
     }
 
     public Release findLatestRelease(final String project) {
-        final List<Release> latestReleaseDate = releasesFireStoreRepository.findLatestReleaseDate(project);
+        final List<Release> latestReleaseDate = releasesRepository.findByProjectOrderByVersionDescLimitOne(project);
         if (latestReleaseDate.isEmpty()) {
             return Release.EMPTY;
         }
