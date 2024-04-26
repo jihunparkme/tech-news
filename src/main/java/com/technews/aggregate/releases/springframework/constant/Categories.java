@@ -8,6 +8,11 @@ public enum Categories {
     SPRING_BOOT("spring-boot"),
     SPRING_DATA_JPA("spring-data-jpa"),
     SPRING_BATCH("spring-batch"),
+
+    JDK8("jdk8"),
+    JDK11("jdk11"),
+    JDK17("jdk17"),
+    JDK21("jdk21"),
     ;
 
     private String value;
