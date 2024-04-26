@@ -2,7 +2,6 @@ package com.technews.crawling;
 
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -10,6 +9,8 @@ import org.jsoup.select.Elements;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -17,7 +18,10 @@ import java.util.stream.Collectors;
 
 @Slf4j
 public class JavaReleaseNotesCrawlingTest {
-    private static final String ORACLE_BASE_URL = "https://www.oracle.com/";
+
+    private final static DateTimeFormatter afterFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+    private static final String ORACLE_BASE_URL = "https://www.oracle.com";
     private static final String JDK_8 = "https://www.oracle.com/java/technologies/javase/8u-relnotes.html";
     private static final String JDK_11 = "https://www.oracle.com/java/technologies/javase/11u-relnotes.html";
     private static final String JDK_17 = "https://www.oracle.com/java/technologies/javase/17u-relnotes.html";
@@ -26,39 +30,38 @@ public class JavaReleaseNotesCrawlingTest {
     @Test
     void test() throws IOException {
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> JDK_8");
-        final List<Release> jdk8ReleaseInfo = getReleaseInfo(JDK_8);
+        final List<Release> jdk8ReleaseInfo = getReleaseInfo("jdk8", JDK_8);
         jdk8ReleaseInfo.stream().forEach(System.out::println);
 
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> JDK_11");
-        final List<Release> jdk11ReleaseInfo = getReleaseInfo(JDK_11);
+        final List<Release> jdk11ReleaseInfo = getReleaseInfo("jdk11", JDK_11);
         jdk11ReleaseInfo.stream().forEach(System.out::println);
 
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> JDK_17");
-        final List<Release> jdk17ReleaseInfo = getReleaseInfo(JDK_17);
+        final List<Release> jdk17ReleaseInfo = getReleaseInfo("jdk17", JDK_17);
         jdk17ReleaseInfo.stream().forEach(System.out::println);
 
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> JDK_21");
-        final List<Release> jdk21ReleaseInfo = getReleaseInfo(JDK_21);
+        final List<Release> jdk21ReleaseInfo = getReleaseInfo("jdk21", JDK_21);
         jdk21ReleaseInfo.stream().forEach(System.out::println);
     }
 
-    private static List<Release> getReleaseInfo(String url) throws IOException {
-
+    private static List<Release> getReleaseInfo(final String project, final String url) throws IOException {
         if (JDK_8.equals(url)) {
-            return getLowerJdk8ReleaseInfo(url);
+            return getLowerJdk8ReleaseInfo(project, url);
         }
 
-        return getExceededJdk8ReleaseInfo(url);
+        return getExceededJdk8ReleaseInfo(project, url);
     }
 
-    private static List<Release> getExceededJdk8ReleaseInfo(final String url) throws IOException {
+    private static List<Release> getExceededJdk8ReleaseInfo(final String project, final String url) throws IOException {
         List<Release> result = new ArrayList<>();
 
         final Document doc = Jsoup.connect(url).get();
         final Elements items = doc.select(".obullets");
         for (Element item : items) {
             final Elements liElements = item.select("li");
-            result.addAll(getReleaseList(liElements));
+            result.addAll(getReleaseList(project, liElements));
         }
         return result.stream()
                 .filter(Release::isNotEmpty)
@@ -66,14 +69,14 @@ public class JavaReleaseNotesCrawlingTest {
                 .collect(Collectors.toList());
     }
 
-    private static List<Release> getLowerJdk8ReleaseInfo(final String url) throws IOException {
+    private static List<Release> getLowerJdk8ReleaseInfo(final String project, final String url) throws IOException {
         List<Release> result = new ArrayList<>();
 
         final Document doc = Jsoup.connect(url).get();
         final Elements items = doc.select(".col-item");
         for (Element item : items) {
             final Elements liElements = item.select("li");
-            result.addAll(getReleaseList(liElements));
+            result.addAll(getReleaseList(project, liElements));
         }
         return result.stream()
                 .filter(Release::isNotEmpty)
@@ -81,10 +84,10 @@ public class JavaReleaseNotesCrawlingTest {
                 .collect(Collectors.toList());
     }
 
-    private static List<Release> getReleaseList(final Elements liElements) {
+    private static List<Release> getReleaseList(final String project, final Elements liElements) {
         List<Release> result = new ArrayList<>();
         for (final Element li : liElements) {
-            final Release release = getRelease(li);
+            final Release release = getRelease(project, li);
             if (release.isEmpty()) {
                 continue;
             }
@@ -94,7 +97,7 @@ public class JavaReleaseNotesCrawlingTest {
         return result;
     }
 
-    private static Release getRelease(final Element li) {
+    private static Release getRelease(final String project, final Element li) {
         final String liText = li.text();
         if (!liText.contains("GA")) {
             return Release.EMPTY;
@@ -105,8 +108,11 @@ public class JavaReleaseNotesCrawlingTest {
             final String href = li.select("a").first().attr("href");
             final String gaUrl = ORACLE_BASE_URL + href;
             return Release.builder()
+                    .createdDt(LocalDate.now().format(afterFormatter))
+                    .tags(List.of(project, "java", "release"))
+                    .project(project)
                     .version(version)
-                    .gaUrl(gaUrl)
+                    .url(gaUrl)
                     .build();
         } catch (Exception e) {
             log.error("Not found matching version.");
@@ -116,10 +122,15 @@ public class JavaReleaseNotesCrawlingTest {
     }
 
     private record Release(
+            String id,
+            String project,
             String version,
-            String gaUrl
+            String date,
+            String url,
+            List<String> tags,
+            String createdDt
     ) {
-        public static final Release EMPTY = new Release(StringUtils.EMPTY, StringUtils.EMPTY);
+        public static final Release EMPTY = new Release(null, null, null, null, null, null, null);
 
         @Builder
         private Release {
