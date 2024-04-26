@@ -1,6 +1,6 @@
 package com.technews.aggregate.index;
 
-import com.technews.common.constant.Categories;
+import com.technews.aggregate.releases.springframework.constant.Categories;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
