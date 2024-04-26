@@ -26,3 +26,12 @@ management:
       exposure:
         include: "*"
       base-path: /management/actuator
+
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: DEBUG
