@@ -28,7 +28,7 @@ class ReleasesRepositoryTest {
     }
 
     @Test
-    void findByProjectOrderAllByVersionDescLimitOne() {
+    void findByProjectOrderAllByVersionDescLimitOneIn() {
         final List<Release> releases = releasesRepository.findByProjectOrderByVersionDescLimitOne("spring-framework");
 
         final List<ReleaseResponse> result = releases.stream().
@@ -40,13 +40,31 @@ class ReleasesRepositoryTest {
 
     @Test
     void find_all_pageable() {
-        final int page = 1;
+        final int page = 0;
         final int size = 10;
         final PageRequest pageable = PageRequest.of(
                 page, size,
                 Sort.by("createdDt").descending().and(Sort.by("version").descending()));
 
         final Page<Release> releases = releasesRepository.findAll(pageable);
+
+        final List<ReleaseResponse> result = releases.getContent().stream().
+                map(release -> ReleaseResponse.of(release))
+                .collect(Collectors.toList());
+
+        result.forEach(System.out::println);
+    }
+
+    @Test
+    void find_by_category_pageable() {
+        final int page = 0;
+        final int size = 10;
+        final List<String> categories = List.of("spring-batch", "spring-boot");
+        final PageRequest pageable = PageRequest.of(
+                page, size,
+                Sort.by("createdDt").descending().and(Sort.by("version").descending()));
+
+        final Page<Release> releases = releasesRepository.findByProjectIn(categories, pageable);
 
         final List<ReleaseResponse> result = releases.getContent().stream().
                 map(release -> ReleaseResponse.of(release))
