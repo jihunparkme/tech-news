@@ -18,6 +18,8 @@ import java.util.Locale;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SaveReleaseRequest {
+    public static final SaveReleaseRequest EMPTY = new SaveReleaseRequest();
+
     private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d, yyyy", Locale.ENGLISH);
 
     private String project;
@@ -59,5 +61,13 @@ public class SaveReleaseRequest {
             log.error("Error parsing the date. date: {}, message: {}", this.date, e.getMessage(), e);
             return false;
         }
+    }
+
+    public boolean isEmpty() {
+        return this == EMPTY;
+    }
+
+    public boolean isNotEmpty() {
+        return !this.isEmpty();
     }
 }
