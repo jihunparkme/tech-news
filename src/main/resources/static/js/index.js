@@ -1,6 +1,7 @@
 let categories = [];
-let page = 1;
-let dataCount = 0;
+let page = 0;
+let totalPage = 0;
+let totalElements = 0;
 const pageSize = 10;
 
 $(function() {
@@ -29,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initPage() {
-    page = 1;
+    page = 0;
     const releases = document.getElementById('releases-area');
     while (releases.firstChild) {
         releases.removeChild(releases.firstChild);
@@ -122,11 +123,18 @@ function addPage(page) {
         contentType: 'application/json; charset=utf-8'
     }).done(function (result) {
         if (result.success) {
-            dataCount = result.count;
+            let data = result.data;
+            totalPage = data.totalPages;
+            totalElements = data.totalElements;
+            $('#total-count').html(totalElements);
 
-            let releases = result.data;
+            if (data.empty) {
+                $('#loading').css('display', 'none');
+            }
+
+            let releases = data.content;
             $('#no-data').css('display', 'none');
-            if (releases.length == 0 && page == 1) {
+            if (releases.length == 0 && page == 0) {
                 $('#no-data').css('display', 'block');
                 return;
             }
@@ -150,7 +158,7 @@ function addPage(page) {
 window.onscroll = function () {
     if ((getScrollTop() + 300) < getDocumentHeight() - window.innerHeight) return;
     // 스크롤이 페이지 하단에 도달할 경우 새 페이지 로드
-    if (dataCount < pageSize) {
+    if (totalPage == page) {
         $('#loading').css('display', 'none');
         return;
     }
