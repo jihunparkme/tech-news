@@ -9,10 +9,10 @@ public enum Categories {
     SPRING_DATA_JPA("spring-data-jpa"),
     SPRING_BATCH("spring-batch"),
 
-    JDK8("jdk8"),
-    JDK11("jdk11"),
-    JDK17("jdk17"),
-    JDK21("jdk21"),
+    JDK8("JDK 8"),
+    JDK11("JDK 11"),
+    JDK17("JDK 17"),
+    JDK21("JDK 21"),
     ;
 
     private String value;
