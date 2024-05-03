@@ -1,7 +1,8 @@
 package com.technews.aggregate.releases.springframework.domain.repository;
 
-import com.technews.aggregate.releases.springframework.domain.Release;
-import com.technews.aggregate.releases.springframework.dto.ReleaseResponse;
+import com.technews.aggregate.releases.domain.Release;
+import com.technews.aggregate.releases.domain.repository.ReleasesRepository;
+import com.technews.aggregate.releases.dto.ReleaseResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;

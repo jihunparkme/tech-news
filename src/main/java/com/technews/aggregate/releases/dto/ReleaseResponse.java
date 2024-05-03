@@ -1,6 +1,6 @@
-package com.technews.aggregate.releases.springframework.dto;
+package com.technews.aggregate.releases.dto;
 
-import com.technews.aggregate.releases.springframework.domain.Release;
+import com.technews.aggregate.releases.domain.Release;
 import lombok.*;
 
 import java.util.List;

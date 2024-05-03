@@ -1,4 +1,4 @@
-package com.technews.aggregate.releases.springframework.domain;
+package com.technews.aggregate.releases.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

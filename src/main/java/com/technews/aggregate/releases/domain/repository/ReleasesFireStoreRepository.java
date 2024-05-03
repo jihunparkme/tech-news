@@ -1,10 +1,10 @@
-package com.technews.aggregate.releases.springframework.domain.repository;
+package com.technews.aggregate.releases.domain.repository;
 
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
-import com.technews.aggregate.releases.springframework.domain.Release;
-import com.technews.aggregate.releases.springframework.dto.SaveReleaseRequest;
+import com.technews.aggregate.releases.domain.Release;
+import com.technews.aggregate.releases.dto.SaveReleaseRequest;
 import com.technews.common.constant.Collections;
 import com.technews.common.exception.FirebaseQuerySnapshotException;
 import lombok.extern.slf4j.Slf4j;

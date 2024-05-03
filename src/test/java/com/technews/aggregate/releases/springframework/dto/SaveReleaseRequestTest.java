@@ -1,5 +1,6 @@
 package com.technews.aggregate.releases.springframework.dto;
 
+import com.technews.aggregate.releases.dto.SaveReleaseRequest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;

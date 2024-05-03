@@ -1,8 +1,8 @@
-package com.technews.aggregate.releases.springframework.service;
+package com.technews.aggregate.releases.service;
 
-import com.technews.aggregate.releases.springframework.domain.Release;
-import com.technews.aggregate.releases.springframework.domain.repository.ReleasesRepository;
-import com.technews.aggregate.releases.springframework.dto.SaveReleaseRequest;
+import com.technews.aggregate.releases.domain.Release;
+import com.technews.aggregate.releases.domain.repository.ReleasesRepository;
+import com.technews.aggregate.releases.dto.SaveReleaseRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.technews.aggregate.releases.springframework.constant;
+package com.technews.aggregate.releases.constant;
 
 import lombok.AllArgsConstructor;
 

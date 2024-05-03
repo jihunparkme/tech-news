@@ -1,7 +1,7 @@
 package com.technews.aggregate.releases.contoller;
 
-import com.technews.aggregate.releases.springframework.domain.Release;
-import com.technews.aggregate.releases.springframework.service.ReleasesService;
+import com.technews.aggregate.releases.domain.Release;
+import com.technews.aggregate.releases.service.ReleasesService;
 import com.technews.common.dto.BasicResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
