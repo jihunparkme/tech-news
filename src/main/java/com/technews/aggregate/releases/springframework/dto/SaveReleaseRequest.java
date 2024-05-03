@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -53,6 +54,10 @@ public class SaveReleaseRequest {
     }
 
     public boolean isLatestDateVersion(final String latestReleaseDate) {
+        if (StringUtils.isBlank(latestReleaseDate)) {
+            return true;
+        }
+
         try {
             final LocalDate latest = LocalDate.parse(latestReleaseDate, formatter);
             final LocalDate date = LocalDate.parse(this.date, formatter);
@@ -61,6 +66,13 @@ public class SaveReleaseRequest {
             log.error("Error parsing the date. date: {}, message: {}", this.date, e.getMessage(), e);
             return false;
         }
+    }
+
+    public boolean isLatestVersion(final String version) {
+        if (StringUtils.isBlank(version)) {
+            return true;
+        }
+        return this.version.compareToIgnoreCase(version) < 0;
     }
 
     public boolean isEmpty() {
