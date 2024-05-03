@@ -52,7 +52,7 @@ public class SaveReleaseRequest {
                 .build();
     }
 
-    public boolean isNewVersion(final String latestReleaseDate) {
+    public boolean isLatestDateVersion(final String latestReleaseDate) {
         try {
             final LocalDate latest = LocalDate.parse(latestReleaseDate, formatter);
             final LocalDate date = LocalDate.parse(this.date, formatter);

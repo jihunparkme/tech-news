@@ -57,7 +57,7 @@ public class GitReleaseScheduler {
         final Release springFrameworkLatestRelease = releasesSchedulerService.findLatestRelease(repository.value());
         final List<SaveReleaseRequest> springFrameworkReleaseInfo = getGitHubReleaseTags(repository.value());
         springFrameworkReleaseInfo.stream()
-                .filter(release -> release.isNewVersion(springFrameworkLatestRelease.getDate()))
+                .filter(release -> release.isLatestDateVersion(springFrameworkLatestRelease.getDate()))
                 .forEach(release -> releasesSchedulerService.insertRelease(release));
     }
 
