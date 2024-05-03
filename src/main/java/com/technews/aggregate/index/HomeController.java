@@ -17,4 +17,9 @@ public class HomeController {
         model.addAttribute("categories", Categories.values());
         return "index";
     }
+
+    @GetMapping("/blogs")
+    public String blogs() {
+        return "blog";
+    }
 }
