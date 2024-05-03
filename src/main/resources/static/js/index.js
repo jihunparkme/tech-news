@@ -56,6 +56,7 @@ function getScrollTop() {
 function generateTitleArea(data) {
     const linkArea = document.createElement('a');
     linkArea.href = data.url;
+    linkArea.target = "_blank";
 
     const titleArea = document.createElement('h2');
     titleArea.className = 'post-title';
