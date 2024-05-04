@@ -15,6 +15,8 @@ import org.jsoup.select.Elements;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -23,6 +25,8 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class SpringBlogScheduler {
+
+    private final static DateTimeFormatter afterFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     private static final String CATEGORY_URL = "https://spring.io/blog/category/";
     private static final String BLOG_URL = "https://spring.io";
@@ -64,6 +68,7 @@ public class SpringBlogScheduler {
                         .writer(meta.writer())
                         .date(meta.date())
                         .tags(List.of(SPRING, category))
+                        .createdDt(LocalDate.now().format(afterFormatter))
                         .build());
             }
         } catch (Exception e) {

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Collections;
 import java.util.List;
 
 @Document(collection = "posts")
@@ -14,7 +15,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Post {
-    public static final Post EMPTY = new Post();
+    public static final Post EMPTY =
+            new Post("", "", "", "", "", "", "", Collections.EMPTY_LIST, "");
 
     private String id;
     private String subject;
@@ -25,4 +27,6 @@ public class Post {
     private String writer;
     private String date;
     List<String> tags;
+
+    private String createdDt;
 }

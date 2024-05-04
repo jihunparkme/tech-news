@@ -29,6 +29,7 @@ public class SaveSpringPostRequest {
     private String writer;
     private String date;
     List<String> tags;
+    private String createdDt;
 
     public boolean isLatestDatePost(final String latestPostDate) {
         if (StringUtils.isBlank(latestPostDate)) {
@@ -54,6 +55,7 @@ public class SaveSpringPostRequest {
                 .date(this.date)
                 .tags(this.tags)
                 .url(this.url)
+                .createdDt(this.createdDt)
                 .build();
     }
 }
