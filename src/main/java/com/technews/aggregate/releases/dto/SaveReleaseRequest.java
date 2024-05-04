@@ -72,7 +72,7 @@ public class SaveReleaseRequest {
         if (StringUtils.isBlank(version)) {
             return true;
         }
-        return this.version.compareToIgnoreCase(version) < 0;
+        return this.version.compareToIgnoreCase(version) > 0;
     }
 
     public boolean isEmpty() {
