@@ -1,7 +1,7 @@
-package com.technews.aggregate.posts.controller;
+package com.technews.aggregate.posts.spring.controller;
 
 import com.technews.aggregate.posts.domain.Post;
-import com.technews.aggregate.posts.service.PostsService;
+import com.technews.aggregate.posts.spring.service.SpringBlogsService;
 import com.technews.common.dto.BasicResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,11 +20,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/posts")
 @RequiredArgsConstructor
-public class PostsController {
+public class SpringBlogsController {
 
-    private final PostsService postsService;
+    private final SpringBlogsService springBlogsService;
 
-    @GetMapping
+    @GetMapping("/list")
     public ResponseEntity scrollList(
             @RequestParam(value = "categories", required = false) final List<String> categories,
             @RequestParam(value = "page", required = false, defaultValue = "1") final int page,
@@ -33,7 +33,7 @@ public class PostsController {
         final PageRequest pageable = PageRequest.of(
                 page, size,
                 Sort.by("createdDt").descending().and(Sort.by("version").descending()));
-        final Page<Post> releasePage = postsService.findAllRelease(page, size, categories);
+        final Page<Post> releasePage = springBlogsService.findAllRelease(page, size, categories);
         return BasicResponse.ok(releasePage);
     }
 }

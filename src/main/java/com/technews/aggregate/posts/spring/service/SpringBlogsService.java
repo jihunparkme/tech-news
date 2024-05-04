@@ -1,4 +1,4 @@
-package com.technews.aggregate.posts.service;
+package com.technews.aggregate.posts.spring.service;
 
 import com.technews.aggregate.posts.domain.Post;
 import com.technews.aggregate.posts.domain.repository.PostsRepository;
@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class PostsService {
+public class SpringBlogsService {
 
     private final PostsRepository postsRepository;
 
