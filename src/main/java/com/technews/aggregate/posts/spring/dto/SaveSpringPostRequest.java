@@ -20,7 +20,7 @@ import java.util.Locale;
 @AllArgsConstructor
 public class SaveSpringPostRequest {
 
-    private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy", Locale.ENGLISH);
+    private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     private String subject;
     private String title;

@@ -20,13 +20,15 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class SpringBlogScheduler {
 
-    private final static DateTimeFormatter afterFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private final static DateTimeFormatter englishFormatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy", Locale.ENGLISH);
+    private final static DateTimeFormatter createdFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     private static final String CATEGORY_URL = "https://spring.io/blog/category/";
     private static final String BLOG_URL = "https://spring.io";
@@ -68,7 +70,7 @@ public class SpringBlogScheduler {
                         .writer(meta.writer())
                         .date(meta.date())
                         .tags(List.of(SPRING, category))
-                        .createdDt(LocalDate.now().format(afterFormatter))
+                        .createdDt(LocalDate.now().format(createdFormatter))
                         .build());
             }
         } catch (Exception e) {
@@ -97,10 +99,19 @@ public class SpringBlogScheduler {
             return Meta.builder()
                     .category(metas[0].trim())
                     .writer(metas[1].trim())
-                    .date(metas[2].trim())
+                    .date(getFormattedDate(metas[2].trim()))
                     .build();
         } catch (Exception e) {
             return Meta.EMPTY;
+        }
+    }
+
+    private static String getFormattedDate(final String date) {
+        try {
+            final LocalDate localDate = LocalDate.parse(date, englishFormatter);
+            return localDate.format(createdFormatter);
+        } catch (Exception e) {
+            return StringUtils.EMPTY;
         }
     }
 
