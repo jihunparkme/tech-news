@@ -18,8 +18,8 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/blogs")
-    public String blogs() {
-        return "blog";
+    @GetMapping("/posts")
+    public String posts() {
+        return "post";
     }
 }
