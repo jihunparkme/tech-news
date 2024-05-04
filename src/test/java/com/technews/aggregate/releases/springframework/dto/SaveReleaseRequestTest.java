@@ -3,8 +3,7 @@ package com.technews.aggregate.releases.springframework.dto;
 import com.technews.aggregate.releases.dto.SaveReleaseRequest;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class SaveReleaseRequestTest {
     public static final String PROJECT = "spring-boot";
@@ -44,11 +43,16 @@ class SaveReleaseRequestTest {
                 .url("url")
                 .build();
 
-        assertTrue(release.isLatestVersion("JDK 8u92"));
-        assertTrue(release.isLatestVersion("JDK 8u91"));
-        assertTrue(release.isLatestVersion("JDK 8u77"));
+        assertEquals(-2, "JDK 8u74".compareToIgnoreCase("JDK 8u92"));
+        assertEquals(0, "JDK 8u74".compareToIgnoreCase("JDK 8u74"));
+        assertEquals(3, "JDK 8u74".compareToIgnoreCase("JDK 8u71"));
+        assertEquals(8, "JDK 8u74".compareToIgnoreCase(""));
+
+        assertFalse(release.isLatestVersion("JDK 8u92"));
+        assertFalse(release.isLatestVersion("JDK 8u91"));
+        assertFalse(release.isLatestVersion("JDK 8u77"));
         assertFalse(release.isLatestVersion("JDK 8u74"));
-        assertFalse(release.isLatestVersion("JDK 8u71"));
-        assertFalse(release.isLatestVersion(""));
+        assertTrue(release.isLatestVersion("JDK 8u71"));
+        assertTrue(release.isLatestVersion(""));
     }
 }
