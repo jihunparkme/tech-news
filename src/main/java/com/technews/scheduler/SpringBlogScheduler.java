@@ -1,5 +1,6 @@
 package com.technews.scheduler;
 
+import com.technews.aggregate.posts.constant.BlogSubjects;
 import com.technews.aggregate.posts.domain.Post;
 import com.technews.aggregate.posts.spring.constant.SpringBlogsSubject;
 import com.technews.aggregate.posts.spring.dto.SaveSpringPostRequest;
@@ -32,7 +33,6 @@ public class SpringBlogScheduler {
 
     private static final String CATEGORY_URL = "https://spring.io/blog/category/";
     private static final String BLOG_URL = "https://spring.io";
-    private static final String SPRING = "Spring";
 
     private final SpringBlogsSchedulerService springBlogsSchedulerService;
 
@@ -63,13 +63,13 @@ public class SpringBlogScheduler {
                 final String url = getPostUrl(element);
 
                 result.add(SaveSpringPostRequest.builder()
-                        .subject(SPRING)
+                        .subject(BlogSubjects.SPRING.value())
                         .title(title)
                         .url(url)
                         .category(category)
                         .writer(meta.writer())
                         .date(meta.date())
-                        .tags(List.of(SPRING, category))
+                        .tags(List.of(BlogSubjects.SPRING.value(), category))
                         .createdDt(LocalDate.now().format(createdFormatter))
                         .build());
             }
