@@ -60,7 +60,7 @@ function generateTitleArea(data) {
 
     const titleArea = document.createElement('h2');
     titleArea.className = 'post-title';
-    titleArea.innerText = data.project + ' ' + data.version;
+    titleArea.innerText = data.version;
     linkArea.appendChild(titleArea);
 
     if (data.tags.length > 0) {
