@@ -1,5 +1,6 @@
 package com.technews.aggregate.index;
 
+import com.technews.aggregate.posts.spring.constant.SpringBlogsSubject;
 import com.technews.aggregate.releases.constant.Categories;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -18,8 +19,9 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/posts")
-    public String posts() {
-        return "post";
+    @GetMapping("/blog/spring")
+    public String posts(Model model) {
+        model.addAttribute("categories", SpringBlogsSubject.values());
+        return "blog/spring";
     }
 }
