@@ -94,7 +94,7 @@ public class GitReleaseScheduler {
         if (relaseDateMatcher.find()) {
             final String date = relaseDateMatcher.group(0);
             builder.date(date);
-            builder.createdDt(DateUtils.getFormattedDate(date, DateUtils.ENGLISH_FORMATTER_1));
+            builder.createdDt(DateUtils.getFormattedDate(date));
         }
 
         return builder.build();

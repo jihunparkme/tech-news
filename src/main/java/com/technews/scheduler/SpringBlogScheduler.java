@@ -95,7 +95,7 @@ public class SpringBlogScheduler {
             return Meta.builder()
                     .category(metas[0].trim())
                     .writer(metas[1].trim())
-                    .date(DateUtils.getFormattedDate(metas[2].trim(), DateUtils.ENGLISH_FORMATTER_2))
+                    .date(DateUtils.getFormattedDate(metas[2].trim()))
                     .build();
         } catch (Exception e) {
             return Meta.EMPTY;

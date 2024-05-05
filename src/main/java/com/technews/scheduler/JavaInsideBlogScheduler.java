@@ -70,7 +70,7 @@ public class JavaInsideBlogScheduler {
 
         final PostInfo postInfo = getPostInfo(postElement);
         savePostBuilder.writer(postInfo.writer());
-        savePostBuilder.date(DateUtils.getFormattedDate(postInfo.date(), DateUtils.ENGLISH_FORMATTER_2));
+        savePostBuilder.date(DateUtils.getFormattedDate(postInfo.date()));
 
         final List<String> tags = getTags(postElement);
         savePostBuilder.tags(tags);
