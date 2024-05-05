@@ -2,7 +2,7 @@ package com.technews.aggregate.posts.spring.service;
 
 import com.technews.aggregate.posts.domain.Post;
 import com.technews.aggregate.posts.domain.repository.PostsRepository;
-import com.technews.aggregate.posts.spring.dto.SaveSpringPostRequest;
+import com.technews.aggregate.posts.spring.dto.SavePostRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,10 +16,10 @@ public class SpringBlogsSchedulerService {
 
     private final PostsRepository postsRepository;
 
-    public void insertPost(SaveSpringPostRequest saveSpringPostRequest) {
+    public void insertPost(SavePostRequest savePostRequest) {
         try {
-            postsRepository.save(saveSpringPostRequest.toRelease());
-            log.info("add new post. {}", saveSpringPostRequest.getTitle());
+            postsRepository.save(savePostRequest.toRelease());
+            log.info("add new post. {}", savePostRequest.getTitle());
         } catch (Exception e) {
             log.error("SpringBlogsSchedulerService.insertPost exception", e);
         }

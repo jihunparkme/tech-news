@@ -11,14 +11,13 @@ import org.apache.commons.lang3.StringUtils;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Locale;
 
 @Slf4j
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SaveSpringPostRequest {
+public class SavePostRequest {
 
     private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 

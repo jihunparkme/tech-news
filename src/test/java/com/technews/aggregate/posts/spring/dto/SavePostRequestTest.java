@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class SaveSpringPostRequestTest {
+class SavePostRequestTest {
 
     @Test
     void when_isLatestDatePost_then_return_true() {
-        final SaveSpringPostRequest release = SaveSpringPostRequest.builder()
+        final SavePostRequest release = SavePostRequest.builder()
                 .date("2024-04-30")
                 .build();
 
@@ -19,7 +19,7 @@ class SaveSpringPostRequestTest {
 
     @Test
     void when_isLatestDatePost_then_return_false() {
-        final SaveSpringPostRequest release = SaveSpringPostRequest.builder()
+        final SavePostRequest release = SavePostRequest.builder()
                 .date("2024-04-30")
                 .build();
 

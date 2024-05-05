@@ -3,7 +3,7 @@ package com.technews.scheduler;
 import com.technews.aggregate.posts.constant.BlogSubjects;
 import com.technews.aggregate.posts.domain.Post;
 import com.technews.aggregate.posts.spring.constant.SpringBlogsSubject;
-import com.technews.aggregate.posts.spring.dto.SaveSpringPostRequest;
+import com.technews.aggregate.posts.spring.dto.SavePostRequest;
 import com.technews.aggregate.posts.spring.service.SpringBlogsSchedulerService;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
@@ -45,14 +45,14 @@ public class SpringBlogScheduler {
 
     private void searchSpringBlogPosts(final SpringBlogsSubject subject) {
         final Post latestPost = springBlogsSchedulerService.findLatestPost(subject.value());
-        final List<SaveSpringPostRequest> posts = getPostInfo(subject.value());
+        final List<SavePostRequest> posts = getPostInfo(subject.value());
         posts.stream()
                 .filter(post -> post.isLatestDatePost(latestPost.getDate()))
                 .forEach(post -> springBlogsSchedulerService.insertPost(post));
     }
 
-    private static List<SaveSpringPostRequest> getPostInfo(final String category) {
-        final List<SaveSpringPostRequest> result = new ArrayList<>();
+    private static List<SavePostRequest> getPostInfo(final String category) {
+        final List<SavePostRequest> result = new ArrayList<>();
 
         try {
             final Document doc = Jsoup.connect(CATEGORY_URL + category).get();
@@ -62,7 +62,7 @@ public class SpringBlogScheduler {
                 final Meta meta = getMeta(element);
                 final String url = getPostUrl(element);
 
-                result.add(SaveSpringPostRequest.builder()
+                result.add(SavePostRequest.builder()
                         .subject(BlogSubjects.SPRING.value())
                         .title(title)
                         .url(url)
