@@ -1,6 +1,7 @@
 package com.technews.aggregate.posts.spring.dto;
 
 import com.technews.aggregate.posts.domain.Post;
+import com.technews.common.util.DateUtils;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Slf4j
@@ -18,9 +18,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SavePostRequest {
-
-    private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
     private String subject;
     private String title;
     private String url;
@@ -36,8 +33,8 @@ public class SavePostRequest {
         }
 
         try {
-            final LocalDate latest = LocalDate.parse(latestPostDate, formatter);
-            final LocalDate date = LocalDate.parse(this.date, formatter);
+            final LocalDate latest = LocalDate.parse(latestPostDate, DateUtils.CREATED_FORMATTER);
+            final LocalDate date = LocalDate.parse(this.date, DateUtils.CREATED_FORMATTER);
             return date.isAfter(latest);
         } catch (Exception e) {
             log.error("Error parsing the date. date: {}, message: {}", this.date, e.getMessage(), e);

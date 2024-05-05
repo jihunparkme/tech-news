@@ -4,6 +4,7 @@ import com.technews.aggregate.releases.domain.Release;
 import com.technews.aggregate.releases.dto.SaveReleaseRequest;
 import com.technews.aggregate.releases.service.ReleasesSchedulerService;
 import com.technews.common.constant.JdkVersion;
+import com.technews.common.util.DateUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -27,7 +27,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class JavaReleasesScheduler {
 
-    private final static DateTimeFormatter afterFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final String ORACLE_BASE_URL = "https://www.oracle.com";
 
     private final ReleasesSchedulerService releasesSchedulerService;
@@ -114,7 +113,7 @@ public class JavaReleasesScheduler {
             final String href = li.select("a").first().attr("href");
             final String gaUrl = ORACLE_BASE_URL + href;
             return SaveReleaseRequest.builder()
-                    .createdDt(LocalDate.now().format(afterFormatter))
+                    .createdDt(LocalDate.now().format(DateUtils.CREATED_FORMATTER))
                     .tags(List.of(project, "java", "release"))
                     .project(project)
                     .version(version)

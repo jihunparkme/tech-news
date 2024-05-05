@@ -1,5 +1,6 @@
 package com.technews.crawling;
 
+import com.technews.common.util.DateUtils;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
@@ -10,7 +11,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -18,8 +18,6 @@ import java.util.stream.Collectors;
 
 @Slf4j
 public class JavaReleaseNotesCrawlingTest {
-
-    private final static DateTimeFormatter afterFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     private static final String ORACLE_BASE_URL = "https://www.oracle.com";
     private static final String JDK_8 = "https://www.oracle.com/java/technologies/javase/8u-relnotes.html";
@@ -108,7 +106,7 @@ public class JavaReleaseNotesCrawlingTest {
             final String href = li.select("a").first().attr("href");
             final String gaUrl = ORACLE_BASE_URL + href;
             return Release.builder()
-                    .createdDt(LocalDate.now().format(afterFormatter))
+                    .createdDt(LocalDate.now().format(DateUtils.CREATED_FORMATTER))
                     .tags(List.of(project, "java", "release"))
                     .project(project)
                     .version(version)
