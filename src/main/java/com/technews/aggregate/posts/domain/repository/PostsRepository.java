@@ -2,7 +2,7 @@ package com.technews.aggregate.posts.domain.repository;
 
 import com.technews.aggregate.posts.domain.Post;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
@@ -17,5 +17,7 @@ public interface PostsRepository extends MongoRepository<Post, String> {
     })
     List<Post> findByCategoryOrderByDateDescLimitOne(String category);
 
-    Page<Post> findAll(Pageable pageable);
+    Page<Post> findBySubject(String subject, PageRequest pageable);
+
+    Page<Post> findBySubjectAndCategoryIn(String subject, List<String> category, PageRequest pageable);
 }

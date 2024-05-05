@@ -24,16 +24,15 @@ public class SpringBlogsController {
 
     private final SpringBlogsService springBlogsService;
 
-    @GetMapping("/list")
+    @GetMapping("/spring")
     public ResponseEntity scrollList(
             @RequestParam(value = "categories", required = false) final List<String> categories,
             @RequestParam(value = "page", required = false, defaultValue = "1") final int page,
             @RequestParam(value = "size", required = false, defaultValue = "10") final int size) {
 
-        final PageRequest pageable = PageRequest.of(
-                page, size,
-                Sort.by("createdDt").descending().and(Sort.by("version").descending()));
-        final Page<Post> releasePage = springBlogsService.findAllRelease(page, size, categories);
+        final PageRequest pageable = PageRequest.of(page, size,
+                Sort.by("createdDt").descending().and(Sort.by("date").descending()));
+        final Page<Post> releasePage = springBlogsService.findAllRelease(pageable, categories);
         return BasicResponse.ok(releasePage);
     }
 }
