@@ -1,10 +1,10 @@
 package com.technews.scheduler;
 
-import com.technews.aggregate.posts.constant.BlogSubjects;
+import com.technews.aggregate.posts.constant.PostSubjects;
 import com.technews.aggregate.posts.domain.Post;
-import com.technews.aggregate.posts.spring.constant.SpringBlogsSubject;
-import com.technews.aggregate.posts.spring.dto.SavePostRequest;
-import com.technews.aggregate.posts.spring.service.SpringBlogsSchedulerService;
+import com.technews.aggregate.posts.constant.SpringBlogsSubject;
+import com.technews.aggregate.posts.dto.SavePostRequest;
+import com.technews.aggregate.posts.service.PostsSchedulerService;
 import com.technews.common.util.DateUtils;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +30,7 @@ public class SpringBlogScheduler {
     private static final String CATEGORY_URL = "https://spring.io/blog/category/";
     private static final String BLOG_URL = "https://spring.io";
 
-    private final SpringBlogsSchedulerService springBlogsSchedulerService;
+    private final PostsSchedulerService postsSchedulerService;
 
     @Scheduled(cron = "0 0 1 * * ?")
     public void runScheduler() {
@@ -40,11 +40,11 @@ public class SpringBlogScheduler {
     }
 
     private void searchSpringBlogPosts(final SpringBlogsSubject subject) {
-        final Post latestPost = springBlogsSchedulerService.findLatestPost(subject.value());
+        final Post latestPost = postsSchedulerService.findLatestPost(subject.value());
         final List<SavePostRequest> posts = getPostInfo(subject.value());
         posts.stream()
                 .filter(post -> post.isLatestDatePost(latestPost.getDate()))
-                .forEach(post -> springBlogsSchedulerService.insertPost(post));
+                .forEach(post -> postsSchedulerService.insertPost(post));
     }
 
     private static List<SavePostRequest> getPostInfo(final String category) {
@@ -59,13 +59,13 @@ public class SpringBlogScheduler {
                 final String url = getPostUrl(element);
 
                 result.add(SavePostRequest.builder()
-                        .subject(BlogSubjects.SPRING.value())
+                        .subject(PostSubjects.SPRING.value())
                         .title(title)
                         .url(url)
                         .category(category)
                         .writer(meta.writer())
                         .date(meta.date())
-                        .tags(List.of(BlogSubjects.SPRING.value(), category))
+                        .tags(List.of(PostSubjects.SPRING.value(), category))
                         .createdDt(LocalDate.now().format(DateUtils.CREATED_FORMATTER))
                         .build());
             }

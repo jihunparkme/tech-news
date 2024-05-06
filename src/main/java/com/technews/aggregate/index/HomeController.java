@@ -1,7 +1,7 @@
 package com.technews.aggregate.index;
 
-import com.technews.aggregate.posts.java.constant.JavaBlogsSubject;
-import com.technews.aggregate.posts.spring.constant.SpringBlogsSubject;
+import com.technews.aggregate.posts.constant.JavaBlogsSubject;
+import com.technews.aggregate.posts.constant.SpringBlogsSubject;
 import com.technews.aggregate.releases.constant.Categories;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

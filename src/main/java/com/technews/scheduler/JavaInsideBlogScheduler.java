@@ -1,10 +1,10 @@
 package com.technews.scheduler;
 
-import com.technews.aggregate.posts.constant.BlogSubjects;
+import com.technews.aggregate.posts.constant.PostSubjects;
 import com.technews.aggregate.posts.domain.Post;
-import com.technews.aggregate.posts.java.constant.JavaBlogsSubject;
-import com.technews.aggregate.posts.spring.dto.SavePostRequest;
-import com.technews.aggregate.posts.spring.service.SpringBlogsSchedulerService;
+import com.technews.aggregate.posts.constant.JavaBlogsSubject;
+import com.technews.aggregate.posts.dto.SavePostRequest;
+import com.technews.aggregate.posts.service.PostsSchedulerService;
 import com.technews.common.util.DateUtils;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
@@ -29,19 +29,19 @@ public class JavaInsideBlogScheduler {
 
     private static final String BLOG_URL = "https://inside.java";
 
-    private final SpringBlogsSchedulerService springBlogsSchedulerService;
+    private final PostsSchedulerService postsSchedulerService;
 
     @Scheduled(cron = "0 0 1 * * ?")
     public void runScheduled() {
-        searchJavaBlogPosts(BlogSubjects.JAVA);
+        searchJavaBlogPosts(PostSubjects.JAVA);
     }
 
-    private void searchJavaBlogPosts(final BlogSubjects subject) {
-        final Post latestPost = springBlogsSchedulerService.findLatestPost(subject.value());
+    private void searchJavaBlogPosts(final PostSubjects subject) {
+        final Post latestPost = postsSchedulerService.findLatestPost(subject.value());
         final List<SavePostRequest> posts = getPosts();
         posts.stream()
                 .filter(post -> post.isLatestDatePost(latestPost.getDate()))
-                .forEach(post -> springBlogsSchedulerService.insertPost(post));
+                .forEach(post -> postsSchedulerService.insertPost(post));
     }
 
     private static List<SavePostRequest> getPosts() {
@@ -62,7 +62,7 @@ public class JavaInsideBlogScheduler {
 
     private static SavePostRequest getPost(final Element postElement) {
         final SavePostRequest.SavePostRequestBuilder savePostBuilder = SavePostRequest.builder();
-        savePostBuilder.subject(BlogSubjects.JAVA.value());
+        savePostBuilder.subject(PostSubjects.JAVA.value());
         savePostBuilder.category(JavaBlogsSubject.INSIDE.value());
 
         savePostBuilder.title(getTitle(postElement));

@@ -1,4 +1,4 @@
-package com.technews.aggregate.posts.spring.dto;
+package com.technews.aggregate.posts.dto;
 
 import com.technews.aggregate.posts.domain.Post;
 import com.technews.common.util.DateUtils;

@@ -1,5 +1,6 @@
 package com.technews.aggregate.posts.spring.dto;
 
+import com.technews.aggregate.posts.dto.SavePostRequest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;

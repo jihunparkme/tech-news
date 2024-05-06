@@ -3,7 +3,7 @@ package com.technews.aggregate.posts.constant;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum BlogSubjects {
+public enum PostSubjects {
     SPRING("Spring"),
     JAVA("Java"),
     ;

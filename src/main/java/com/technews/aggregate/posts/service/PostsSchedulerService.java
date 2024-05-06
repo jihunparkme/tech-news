@@ -1,8 +1,8 @@
-package com.technews.aggregate.posts.spring.service;
+package com.technews.aggregate.posts.service;
 
 import com.technews.aggregate.posts.domain.Post;
 import com.technews.aggregate.posts.domain.repository.PostsRepository;
-import com.technews.aggregate.posts.spring.dto.SavePostRequest;
+import com.technews.aggregate.posts.dto.SavePostRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class SpringBlogsSchedulerService {
+public class PostsSchedulerService {
 
     private final PostsRepository postsRepository;
 

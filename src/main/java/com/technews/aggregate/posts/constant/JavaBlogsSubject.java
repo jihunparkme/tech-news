@@ -1,4 +1,4 @@
-package com.technews.aggregate.posts.java.constant;
+package com.technews.aggregate.posts.constant;
 
 import lombok.AllArgsConstructor;
 
