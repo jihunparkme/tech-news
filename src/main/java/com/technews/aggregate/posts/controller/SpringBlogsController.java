@@ -1,4 +1,4 @@
-package com.technews.aggregate.posts.spring.controller;
+package com.technews.aggregate.posts.controller;
 
 import com.technews.aggregate.posts.domain.Post;
 import com.technews.aggregate.posts.spring.service.SpringBlogsService;
