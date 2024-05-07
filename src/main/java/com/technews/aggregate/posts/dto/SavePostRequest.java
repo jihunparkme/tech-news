@@ -42,7 +42,7 @@ public class SavePostRequest {
         }
     }
 
-    public Post toRelease() {
+    public Post toPost() {
         return Post.builder()
                 .subject(this.subject)
                 .title(this.title)

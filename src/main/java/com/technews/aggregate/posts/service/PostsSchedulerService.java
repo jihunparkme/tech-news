@@ -18,7 +18,7 @@ public class PostsSchedulerService {
 
     public void insertPost(SavePostRequest savePostRequest) {
         try {
-            postsRepository.save(savePostRequest.toRelease());
+            postsRepository.save(savePostRequest.toPost());
             log.info("add new post. {}", savePostRequest.getTitle());
         } catch (Exception e) {
             log.error("SpringBlogsSchedulerService.insertPost exception", e);
