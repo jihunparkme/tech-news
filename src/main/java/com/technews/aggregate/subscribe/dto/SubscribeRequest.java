@@ -28,4 +28,11 @@ public class SubscribeRequest {
                 .startDt(LocalDateTime.now())
                 .build();
     }
+
+    public Subscribe toUnSubscribe() {
+        return Subscribe.builder()
+                .subscribe(false)
+                .endDt(LocalDateTime.now())
+                .build();
+    }
 }

@@ -37,4 +37,15 @@ public class SubscribeService {
         Subscribe subscribe = request.toSubscribe();
         subscribeRepository.save(subscribe);
     }
+
+    @Transactional
+    public void unsubscribe(SubscribeRequest request) {
+        final Optional<Subscribe> subscribeOpt = subscribeRepository.findByEmail(request.getEmail());
+        if (subscribeOpt.isEmpty()) {
+            throw new NotFoundSubscribe();
+        }
+
+        Subscribe subscribe = request.toUnSubscribe();
+        subscribeRepository.save(subscribe);
+    }
 }
