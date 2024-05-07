@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
+
 @Document(collection = "subscribe")
 @Getter
 @Builder
@@ -15,6 +17,6 @@ public class Subscribe {
     private String id;
     private String email;
     private Boolean subscribe;
-    private String startDt;
-    private String endDt;
+    private LocalDateTime startDt;
+    private LocalDateTime endDt;
 }
