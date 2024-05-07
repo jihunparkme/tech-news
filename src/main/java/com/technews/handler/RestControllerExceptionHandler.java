@@ -7,6 +7,10 @@ import org.springframework.beans.factory.BeanCreationNotAllowedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.util.CollectionUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,10 +20,26 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 
 import java.net.BindException;
 import java.nio.file.AccessDeniedException;
+import java.util.List;
+
+import static com.technews.common.constant.Result.FAIL;
 
 @Slf4j
 @RestControllerAdvice(annotations = RestController.class)
 public class RestControllerExceptionHandler {
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity handleValidationExceptions(MethodArgumentNotValidException ex) {
+        BindingResult bindingResult = ex.getBindingResult();
+        if (bindingResult.hasErrors()) {
+            List<ObjectError> allErrors = bindingResult.getAllErrors();
+            if (!CollectionUtils.isEmpty(allErrors)) {
+                return BasicResponse.clientError(allErrors.get(0).getDefaultMessage());
+            }
+            return BasicResponse.clientError(FAIL.message());
+        }
+        return BasicResponse.clientError(ex.getMessage());
+    }
 
     @ExceptionHandler({
             HttpMessageNotReadableException.class,
