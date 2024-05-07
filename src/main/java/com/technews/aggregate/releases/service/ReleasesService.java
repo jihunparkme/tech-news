@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class ReleasesService {
 
     private final ReleasesRepository releasesRepository;
 
+    @Transactional(readOnly = true)
     public Page<Release> findAllRelease(
             final int page, final int size, final List<String> categories) {
         final PageRequest pageable = PageRequest.of(

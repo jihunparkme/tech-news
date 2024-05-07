@@ -6,6 +6,7 @@ import com.technews.aggregate.releases.dto.SaveReleaseRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class ReleasesSchedulerService {
 
     private final ReleasesRepository releasesRepository;
 
+    @Transactional
     public void insertRelease(SaveReleaseRequest saveReleaseRequest) {
         try {
             releasesRepository.save(saveReleaseRequest.toRelease());
@@ -25,6 +27,7 @@ public class ReleasesSchedulerService {
         }
     }
 
+    @Transactional(readOnly = true)
     public Release findLatestRelease(final String project) {
         final List<Release> latestReleaseDate = releasesRepository.findByProjectOrderByVersionDescLimitOne(project);
         if (latestReleaseDate.isEmpty()) {
