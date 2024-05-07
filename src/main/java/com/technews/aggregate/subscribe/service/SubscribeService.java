@@ -26,4 +26,15 @@ public class SubscribeService {
 
         return SubscribeResponse.of(subscribeOpt.get());
     }
+
+    @Transactional
+    public void subscribe(SubscribeRequest request) {
+        final Optional<Subscribe> subscribeOpt = subscribeRepository.findByEmail(request.getEmail());
+        if (subscribeOpt.isEmpty()) {
+            throw new NotFoundSubscribe();
+        }
+
+        Subscribe subscribe = request.toSubscribe();
+        subscribeRepository.save(subscribe);
+    }
 }
