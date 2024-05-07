@@ -6,6 +6,7 @@ import com.technews.aggregate.posts.dto.SavePostRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class PostsSchedulerService {
 
     private final PostsRepository postsRepository;
 
+    @Transactional
     public void insertPost(SavePostRequest savePostRequest) {
         try {
             postsRepository.save(savePostRequest.toPost());
@@ -25,6 +27,7 @@ public class PostsSchedulerService {
         }
     }
 
+    @Transactional(readOnly = true)
     public Post findLatestPost(final String category) {
         final List<Post> latestPost = postsRepository.findByCategoryOrderByDateDescLimitOne(category);
         if (latestPost.isEmpty()) {

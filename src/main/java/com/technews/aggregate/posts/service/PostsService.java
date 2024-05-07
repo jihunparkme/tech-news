@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class PostsService {
 
     private final PostsRepository postsRepository;
 
+    @Transactional(readOnly = true)
     public Page<Post> findAllRelease(final PostSubjects subject, final PageRequest pageable, final List<String> categories) {
         return getReleasePage(subject, categories, pageable);
     }
