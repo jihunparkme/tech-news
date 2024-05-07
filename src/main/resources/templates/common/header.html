@@ -10,29 +10,14 @@
                 <div class="masthead-content text-white">
                     <div class="container-fluid px-4 px-lg-0">
                         <p class="mb-2">If you would like to subscribe, please enter your email.</p>
-                        <form id="subscribe-form">
+                        <form id="subscribe-form" onsubmit="return false;">
                             <div class="row input-group-newsletter">
                                 <div class="col">
-                                    <input class="form-control" id="subscribe-email" type="email" placeholder="Enter email address..." data-sb-validations="required,email" data-sb-can-submit="yes">
+                                    <input class="form-control" id="subscribe-email" type="email" placeholder="Enter email address..." required>
                                 </div>
                                 <div class="col-auto">
-                                    <button class="btn btn-info" id="subscribe-btn" type="submit">Subscribe</button>
+                                    <button class="btn btn-info" id="subscribe-btn" th:onclick="'subscribe()'">Subscribe</button>
                                 </div>
-                            </div>
-                            <div class="invalid-feedback mt-2 d-none" data-sb-feedback="email:required">An email is
-                                required.
-                            </div>
-                            <div class="invalid-feedback mt-2 d-none" data-sb-feedback="email:email">Email is not
-                                valid.
-                            </div>
-                            <div class="d-none" id="submitSuccessMessage">
-                                <div class="text-center mb-3 mt-2">
-                                    <div class="fw-bolder">Form submission successful!</div>
-                                    Your subscription is complete.
-                                </div>
-                            </div>
-                            <div class="d-none" id="submitErrorMessage">
-                                <div class="text-center text-danger mb-3 mt-2">Error sending message!</div>
                             </div>
                         </form>
                     </div>
