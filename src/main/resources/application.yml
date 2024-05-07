@@ -8,5 +8,5 @@ spring:
   profiles:
     active: prod
     group:
-      local: local
-      prod: prod
+      local: local, mail
+      prod: prod, mail
