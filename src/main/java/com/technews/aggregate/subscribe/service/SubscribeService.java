@@ -29,11 +29,6 @@ public class SubscribeService {
 
     @Transactional
     public void subscribe(SubscribeRequest request) {
-        final Optional<Subscribe> subscribeOpt = subscribeRepository.findByEmail(request.getEmail());
-        if (subscribeOpt.isEmpty()) {
-            throw new NotFoundSubscribe();
-        }
-
         Subscribe subscribe = request.toSubscribe();
         subscribeRepository.save(subscribe);
     }
@@ -45,7 +40,8 @@ public class SubscribeService {
             throw new NotFoundSubscribe();
         }
 
-        Subscribe subscribe = request.toUnSubscribe();
+        final Subscribe subscribe = subscribeOpt.get();
+        subscribe.unsubscribe();
         subscribeRepository.save(subscribe);
     }
 }

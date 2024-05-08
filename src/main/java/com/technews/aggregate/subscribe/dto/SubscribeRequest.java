@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SubscribeRequest {
-    @NotBlank(message = "email is required.")
+    @NotBlank(message = "An email is required.")
     @Pattern(regexp = "^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}", message = "Email is not valid.")
     @Size(min = 3, max = 50, message = "The email length must be between 3 and 50 characters.")
     private String email;
@@ -26,6 +26,7 @@ public class SubscribeRequest {
                 .email(this.email)
                 .subscribe(true)
                 .startDt(LocalDateTime.now())
+                .endDt(LocalDateTime.now())
                 .build();
     }
 

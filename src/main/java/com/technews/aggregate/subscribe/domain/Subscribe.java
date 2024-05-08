@@ -19,4 +19,9 @@ public class Subscribe {
     private Boolean subscribe;
     private LocalDateTime startDt;
     private LocalDateTime endDt;
+
+    public void unsubscribe() {
+        this.subscribe = false;
+        this.endDt = LocalDateTime.now();
+    }
 }
