@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Post {
     public static final Post EMPTY =
-            new Post("", "", "", "", "", "", "", Collections.EMPTY_LIST, "");
+            new Post("", "", "", "", "", "", "", Collections.EMPTY_LIST, false, "");
 
     private String id;
     private String subject;
@@ -28,5 +28,6 @@ public class Post {
     private String date;
     List<String> tags;
 
+    private boolean shared;
     private String createdDt;
 }

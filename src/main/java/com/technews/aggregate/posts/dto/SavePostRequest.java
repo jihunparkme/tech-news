@@ -51,6 +51,7 @@ public class SavePostRequest {
                 .date(this.date)
                 .tags(this.tags)
                 .url(this.url)
+                .shared(false)
                 .createdDt(this.createdDt)
                 .build();
     }

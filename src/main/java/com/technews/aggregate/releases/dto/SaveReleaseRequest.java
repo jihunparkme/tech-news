@@ -37,6 +37,7 @@ public class SaveReleaseRequest {
                 .date(this.date)
                 .url(this.url)
                 .tags(this.tags)
+                .shared(false)
                 .createdDt(this.createdDt)
                 .build();
     }
