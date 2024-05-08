@@ -49,14 +49,14 @@ public class SubscribeService {
     }
 
     @Transactional(readOnly = true)
-    public List<SubscribeResponse> findSubscriber() {
+    public List<String> findSubscriberEmail() {
         final Optional<List<Subscribe>> subscribersOpt = subscribeRepository.findBySubscribeTrue();
         if (subscribersOpt.isEmpty()) {
             return Collections.EMPTY_LIST;
         }
 
         return subscribersOpt.get().stream()
-                .map(subscribe -> SubscribeResponse.of(subscribe))
+                .map(Subscribe::getEmail)
                 .collect(Collectors.toList());
     }
 }
