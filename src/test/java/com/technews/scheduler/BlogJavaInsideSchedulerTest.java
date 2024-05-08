@@ -7,13 +7,13 @@ import org.springframework.test.context.ActiveProfiles;
 
 @ActiveProfiles("local")
 @SpringBootTest
-class SpringBlogSchedulerTest {
+class BlogJavaInsideSchedulerTest {
 
     @Autowired
-    private SpringBlogScheduler springBlogScheduler;
+    private BlogJavaInsideScheduler blogJavaInsideScheduler;
 
     @Test
     void run() {
-        springBlogScheduler.runScheduler();
+        blogJavaInsideScheduler.runScheduled();
     }
 }

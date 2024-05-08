@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class JavaReleasesScheduler {
+public class ReleasesJavaScheduler {
 
     private static final String ORACLE_BASE_URL = "https://www.oracle.com";
 

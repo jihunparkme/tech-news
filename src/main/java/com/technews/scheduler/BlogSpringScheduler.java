@@ -25,7 +25,7 @@ import java.util.List;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class SpringBlogScheduler {
+public class BlogSpringScheduler {
 
     private static final String CATEGORY_URL = "https://spring.io/blog/category/";
     private static final String BLOG_URL = "https://spring.io";

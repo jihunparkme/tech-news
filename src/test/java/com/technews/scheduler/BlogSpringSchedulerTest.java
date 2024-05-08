@@ -7,12 +7,13 @@ import org.springframework.test.context.ActiveProfiles;
 
 @ActiveProfiles("local")
 @SpringBootTest
-class JavaReleasesSchedulerTest {
+class BlogSpringSchedulerTest {
+
     @Autowired
-    private JavaReleasesScheduler javaReleasesScheduler;
+    private BlogSpringScheduler blogSpringScheduler;
 
     @Test
     void run() {
-        javaReleasesScheduler.runScheduler();
+        blogSpringScheduler.runScheduler();
     }
 }

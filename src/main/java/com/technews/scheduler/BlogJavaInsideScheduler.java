@@ -25,7 +25,7 @@ import java.util.List;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class JavaInsideBlogScheduler {
+public class BlogJavaInsideScheduler {
 
     private static final String BLOG_URL = "https://inside.java";
 
