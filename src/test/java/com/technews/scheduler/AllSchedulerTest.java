@@ -9,13 +9,22 @@ import org.springframework.test.context.ActiveProfiles;
 @Disabled
 @ActiveProfiles("local")
 @SpringBootTest
-class BlogSpringSchedulerTest {
+public class AllSchedulerTest {
 
     @Autowired
+    private ReleaseSpringProjectsScheduler releaseSpringProjectsScheduler;
+    @Autowired
+    private ReleasesJavaScheduler releasesJavaScheduler;
+    @Autowired
     private BlogSpringScheduler blogSpringScheduler;
+    @Autowired
+    private BlogJavaInsideScheduler blogJavaInsideScheduler;
 
     @Test
     void run() {
+        releaseSpringProjectsScheduler.runScheduler();
+        releasesJavaScheduler.runScheduler();
         blogSpringScheduler.runScheduler();
+        blogJavaInsideScheduler.runScheduled();
     }
 }
