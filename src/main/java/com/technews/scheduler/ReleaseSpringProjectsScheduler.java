@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class GitReleaseScheduler {
+public class ReleaseSpringProjectsScheduler {
 
     private static final String SPRING_PROJECT_REPOSITORY_URL = "https://github.com/spring-projects/";
     private static final String SPRING_PROJECT_REPOSITORY_TAGS = "/tags";

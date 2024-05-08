@@ -7,13 +7,13 @@ import org.springframework.test.context.ActiveProfiles;
 
 @ActiveProfiles("local")
 @SpringBootTest
-class GitReleaseSchedulerTest {
+class ReleaseSpringProjectsSchedulerTest {
 
     @Autowired
-    private GitReleaseScheduler gitReleaseScheduler;
+    private ReleaseSpringProjectsScheduler releaseSpringProjectsScheduler;
 
     @Test
     void run() {
-        gitReleaseScheduler.runScheduler();
+        releaseSpringProjectsScheduler.runScheduler();
     }
 }
