@@ -9,7 +9,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -43,5 +46,17 @@ public class SubscribeService {
         final Subscribe subscribe = subscribeOpt.get();
         subscribe.unsubscribe();
         subscribeRepository.save(subscribe);
+    }
+
+    @Transactional(readOnly = true)
+    public List<SubscribeResponse> findSubscriber() {
+        final Optional<List<Subscribe>> subscribersOpt = subscribeRepository.findBySubscribeTrue();
+        if (subscribersOpt.isEmpty()) {
+            return Collections.EMPTY_LIST;
+        }
+
+        return subscribersOpt.get().stream()
+                .map(subscribe -> SubscribeResponse.of(subscribe))
+                .collect(Collectors.toList());
     }
 }
