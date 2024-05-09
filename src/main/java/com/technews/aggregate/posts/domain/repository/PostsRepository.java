@@ -21,5 +21,5 @@ public interface PostsRepository extends MongoRepository<Post, String> {
 
     Page<Post> findBySubjectAndCategoryIn(String subject, List<String> category, PageRequest pageable);
 
-    List<Post> findBySharedTrue();
+    List<Post> findBySharedFalse();
 }

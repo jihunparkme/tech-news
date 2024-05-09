@@ -2,6 +2,10 @@ package com.technews.common.constant;
 
 import lombok.AllArgsConstructor;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @AllArgsConstructor
 public enum JdkVersion {
     JDK_8("JDK 8", "https://www.oracle.com/java/technologies/javase/8u-relnotes.html"),
@@ -19,5 +23,11 @@ public enum JdkVersion {
 
     public String url() {
         return url;
+    }
+
+    public static List<String> list() {
+        return Arrays.stream(values())
+                .map(jdk -> jdk.value)
+                .collect(Collectors.toUnmodifiableList());
     }
 }

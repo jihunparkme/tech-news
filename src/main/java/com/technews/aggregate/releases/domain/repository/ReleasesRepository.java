@@ -21,5 +21,5 @@ public interface ReleasesRepository extends MongoRepository<Release, String> {
 
     Page<Release> findByProjectIn(List<String> project, Pageable pageable);
 
-    List<Release> findBySharedTrue();
+    List<Release> findBySharedFalse();
 }
