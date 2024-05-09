@@ -41,7 +41,7 @@ public class SubscribeMailScheduler {
         final List<String> subscriber = subscribeService.findSubscriberEmail();
         Events.raise(SendMailEvent.builder()
                 .subject(SUBJECT)
-                .contents(MailTemplateUtils.generateContents())
+                .contents(MailTemplateUtils.generateContents(subscriberMailContents))
                 .addressList(Optional.of(subscriber))
                 .build());
     }
@@ -53,10 +53,10 @@ public class SubscribeMailScheduler {
         List<Post> postOfJava = getPostOfJava(posts);
 
         return SubscriberMailContents.builder()
-                .releaseOfSpring(releaseOfSpring)
-                .releaseOfJava(releaseOfJava)
-                .postOfSpring(postOfSpring)
-                .postOfJava(postOfJava)
+                .springReleases(releaseOfSpring)
+                .javaReleases(releaseOfJava)
+                .springPosts(postOfSpring)
+                .javaPosts(postOfJava)
                 .build();
     }
 

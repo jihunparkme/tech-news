@@ -14,9 +14,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SubscriberMailContents {
-    private List<Release> releaseOfSpring;
-    private List<Release> releaseOfJava;
+    private List<Release> springReleases;
+    private List<Release> javaReleases;
 
-    private List<Post> postOfSpring;
-    private List<Post> postOfJava;
+    private List<Post> springPosts;
+    private List<Post> javaPosts;
 }
