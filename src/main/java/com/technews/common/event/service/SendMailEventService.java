@@ -29,7 +29,7 @@ public class SendMailEventService {
     @Value("${admin.mail.address}")
     private String adminAddress;
 
-    private static final String MAIL_TITLE_PREFIX = "[tech-news] ";
+    private static final String MAIL_TITLE_PREFIX = "[Tech-News] ";
 
     private final JavaMailSender mailSender;
 
