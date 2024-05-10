@@ -27,4 +27,8 @@ public class Release {
 
     private boolean shared;
     private String createdDt;
+
+    public void share() {
+        this.shared = true;
+    }
 }

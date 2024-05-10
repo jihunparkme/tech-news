@@ -30,4 +30,8 @@ public class Post {
 
     private boolean shared;
     private String createdDt;
+
+    public void share() {
+        this.shared = true;
+    }
 }

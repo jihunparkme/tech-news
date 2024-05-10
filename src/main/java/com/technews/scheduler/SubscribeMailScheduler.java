@@ -34,16 +34,23 @@ public class SubscribeMailScheduler {
 
     @Scheduled(cron = "0 0 9 * * *")
     public void runScheduler() {
+        log.info("[SubscribeMailScheduler] Start...");
         final List<Release> releases = releasesRepository.findBySharedFalse();
         final List<Post> posts = postsRepository.findBySharedFalse();
-        SubscriberMailContents subscriberMailContents = getSubscriberMailContents(releases, posts);
+        if (releases.isEmpty() && posts.isEmpty()) {
+            log.info("[SubscribeMailScheduler] There are no news");
+            return;
+        }
 
+        SubscriberMailContents subscriberMailContents = getSubscriberMailContents(releases, posts);
         final List<String> subscriber = subscribeService.findSubscriberEmail();
         Events.raise(SendMailEvent.builder()
                 .subject(SUBJECT)
                 .contents(MailTemplateUtils.generateContents(subscriberMailContents))
                 .addressList(Optional.of(subscriber))
                 .build());
+
+        updateShared(releases, posts);
     }
 
     private SubscriberMailContents getSubscriberMailContents(final List<Release> releases, final List<Post> posts) {
@@ -82,5 +89,16 @@ public class SubscribeMailScheduler {
         return posts.stream()
                 .filter(post -> PostSubjects.JAVA.value().equals(post.getSubject()))
                 .collect(Collectors.toList());
+    }
+
+    private void updateShared(final List<Release> releases, final List<Post> posts) {
+        releases.stream().forEach(release -> {
+            release.share();
+            releasesRepository.save(release);
+        });
+        posts.stream().forEach(post -> {
+            post.share();
+            postsRepository.save(post);
+        });
     }
 }

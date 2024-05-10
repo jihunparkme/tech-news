@@ -13,58 +13,62 @@ public class MailTemplateUtils {
                 "      </h3>\n" +
                 "      <h4 style=\"font-family:Palatino Linotype, Book Antiqua, Palatino, serif;font-style:italic;font-weight:500\">\n" +
                 "          Release\n" +
-                "      </h4>\n");
+                "      </h4><ul>\n");
         for (final Release springRelease : subscriberMailContents.getSpringReleases()) {
-            sb.append("            <a\n" +
+            sb.append("            <li><a\n" +
                     "                style=\"font-family:Palatino Linotype, Book Antiqua, Palatino, serif;font-size: 15px; margin-left: auto; margin-right: auto; text-align: justify;color: #666;line-height:1.5;\"\n" +
                     "                href=\"");
             sb.append(springRelease.getUrl());
             sb.append("\" target=\"_blank\">\n");
             sb.append(springRelease.getProject() + " : " + springRelease.getVersion());
-            sb.append("\n      </a><br/>\n");
+            sb.append("\n      </a><br/></li>\n");
         }
+        sb.append("      </ul>\n");
 
         sb.append("      <h4 style=\"font-family:Palatino Linotype, Book Antiqua, Palatino, serif;font-style:italic;font-weight:500\">\n" +
                 "          Blog\n" +
-                "      </h4>\n");
+                "      </h4><ul>\n");
         for (final Post springPost : subscriberMailContents.getSpringPosts()) {
-            sb.append("            <a\n" +
+            sb.append("            <li><a\n" +
                     "                style=\"font-family:Palatino Linotype, Book Antiqua, Palatino, serif;font-size: 15px; margin-left: auto; margin-right: auto; text-align: justify;color: #666;line-height:1.5;margin-bottom:75px\"\n" +
                     "                href=\"");
             sb.append(springPost.getUrl());
             sb.append("\" target=\"_blank\">\n");
             sb.append(springPost.getTitle());
-            sb.append("\n      </a><br/>\n");
+            sb.append("\n      </a><br/></li>\n");
         }
+        sb.append("      </ul>\n");
 
         sb.append("<h3 style=\"font-family:Palatino Linotype, Book Antiqua, Palatino, serif;font-style:italic;font-weight:blod;margin-top: 3em;\">\n" +
                 "          Java\n" +
                 "      </h3>\n" +
                 "      <h4 style=\"font-family:Palatino Linotype, Book Antiqua, Palatino, serif;font-style:italic;font-weight:500\">\n" +
                 "          Release\n" +
-                "      </h4>\n");
+                "      </h4><ul>\n");
         for (final Release javaRelease : subscriberMailContents.getJavaReleases()) {
-            sb.append("            <a\n" +
+            sb.append("            <li><a\n" +
                     "                style=\"font-family:Palatino Linotype, Book Antiqua, Palatino, serif;font-size: 15px; margin-left: auto; margin-right: auto; text-align: justify;color: #666;line-height:1.5;\"\n" +
                     "                href=\"");
             sb.append(javaRelease.getUrl());
             sb.append("\" target=\"_blank\">\n");
             sb.append(javaRelease.getProject() + " : " + javaRelease.getVersion());
-            sb.append("\n      </a><br/>\n");
+            sb.append("\n      </a><br/></li>\n");
         }
+        sb.append("      </ul>\n");
 
         sb.append("      <h4 style=\"font-family:Palatino Linotype, Book Antiqua, Palatino, serif;font-style:italic;font-weight:500\">\n" +
                 "          Blog\n" +
-                "      </h4>\n");
+                "      </h4><ul>\n");
         for (final Post javaPost : subscriberMailContents.getJavaPosts()) {
-            sb.append("            <a\n" +
+            sb.append("            <li><a\n" +
                     "                style=\"font-family:Palatino Linotype, Book Antiqua, Palatino, serif;font-size: 15px; margin-left: auto; margin-right: auto; text-align: justify;color: #666;line-height:1.5;margin-bottom:75px;\"\n" +
                     "                href=\"");
             sb.append(javaPost.getUrl());
             sb.append("\" target=\"_blank\">\n");
             sb.append(javaPost.getTitle());
-            sb.append("\n      </a><br/>\n");
+            sb.append("\n      </a><br/></li>\n");
         }
+        sb.append("      </ul>\n");
 
         sb.append("      <p style=\"margin-bottom:75px;\"></p>");
 
