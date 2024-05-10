@@ -12,6 +12,8 @@ Tech News 는 Java, Spring 의 RELEASES 정보, BLOG 게시물들을 수집하�
 - Thymeleaf
 - Junit 5
 - Mongodb
+- AWS EC2
+- Docker
 
 ## 주요 기능
 
@@ -35,8 +37,10 @@ JDK Release 소식은 [ORACLE](https://www.oracle.com/) 홈페이지에서 LTS �
 
 Java News 는 [Inside Java](https://inside.java/) 에서 수집하고 있습니다.
 
-.
-
 > 수집에 포함시키고 싶으신 페이지가 있으시다면 구독 시 발송되는 메일로 페이지 정보를 알려주세요 :)
 
+### 구독
 
+Java, Spring 의 새로운 소식을 구독하고 싶으시다면<br/>
+페이지의 헤더에서 `If you would like to subscribe or unsubscribe, please enter your email.` 문구를 찾아주세요.<br/>
+발견하셨다면 문구 하단 입력란에 이메일을 입력하시고 구독 버튼을 눌러주시면 구독이 시작됩니다.
