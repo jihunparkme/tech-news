@@ -28,7 +28,7 @@ public class SavePostRequest {
     private String createdDt;
 
     public boolean isLatestDatePost(final String latestPostDate) {
-        if (StringUtils.isBlank(latestPostDate)) {
+        if (StringUtils.isBlank(this.date) || StringUtils.isBlank(latestPostDate)) {
             return true;
         }
 
