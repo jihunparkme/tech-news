@@ -33,10 +33,10 @@ public class BlogJavaInsideScheduler {
 
     @Scheduled(cron = "0 0 1 * * ?")
     public void runScheduled() {
-        searchJavaBlogPosts(PostSubjects.JAVA);
+        searchJavaBlogPosts(JavaBlogsSubject.INSIDE);
     }
 
-    private void searchJavaBlogPosts(final PostSubjects subject) {
+    private void searchJavaBlogPosts(final JavaBlogsSubject subject) {
         final Post latestPost = postsSchedulerService.findLatestPost(subject.value());
         final List<SavePostRequest> posts = getPosts();
         posts.stream()
