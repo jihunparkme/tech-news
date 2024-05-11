@@ -22,5 +22,8 @@ class DateUtilsTest {
 
         result = DateUtils.getFormattedDate("March 05, 2024");
         assertEquals("2024-03-05", result);
+
+        result = DateUtils.getFormattedDate("April 9, 2024");
+        assertEquals("2024-04-09", result);
     }
 }
