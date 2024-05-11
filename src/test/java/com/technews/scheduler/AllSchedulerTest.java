@@ -19,6 +19,8 @@ public class AllSchedulerTest {
     private BlogSpringScheduler blogSpringScheduler;
     @Autowired
     private BlogJavaInsideScheduler blogJavaInsideScheduler;
+    @Autowired
+    private SubscribeMailScheduler subscribeMailScheduler;
 
     @Test
     void run() {
@@ -26,5 +28,6 @@ public class AllSchedulerTest {
         releasesJavaScheduler.runScheduler();
         blogSpringScheduler.runScheduler();
         blogJavaInsideScheduler.runScheduled();
+        subscribeMailScheduler.runScheduler();
     }
 }
