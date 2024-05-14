@@ -1,6 +1,6 @@
 # Tech News
 
-Tech News 는 Java, Spring 의 RELEASES 정보, BLOG 게시물들을 수집하여 홈페이지에 보여줍니다.<br/>
+Tech News 는 Java, Spring 의 Releases 정보, Blog 게시물들을 수집하여 홈페이지에 보여줍니다.<br/>
 구독을 할 경우 이메일로 새로운 정보나 글들을 공유합니다.
 
 ## Tech Stack
@@ -44,3 +44,29 @@ Java News 는 [Inside Java](https://inside.java/) 에서 수집하고 있습니�
 Java, Spring 의 새로운 소식을 구독하고 싶으시다면<br/>
 페이지의 헤더에서 `If you would like to subscribe or unsubscribe, please enter your email.` 문구를 찾아주세요.<br/>
 발견하셨다면 문구 하단 입력란에 이메일을 입력하시고 구독 버튼을 눌러주시면 구독이 시작됩니다.
+
+## Sample
+
+### Main Page
+- Java & Spring Releases News
+
+<img src="./src/main/resources/static/img/capture/main.png" width="70%">
+
+---
+
+### Spring Blog News
+
+<img src="./src/main/resources/static/img/capture/spring.png" width="70%">
+
+---
+
+### Java Blog News
+
+<img src="./src/main/resources/static/img/capture/java.png" width="70%">
+
+---
+
+### Mail Subscription Content
+
+<img src="./src/main/resources/static/img/capture/email.png" width="70%">
+
