@@ -32,9 +32,8 @@ public class OracleJavaBlogCrawlingTest {
 
         try {
             final Document doc = Jsoup.connect(BLOG_BASE_URL)
-                    .userAgent("Mozilla/5.0")
+                    .header("User-Agent", "PostmanRuntime/7.37.3")
                     .get();
-            System.out.println(doc);
             final Elements categoryElements = doc.select(".with-category");
             for (Element categoryElement : categoryElements) {
                 final String category = categoryElement.select(".rw-ptitle").text();
