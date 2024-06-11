@@ -35,7 +35,7 @@ JDK Release 소식은 [ORACLE](https://www.oracle.com/) 홈페이지에서 LTS �
 - [JDK 17 Release notes](https://www.oracle.com/java/technologies/javase/17u-relnotes.html)
 - [JDK 21 Release notes](https://www.oracle.com/java/technologies/javase/21u-relnotes.html)
 
-Java News 는 [Inside Java](https://inside.java/) 에서 수집하고 있습니다.
+Java News 는 [Inside Java](https://inside.java/), [Oracle Java](https://blogs.oracle.com/java/) 에서 수집하고 있습니다.
 
 > 수집에 포함시키고 싶으신 페이지가 있으시다면 구독 시 발송되는 메일로 페이지 정보를 알려주세요 :)
 
