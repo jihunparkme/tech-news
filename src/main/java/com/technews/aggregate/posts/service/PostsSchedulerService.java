@@ -36,4 +36,12 @@ public class PostsSchedulerService {
 
         return latestPost.get(0);
     }
+
+    public boolean isNotExistOracleJavaPosts(final String title) {
+        final List<Post> posts = postsRepository.findByTitle(title);
+        if (posts.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
 }

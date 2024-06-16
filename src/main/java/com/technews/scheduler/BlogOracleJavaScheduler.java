@@ -34,9 +34,8 @@ public class BlogOracleJavaScheduler {
 
     private void searchOracleJavaBlogPosts() {
         final List<OracleJavaBlogPost> oracleJavaBlogPosts = getPosts();
-        // TODO: 제목 검색으로 중복 확인
         oracleJavaBlogPosts.stream()
-                .filter(post -> postsSchedulerService.isExistPostt(post.getTitle()))
+                .filter(post -> postsSchedulerService.isNotExistOracleJavaPosts(post.getTitle()))
                 .map(post -> post.toSavePostRequest())
                 .forEach(post -> postsSchedulerService.insertPost(post));
     }
