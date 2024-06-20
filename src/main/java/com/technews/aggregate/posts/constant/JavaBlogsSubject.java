@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public enum JavaBlogsSubject {
     INSIDE("inside"),
+    ORACLE("oracle"),
     ;
 
     private String value;

@@ -116,7 +116,7 @@ public class BlogJavaInsideScheduler {
             postInfoBuilder.date(split[0]);
             return postInfoBuilder.build();
         } catch (Exception e) {
-            return PostInfo.EMPTY;
+            return postInfoBuilder.build();
         }
     }
 

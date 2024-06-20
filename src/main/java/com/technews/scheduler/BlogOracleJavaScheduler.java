@@ -1,5 +1,7 @@
 package com.technews.scheduler;
 
+import com.technews.aggregate.posts.constant.JavaBlogsSubject;
+import com.technews.aggregate.posts.constant.PostSubjects;
 import com.technews.aggregate.posts.dto.SavePostRequest;
 import com.technews.aggregate.posts.service.PostsSchedulerService;
 import lombok.*;
@@ -73,13 +75,13 @@ public class BlogOracleJavaScheduler {
             }
 
             final OracleJavaBlogPost post = OracleJavaBlogPost.builder()
-                    .subject("java")
+                    .subject(PostSubjects.JAVA.value())
                     .title(postInfo.title())
                     .url(postInfo.url())
-                    .category("oracle")
+                    .category(JavaBlogsSubject.ORACLE.value())
                     .writer(postInfo.writer())
                     .date(LocalDate.now().toString())
-                    .tags(List.of("oracle", category))
+                    .tags(List.of(JavaBlogsSubject.ORACLE.value(), category))
                     .createdDt(LocalDate.now().toString())
                     .build();
 
