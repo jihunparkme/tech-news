@@ -50,23 +50,24 @@ Java, Spring 의 새로운 소식을 구독하고 싶으시다면<br/>
 ### Main Page
 - Java & Spring Releases News
 
-<img src="https://github.com/user-attachments/assets/e8c5b393-c12b-4a2b-b5ad-bbe8a6e17393">
+![Jul-17-2024 22-31-01](https://github.com/user-attachments/assets/19a0f1cb-f3c0-4591-a8fe-ec68c65a3931)
 
 ---
 
 ### Spring Blog News
 
-<img src="./src/main/resources/static/img/capture/spring.png" width="70%">
+![Jul-17-2024 22-33-47](https://github.com/user-attachments/assets/f3a11030-7a43-4ebb-a3df-e379ebfd955b)
 
 ---
 
 ### Java Blog News
 
-<img src="./src/main/resources/static/img/capture/java.png" width="70%">
+![Jul-17-2024 22-40-10](https://github.com/user-attachments/assets/79e22298-8f58-4449-9a76-0642c051e4bd)
 
 ---
 
 ### Mail Subscription Content
 
-<img src="./src/main/resources/static/img/capture/email.png" width="70%">
+![Jul-17-2024 22-38-36](https://github.com/user-attachments/assets/bbecefac-90e3-4045-8e92-a4686468624a)
+
 
