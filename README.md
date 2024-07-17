@@ -50,7 +50,7 @@ Java, Spring 의 새로운 소식을 구독하고 싶으시다면<br/>
 ### Main Page
 - Java & Spring Releases News
 
-<img src="./src/main/resources/static/img/capture/main.png" width="70%">
+<img src="https://github.com/user-attachments/assets/e8c5b393-c12b-4a2b-b5ad-bbe8a6e17393">
 
 ---
 
