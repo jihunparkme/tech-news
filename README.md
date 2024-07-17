@@ -47,8 +47,8 @@ Java, Spring 의 새로운 소식을 구독하고 싶으시다면<br/>
 
 ## Sample
 
-### Main Page
-- Java & Spring Releases News
+### Java & Spring Releases News
+- Main Page
 
 ![Jul-17-2024 22-31-01](https://github.com/user-attachments/assets/19a0f1cb-f3c0-4591-a8fe-ec68c65a3931)
 
