@@ -5,7 +5,7 @@ Tech News 는 Java, Spring 의 Releases 정보, Blog 게시물들을 수집하�
 
 ## Tech Stack
 
-- JDK 17
+- JDK 21
 - Spring Boot 3.2.5
 - Spring Web
 - jsoup 1.17.1
