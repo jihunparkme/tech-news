@@ -38,6 +38,7 @@ dependencies {
     implementation("org.jsoup:jsoup:1.17.1")
     implementation("org.apache.commons:commons-lang3")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
 
     // Spring Boot Devtools
     compileOnly("org.springframework.boot:spring-boot-devtools")
