@@ -9,7 +9,5 @@ import org.springframework.web.bind.annotation.RequestMapping
 class AboutController {
 
     @GetMapping
-    fun about(): String {
-        return "about"
-    }
+    fun about() = "about"
 }
