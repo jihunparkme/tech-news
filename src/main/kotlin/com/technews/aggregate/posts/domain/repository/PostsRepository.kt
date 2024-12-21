@@ -8,7 +8,10 @@ import org.springframework.data.mongodb.repository.MongoRepository
 
 interface PostsRepository : MongoRepository<Post, String> {
     @Aggregation(
-        pipeline = ["{ '\$match': { 'category' : ?0 } }", "{ '\$sort' : { 'date' : -1 } }", "{ '\$limit' : 1 }"
+        pipeline = [
+            "{ '\$match': { 'category' : ?0 } }",
+            "{ '\$sort' : { 'date' : -1 } }",
+            "{ '\$limit' : 1 }"
         ]
     )
     fun findByCategoryOrderByDateDescLimitOne(category: String): List<Post>

@@ -18,7 +18,7 @@ class PostsController(
 ) {
     @GetMapping("/spring")
     fun springScroll(
-        @RequestParam(value = "categories", required = false) categories: List<String>,
+        @RequestParam(value = "categories", required = false) categories: List<String>?,
         @RequestParam(value = "page", required = false, defaultValue = "1") page: Int,
         @RequestParam(value = "size", required = false, defaultValue = "10") size: Int
     ): ResponseEntity<*> {
@@ -32,7 +32,7 @@ class PostsController(
 
     @GetMapping("/java")
     fun javaScroll(
-        @RequestParam(value = "categories", required = false) categories: List<String>,
+        @RequestParam(value = "categories", required = false) categories: List<String>?,
         @RequestParam(value = "page", required = false, defaultValue = "1") page: Int,
         @RequestParam(value = "size", required = false, defaultValue = "10") size: Int
     ): ResponseEntity<*> {
