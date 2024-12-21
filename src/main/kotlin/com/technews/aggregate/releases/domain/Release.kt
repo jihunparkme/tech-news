@@ -4,14 +4,14 @@ import org.springframework.data.mongodb.core.mapping.Document
 
 @Document(collection = "releases")
 class Release(
-    private val id: String = "",
-    private val project: String = "",
-    private val version: String = "",
-    private val date: String = "",
-    private val url: String = "",
-    private val tags: List<String> = emptyList(),
-    private var shared: Boolean = false,
-    private val createdDt: String = "",
+    val id: String = "",
+    val project: String = "",
+    val version: String = "",
+    val date: String = "",
+    val url: String = "",
+    val tags: List<String> = emptyList(),
+    var shared: Boolean = false,
+    val createdDt: String = "",
 ) {
     fun share() {
         shared = true

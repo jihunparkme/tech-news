@@ -3,7 +3,7 @@ package com.technews.aggregate.posts.domain
 import org.springframework.data.mongodb.core.mapping.Document
 
 @Document(collection = "posts")
-data class Post(
+class Post(
     val id: String = "",
     val subject: String = "",
     val title: String = "",

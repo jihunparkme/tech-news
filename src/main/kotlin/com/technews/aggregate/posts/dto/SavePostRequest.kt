@@ -26,7 +26,7 @@ class SavePostRequest(
             val parsedDate = LocalDate.parse(date, DateUtils.CREATED_FORMATTER)
             parsedDate.isAfter(latest)
         } catch (e: Exception) {
-            logger.error { "Error parsing the date. date: $date, message: ${e.message}" }
+            logger.error("Error parsing the date. date: $date, message: ${e.message}", e)
             false
         }
     }
