@@ -16,7 +16,7 @@ class PostsService(
     fun findAllRelease(
         subject: PostSubjects,
         pageable: PageRequest,
-        categories: List<String>?
+        categories: List<String>
     ): Page<Post> =
         if (categories.isNullOrEmpty()) {
             postsRepository.findBySubject(subject.value, pageable)

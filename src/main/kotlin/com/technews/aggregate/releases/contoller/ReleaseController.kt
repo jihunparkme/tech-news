@@ -17,7 +17,7 @@ class ReleaseController(
 ) {
     @GetMapping
     fun scrollList(
-        @RequestParam(value = "categories", required = false) categories: List<String>?,
+        @RequestParam(value = "categories", required = false) categories: List<String>,
         @RequestParam(value = "page", required = false, defaultValue = "1") page: Int,
         @RequestParam(value = "size", required = false, defaultValue = "10") size: Int
     ): ResponseEntity<*> {
