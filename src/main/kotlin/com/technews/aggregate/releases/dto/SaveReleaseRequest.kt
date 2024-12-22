@@ -8,7 +8,7 @@ import java.util.*
 
 private val logger = KotlinLogging.logger {}
 
-class SaveReleaseRequest(
+data class SaveReleaseRequest(
     val project: String = "",
     val version: String = "",
     val date: String = "",

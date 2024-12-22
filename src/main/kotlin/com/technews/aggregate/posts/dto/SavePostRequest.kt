@@ -7,7 +7,7 @@ import java.time.LocalDate
 
 private val logger = KotlinLogging.logger {}
 
-class SavePostRequest(
+data class SavePostRequest(
     val subject: String,
     val title: String,
     val url: String,

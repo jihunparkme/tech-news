@@ -2,7 +2,7 @@ package com.technews.aggregate.releases.dto
 
 import com.technews.aggregate.releases.domain.Release
 
-class ReleaseResponse(
+data class ReleaseResponse(
     val project: String,
     val version: String,
     val date: String,
