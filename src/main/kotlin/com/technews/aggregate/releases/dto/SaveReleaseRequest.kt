@@ -9,12 +9,12 @@ import java.util.*
 private val logger = KotlinLogging.logger {}
 
 class SaveReleaseRequest(
-    private val project: String = "",
-    private val version: String = "",
-    private val date: String = "",
-    private val url: String = "",
-    private val tags: List<String> = emptyList(),
-    private val createdDt: String = "",
+    val project: String = "",
+    val version: String = "",
+    val date: String = "",
+    val url: String = "",
+    val tags: List<String> = emptyList(),
+    val createdDt: String = "",
 ) {
     companion object {
         @JvmField
