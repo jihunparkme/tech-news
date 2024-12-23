@@ -3,13 +3,13 @@ package com.technews.common.config.event
 import org.springframework.context.ApplicationEventPublisher
 
 object Events {
-    private var publisher: ApplicationEventPublisher? = null
+    private lateinit var publisher: ApplicationEventPublisher
 
-    fun setPublisher(publisher: ApplicationEventPublisher?) {
+    fun setPublisher(publisher: ApplicationEventPublisher) {
         this.publisher = publisher
     }
 
     fun raise(event: Any) {
-        publisher?.publishEvent(event)
+        publisher.publishEvent(event)
     }
 }

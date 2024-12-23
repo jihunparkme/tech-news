@@ -4,7 +4,6 @@ import com.technews.aggregate.subscribe.domain.Subscribe
 import com.technews.aggregate.subscribe.domain.repository.SubscribeRepository
 import com.technews.aggregate.subscribe.dto.SubscribeRequest
 import com.technews.aggregate.subscribe.dto.SubscribeResponse
-import com.technews.common.exception.NotFoundSubscribe
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -15,7 +14,7 @@ class SubscribeService(
     @Transactional(readOnly = true)
     fun validSubscribe(request: SubscribeRequest): SubscribeResponse {
         val subscribe = subscribeRepository.findByEmail(request.email)
-        return subscribe?.let { SubscribeResponse.from(it) } ?: return SubscribeResponse()
+        return subscribe.let { SubscribeResponse.from(it) }
     }
 
     @Transactional
@@ -24,7 +23,7 @@ class SubscribeService(
 
     @Transactional
     fun unsubscribe(request: SubscribeRequest) {
-        val subscribe = subscribeRepository.findByEmail(request.email) ?: throw NotFoundSubscribe()
+        val subscribe = subscribeRepository.findByEmail(request.email)
         subscribe.unsubscribe()
         subscribeRepository.save<Subscribe>(subscribe)
     }
