@@ -1,0 +1,86 @@
+package com.technews.scheduler
+
+import com.technews.aggregate.posts.constant.JavaBlogsSubject
+import com.technews.aggregate.posts.constant.PostSubjects
+import com.technews.aggregate.posts.dto.SavePostRequest
+import com.technews.aggregate.posts.service.PostsSchedulerService
+import com.technews.common.util.DateUtils
+import mu.KotlinLogging
+import org.jsoup.Jsoup
+import org.jsoup.nodes.Element
+import org.springframework.scheduling.annotation.Scheduled
+import org.springframework.stereotype.Component
+import java.time.LocalDate
+
+private val logger = KotlinLogging.logger {}
+
+@Component
+class BlogJavaInsideScheduler(
+    private val postsSchedulerService: PostsSchedulerService,
+) {
+    @Scheduled(cron = "0 0 1 * * ?")
+    fun runScheduled() {
+        searchJavaBlogPosts(JavaBlogsSubject.INSIDE)
+    }
+
+    private fun searchJavaBlogPosts(subject: JavaBlogsSubject) {
+        val latestPost = postsSchedulerService.findLatestPost(subject.value)
+        posts.filter { it.isLatestDatePost(latestPost.date) }
+//            .forEach { postsSchedulerService.insertPost(it) }
+            .forEach { println() }
+    }
+
+    companion object {
+        private const val BLOG_URL = "https://inside.java"
+
+        private val posts: List<SavePostRequest>
+            get() = try {
+                Jsoup.connect(BLOG_URL).get()
+                    .select(".post")
+                    .map { getPost(it) }
+            } catch (e: Exception) {
+                emptyList()
+            }
+
+        private fun getPost(postElement: Element): SavePostRequest {
+            return SavePostRequest(
+                subject = PostSubjects.JAVA.value,
+                category = JavaBlogsSubject.INSIDE.value,
+                title = getTitle(postElement),
+                url = getUrl(postElement),
+                writer = getPostInfo(postElement).writer,
+                date = DateUtils.getFormattedDate(getPostInfo(postElement).date),
+                tags = getTags(postElement),
+                createdDt = LocalDate.now().format(DateUtils.CREATED_FORMATTER)
+            )
+        }
+
+        private fun getTitle(postElement: Element): String =
+            runCatching { postElement.select(".post-title").text() }.getOrDefault("")
+
+        private fun getUrl(postElement: Element): String =
+            runCatching {
+                val url = postElement.select("a").first()?.attr("href").orEmpty()
+                if (url.startsWith("http")) url else "$BLOG_URL$url"
+            }.getOrDefault(BLOG_URL)
+
+        private fun getPostInfo(postElement: Element): PostInfo {
+            val info = postElement.select(".post-info").text()
+            return runCatching {
+                val split = info.split(" on ")
+                if (split.size == 2) PostInfo(split[0], split[1]) else PostInfo(
+                    writer = "",
+                    date = split.getOrNull(0) ?: ""
+                )
+            }.getOrDefault(PostInfo(writer = "", date = ""))
+        }
+
+        private fun getTags(postElement: Element): List<String> =
+            postElement.select("span#post-tags .tag-small").map { it.text() }
+    }
+}
+
+private data class PostInfo(
+    val writer: String = "",
+    val date: String = "",
+)
