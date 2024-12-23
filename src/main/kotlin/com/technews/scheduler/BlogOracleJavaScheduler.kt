@@ -71,7 +71,7 @@ class BlogOracleJavaScheduler(
             }
         }
 
-        private val posts: List<OracleJavaBlogPost?>
+        private val posts: List<OracleJavaBlogPost>
             get() = runCatching {
                 Jsoup.connect(BLOG_BASE_URL)
                     .header("User-Agent", "PostmanRuntime/7.37.3")
