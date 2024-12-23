@@ -17,7 +17,6 @@ data class SaveReleaseRequest(
     val createdDt: String = "",
 ) {
     companion object {
-        @JvmField
         val EMPTY: SaveReleaseRequest = SaveReleaseRequest()
 
         private val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("MMM d, yyyy", Locale.ENGLISH)

@@ -1,7 +1,6 @@
 package com.technews.handler;
 
 import com.technews.common.dto.BasicResponse;
-import com.technews.common.exception.FirebaseQuerySnapshotException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.BeanCreationNotAllowedException;
 import org.springframework.http.HttpStatus;
