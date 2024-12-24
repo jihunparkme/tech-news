@@ -18,7 +18,7 @@ class PostsService(
         pageable: PageRequest,
         categories: List<String>
     ): Page<Post> =
-        if (categories.isNullOrEmpty()) {
+        if (categories.isEmpty()) {
             postsRepository.findBySubject(subject.value, pageable)
         } else {
             postsRepository.findBySubjectAndCategoryIn(subject.value, categories, pageable)
