@@ -24,8 +24,8 @@ class BlogJavaInsideScheduler(
     }
 
     private fun searchJavaBlogPosts(subject: JavaBlogsSubject) {
-        val latestPost = postsSchedulerService.findLatestPost(subject.value)
-        posts.filter { it.isLatestDatePost(latestPost.date) }
+        val lastPost = postsSchedulerService.findLastPost(subject.value)
+        posts.filter { it.isLatestDatePost(lastPost.date) }
 //            .forEach { postsSchedulerService.insertPost(it) }
             .forEach { println() }
     }

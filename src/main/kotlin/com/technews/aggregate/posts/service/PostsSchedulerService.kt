@@ -24,7 +24,7 @@ class PostsSchedulerService(
     }
 
     @Transactional(readOnly = true)
-    fun findLatestPost(category: String): Post =
+    fun findLastPost(category: String): Post =
         postsRepository.findByCategoryOrderByDateDescLimitOne(category).firstOrNull() ?: Post()
 
     fun isNotExistOracleJavaPosts(title: String): Boolean =

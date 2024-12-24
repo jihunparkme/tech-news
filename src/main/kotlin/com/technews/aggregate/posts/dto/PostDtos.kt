@@ -18,13 +18,13 @@ data class SavePostRequest(
     val createdDt: String = "",
 ) {
 
-    fun isLatestDatePost(latestPostDate: String): Boolean {
-        if (date.isBlank() || latestPostDate.isBlank()) return true
+    fun isLatestDatePost(lastPostDate: String): Boolean {
+        if (date.isBlank() || lastPostDate.isBlank()) return true
 
         return try {
-            val latest = LocalDate.parse(latestPostDate, DateUtils.CREATED_FORMATTER)
-            val parsedDate = LocalDate.parse(date, DateUtils.CREATED_FORMATTER)
-            parsedDate.isAfter(latest)
+            val lastPostLocalDate = LocalDate.parse(lastPostDate, DateUtils.CREATED_FORMATTER)
+            val savedPostLocalDate = LocalDate.parse(date, DateUtils.CREATED_FORMATTER)
+            savedPostLocalDate.isAfter(lastPostLocalDate)
         } catch (e: Exception) {
             logger.error("Error parsing the date. date: $date, message: ${e.message}", e)
             false

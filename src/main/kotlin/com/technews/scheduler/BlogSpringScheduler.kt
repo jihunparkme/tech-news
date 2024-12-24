@@ -24,9 +24,9 @@ class BlogSpringScheduler(
     }
 
     private fun searchSpringBlogPosts(subject: SpringBlogsSubject) {
-        val latestPost = postsSchedulerService.findLatestPost(subject.value)
+        val lastPost = postsSchedulerService.findLastPost(subject.value)
         val posts = getPostInfo(subject.value)
-        posts.filter { it.isLatestDatePost(latestPost.date) }
+        posts.filter { it.isLatestDatePost(lastPost.date) }
             .forEach { postsSchedulerService.insertPost(it) }
     }
 
