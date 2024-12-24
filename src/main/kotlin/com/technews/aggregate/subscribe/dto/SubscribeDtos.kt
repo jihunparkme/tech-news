@@ -1,5 +1,7 @@
 package com.technews.aggregate.subscribe.dto
 
+import com.technews.aggregate.posts.domain.Post
+import com.technews.aggregate.releases.domain.Release
 import com.technews.aggregate.subscribe.domain.Subscribe
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
@@ -29,3 +31,29 @@ data class SubscribeRequest(
             endDt = LocalDateTime.now(),
         )
 }
+
+data class SubscribeResponse(
+    val email: String = "",
+    val subscribe: Boolean = false,
+    val startDt: String = "",
+    val endDt: String = "",
+    val empty: Boolean = true,
+) {
+    companion object {
+        fun from(subscribe: Subscribe): SubscribeResponse =
+            SubscribeResponse(
+                email = subscribe.email,
+                subscribe = subscribe.subscribe,
+                startDt = subscribe.startDt.toString(),
+                endDt = subscribe.endDt.toString(),
+                empty = false,
+            )
+    }
+}
+
+data class SubscriberMailContents(
+    val springReleases: List<Release> = emptyList(),
+    val javaReleases: List<Release> = emptyList(),
+    val springPosts: List<Post> = emptyList(),
+    val javaPosts: List<Post> = emptyList(),
+)
