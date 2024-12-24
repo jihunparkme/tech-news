@@ -8,14 +8,14 @@ import java.time.LocalDate
 private val logger = KotlinLogging.logger {}
 
 data class SavePostRequest(
-    val subject: String,
-    val title: String,
-    val url: String,
-    val category: String,
-    val writer: String,
-    val date: String,
-    var tags: List<String>,
-    val createdDt: String,
+    val subject: String = "",
+    val title: String = "",
+    val url: String = "",
+    val category: String = "",
+    val writer: String = "",
+    val date: String = "",
+    var tags: List<String> = emptyList(),
+    val createdDt: String = "",
 ) {
 
     fun isLatestDatePost(latestPostDate: String): Boolean {
