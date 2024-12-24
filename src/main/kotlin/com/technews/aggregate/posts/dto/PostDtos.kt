@@ -4,6 +4,7 @@ import com.technews.aggregate.posts.domain.Post
 import com.technews.common.util.DateUtils
 import mu.KotlinLogging
 import java.time.LocalDate
+import java.time.format.DateTimeParseException
 
 private val logger = KotlinLogging.logger {}
 
@@ -17,16 +18,21 @@ data class SavePostRequest(
     var tags: List<String> = emptyList(),
     val createdDt: String = "",
 ) {
-
-    fun isLatestDatePost(lastPostDate: String): Boolean {
-        if (date.isBlank() || lastPostDate.isBlank()) return true
+    fun isLatestDatePost(lastPostDate: String?): Boolean {
+        if (date.isNullOrBlank() || lastPostDate.isNullOrBlank()) {
+            logger.debug("One of the dates is blank. date: $date, lastPostDate: $lastPostDate")
+            return true
+        }
 
         return try {
             val lastPostLocalDate = LocalDate.parse(lastPostDate, DateUtils.CREATED_FORMATTER)
             val savedPostLocalDate = LocalDate.parse(date, DateUtils.CREATED_FORMATTER)
             savedPostLocalDate.isAfter(lastPostLocalDate)
-        } catch (e: Exception) {
-            logger.error("Error parsing the date. date: $date, message: ${e.message}", e)
+        } catch (e: DateTimeParseException) {
+            logger.error(
+                "Invalid date format encountered. date: $date, lastPostDate: $lastPostDate, message: ${e.message}",
+                e
+            )
             false
         }
     }
