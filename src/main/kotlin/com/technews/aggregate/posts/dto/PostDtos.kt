@@ -18,8 +18,8 @@ data class SavePostRequest(
     var tags: List<String> = emptyList(),
     val createdDt: String = "",
 ) {
-    fun isLatestDatePost(lastPostDate: String?): Boolean {
-        if (date.isNullOrBlank() || lastPostDate.isNullOrBlank()) {
+    fun isLatestDatePost(lastPostDate: String): Boolean {
+        if (date.isBlank() || lastPostDate.isBlank()) {
             logger.debug("One of the dates is blank. date: $date, lastPostDate: $lastPostDate")
             return true
         }
