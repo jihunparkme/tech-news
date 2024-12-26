@@ -4,30 +4,10 @@ import com.technews.aggregate.releases.domain.Release
 import mu.KotlinLogging
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
 import java.util.*
 
 private val logger = KotlinLogging.logger {}
-
-data class ReleaseResponse(
-    val project: String,
-    val version: String,
-    val date: String,
-    val url: String,
-    val tags: List<String>,
-    val createdDt: String,
-) {
-    companion object {
-        fun from(release: Release): ReleaseResponse =
-            ReleaseResponse(
-                project = release.project,
-                version = release.version,
-                date = release.date,
-                url = release.url,
-                tags = release.tags,
-                createdDt = release.createdDt,
-            )
-    }
-}
 
 data class SaveReleaseRequest(
     val project: String = "",
@@ -53,17 +33,6 @@ data class SaveReleaseRequest(
             createdDt = createdDt,
         )
 
-    fun toRelease(id: String): Release =
-        Release(
-            id = id,
-            project = this.project,
-            version = this.version,
-            date = this.date,
-            url = this.url,
-            tags = this.tags,
-            createdDt = this.createdDt,
-        )
-
     fun isLatestDateVersion(latestReleaseDate: String): Boolean {
         if (latestReleaseDate.isBlank()) return true
 
@@ -71,7 +40,7 @@ data class SaveReleaseRequest(
             val latest = LocalDate.parse(latestReleaseDate, formatter)
             val date = LocalDate.parse(this.date, formatter)
             date.isAfter(latest)
-        } catch (e: Exception) {
+        } catch (e: DateTimeParseException) {
             logger.error("Error parsing the date. date: ${this.date}, message: ${e.message}", e)
             false
         }
@@ -88,3 +57,14 @@ data class SaveReleaseRequest(
     val isNotEmpty: Boolean
         get() = !this.isEmpty
 }
+
+data class ReleaseResponse(
+    val id: String = "",
+    val project: String = "",
+    val version: String = "",
+    val date: String = "",
+    val url: String = "",
+    val tags: List<String> = emptyList(),
+    var shared: Boolean = false,
+    val createdDt: String = "",
+)

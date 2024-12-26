@@ -18,7 +18,7 @@ interface ReleasesRepository : MongoRepository<Release, String> {
 
     override fun findAll(pageable: Pageable): Page<Release>
 
-    fun findByProjectIn(project: List<String>, pageable: Pageable): Page<Release>
+    fun findByProjectIn(project: List<String>?, pageable: Pageable): Page<Release>
 
     fun findBySharedFalse(): List<Release>
 }

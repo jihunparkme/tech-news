@@ -18,7 +18,7 @@ interface PostsRepository : MongoRepository<Post, String> {
 
     fun findBySubject(subject: String, pageable: PageRequest): Page<Post>
 
-    fun findBySubjectAndCategoryIn(subject: String, category: List<String>, pageable: PageRequest): Page<Post>
+    fun findBySubjectAndCategoryIn(subject: String, category: List<String>?, pageable: PageRequest): Page<Post>
 
     fun findBySharedFalse(): List<Post>
 
