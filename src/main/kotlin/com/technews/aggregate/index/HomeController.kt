@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping
 @Controller
 @RequestMapping("/")
 class HomeController {
-
     @GetMapping
     fun home(model: Model): String {
         model["categories"] = Categories.entries.toTypedArray()
@@ -26,7 +25,7 @@ class HomeController {
     }
 
     @GetMapping("/blog/java")
-    fun JavaPosts(model: Model): String {
+    fun javaPosts(model: Model): String {
         model["categories"] = JavaBlogsSubject.entries.toTypedArray()
         return "blog/java"
     }

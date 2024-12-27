@@ -57,7 +57,7 @@ class BlogSpringScheduler(
                     writer = getMeta(element).writer,
                     date = getMeta(element).date,
                     tags = listOf(PostSubjects.SPRING.value, category),
-                    createdDt = LocalDate.now().format(DateUtils.CREATED_FORMATTER)
+                    createdDt = LocalDate.now().format(DateUtils.CREATED_FORMATTER),
                 )
             }
         } catch (e: Exception) {
@@ -82,10 +82,9 @@ class BlogSpringScheduler(
                 Meta(
                     category = metas[0],
                     writer = metas[1],
-                    date = DateUtils.getFormattedDate(metas[2])
+                    date = DateUtils.getFormattedDate(metas[2]),
                 )
             }.getOrDefault(Meta.EMPTY)
-
         }
     }
 }

@@ -7,7 +7,7 @@ enum class PostSubjects(val value: String) {
 
     companion object {
         fun from(value: String): PostSubjects {
-            return entries.firstOrNull { it.value == value} ?: SPRING
+            return entries.firstOrNull { it.value == value } ?: SPRING
         }
     }
 }

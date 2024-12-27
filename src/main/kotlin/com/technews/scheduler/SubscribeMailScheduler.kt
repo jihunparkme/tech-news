@@ -40,8 +40,8 @@ class SubscribeMailScheduler(
             SendMailEvent(
                 subject = SUBJECT,
                 contents = MailTemplateUtils.generateContents(subscriberMailContents),
-                addressList = subscriber
-            )
+                addressList = subscriber,
+            ),
         )
 
         updateShared(releases, posts)
@@ -60,7 +60,7 @@ class SubscribeMailScheduler(
             springReleases = releaseOfSpring,
             javaReleases = releaseOfJava,
             springPosts = postOfSpring,
-            javaPosts = postOfJava
+            javaPosts = postOfJava,
         )
     }
 

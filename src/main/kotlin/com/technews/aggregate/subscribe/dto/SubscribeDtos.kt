@@ -12,7 +12,7 @@ data class SubscribeRequest(
     @field:NotBlank(message = "An email is required.")
     @field:Pattern(
         regexp = "^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}",
-        message = "Email is not valid."
+        message = "Email is not valid.",
     )
     @field:Size(min = 3, max = 50, message = "The email length must be between 3 and 50 characters.")
     val email: String,

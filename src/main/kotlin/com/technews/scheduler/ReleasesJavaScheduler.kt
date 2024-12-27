@@ -97,7 +97,7 @@ class ReleasesJavaScheduler(
                     tags = listOf(project, "java", "release"),
                     project = project,
                     version = version,
-                    url = gaUrl
+                    url = gaUrl,
                 )
             } catch (e: Exception) {
                 logger.error("Not found matching version.")

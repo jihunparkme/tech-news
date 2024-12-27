@@ -50,7 +50,7 @@ class BlogJavaInsideScheduler(
                 writer = getPostInfo(postElement).writer,
                 date = DateUtils.getFormattedDate(getPostInfo(postElement).date),
                 tags = getTags(postElement),
-                createdDt = LocalDate.now().format(DateUtils.CREATED_FORMATTER)
+                createdDt = LocalDate.now().format(DateUtils.CREATED_FORMATTER),
             )
         }
 
@@ -67,10 +67,12 @@ class BlogJavaInsideScheduler(
             val info = postElement.select(".post-info").text()
             return runCatching {
                 val split = info.split(" on ")
-                if (split.size == 2) PostInfo(split[0], split[1]) else PostInfo(
-                    writer = "",
-                    date = split.getOrNull(0) ?: ""
-                )
+                if (split.size == 2) { PostInfo(split[0], split[1]) } else {
+                    PostInfo(
+                        writer = "",
+                        date = split.getOrNull(0) ?: "",
+                    )
+                }
             }.getOrDefault(PostInfo(writer = "", date = ""))
         }
 

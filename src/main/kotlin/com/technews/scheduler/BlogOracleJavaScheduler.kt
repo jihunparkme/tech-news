@@ -51,7 +51,7 @@ class BlogOracleJavaScheduler(
                 writer = writer,
                 date = date,
                 tags = tags,
-                createdDt = createdDt
+                createdDt = createdDt,
             )
         }
     }
@@ -90,8 +90,7 @@ class BlogOracleJavaScheduler(
         private fun getPosts(category: String, postElement: Element): List<OracleJavaBlogPost> {
             return postElement.select(".cscroll-item-w1").mapNotNull { element ->
                 val postInfo = getPostInfo(element)
-                if (SAVED_POST_TITLE.contains(postInfo.title)) null
-                else {
+                if (SAVED_POST_TITLE.contains(postInfo.title)) { null } else {
                     SAVED_POST_TITLE.add(postInfo.title)
                     OracleJavaBlogPost(
                         subject = PostSubjects.JAVA.value,
@@ -101,12 +100,11 @@ class BlogOracleJavaScheduler(
                         writer = postInfo.writer,
                         date = LocalDate.now().toString(),
                         tags = listOf(JavaBlogsSubject.ORACLE.value, category),
-                        createdDt = LocalDate.now().toString()
+                        createdDt = LocalDate.now().toString(),
                     )
                 }
             }
         }
-
 
         private fun getPostInfo(element: Element): PostInfo {
             return runCatching {
@@ -115,7 +113,7 @@ class BlogOracleJavaScheduler(
                 PostInfo(
                     title = post.getOrNull(2)?.text().orEmpty(),
                     url = BLOG_BASE_URL + post.getOrNull(2)?.attr("href").orEmpty(),
-                    writer = post.getOrNull(3)?.text().orEmpty()
+                    writer = post.getOrNull(3)?.text().orEmpty(),
                 )
             }.getOrDefault(PostInfo.EMPTY)
         }

@@ -56,7 +56,7 @@ class ReleaseSpringProjectsScheduler(
                     getReleaseInfo(repository, trim)
                 }
             } catch (e: IOException) {
-                logger.error("Jsoup.connect exception. url: ${url}, ${e.message}", e)
+                logger.error("Jsoup.connect exception. url: $url, ${e.message}", e)
                 emptyList()
             } catch (e: Exception) {
                 logger.error("getGitHubReleaseTags exception. ${e.message}", e)
@@ -81,7 +81,7 @@ class ReleaseSpringProjectsScheduler(
                 version = version?.let { "Release $it" } ?: "",
                 url = url ?: "",
                 date = date ?: "",
-                createdDt = createdDt ?: ""
+                createdDt = createdDt ?: "",
             )
         }
 

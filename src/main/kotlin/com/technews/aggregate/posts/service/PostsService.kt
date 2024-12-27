@@ -1,7 +1,6 @@
 package com.technews.aggregate.posts.service
 
 import com.technews.aggregate.posts.constant.PostSubjects
-import com.technews.aggregate.posts.domain.Post
 import com.technews.aggregate.posts.domain.repository.PostsRepository
 import com.technews.aggregate.posts.dto.PostResponse
 import org.springframework.data.domain.Page

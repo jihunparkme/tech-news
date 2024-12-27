@@ -11,8 +11,8 @@ interface ReleasesRepository : MongoRepository<Release, String> {
         pipeline = [
             "{ '\$match': { 'project' : ?0 } }",
             "{ '\$sort' : { 'version' : -1 } }",
-            "{ '\$limit' : 1 }"
-        ]
+            "{ '\$limit' : 1 }",
+        ],
     )
     fun findByProjectOrderByVersionDescLimitOne(project: String): List<Release>
 

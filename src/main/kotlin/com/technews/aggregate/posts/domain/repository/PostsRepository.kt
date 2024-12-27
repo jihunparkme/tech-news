@@ -11,8 +11,8 @@ interface PostsRepository : MongoRepository<Post, String> {
         pipeline = [
             "{ '\$match': { 'category' : ?0 } }",
             "{ '\$sort' : { 'date' : -1 } }",
-            "{ '\$limit' : 1 }"
-        ]
+            "{ '\$limit' : 1 }",
+        ],
     )
     fun findByCategoryOrderByDateDescLimitOne(category: String): List<Post>
 

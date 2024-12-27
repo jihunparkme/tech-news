@@ -2,7 +2,7 @@ package com.technews.aggregate.releases.constant
 
 enum class Categories(
     val value: String,
-    val url: String
+    val url: String,
 ) {
     SPRING_FRAMEWORK("spring-framework", "https://github.com/spring-projects/spring-framework/tags"),
     SPRING_BOOT("spring-boot", "https://github.com/spring-projects/spring-boot/tags"),
@@ -13,5 +13,4 @@ enum class Categories(
     JDK11("JDK 11", "https://www.oracle.com/java/technologies/javase/11u-relnotes.html"),
     JDK17("JDK 17", "https://www.oracle.com/java/technologies/javase/17u-relnotes.html"),
     JDK21("JDK 21", "https://www.oracle.com/java/technologies/javase/21u-relnotes.html"),
-    ;
 }

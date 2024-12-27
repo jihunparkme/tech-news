@@ -57,8 +57,7 @@ class SendMailEventService(
 
         message.setRecipients(
             jakarta.mail.Message.RecipientType.TO,
-            InternetAddress.parse(recipientAddresses)
+            InternetAddress.parse(recipientAddresses),
         )
     }
 }
-

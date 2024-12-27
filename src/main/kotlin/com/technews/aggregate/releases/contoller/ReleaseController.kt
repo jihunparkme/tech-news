@@ -1,6 +1,5 @@
 package com.technews.aggregate.releases.contoller
 
-import com.technews.aggregate.releases.domain.Release
 import com.technews.aggregate.releases.dto.ReleaseResponse
 import com.technews.aggregate.releases.service.ReleasesService
 import com.technews.common.dto.BasicResponse
@@ -26,8 +25,9 @@ class ReleaseController(
         assembler: PagedResourcesAssembler<ReleaseResponse>,
     ): ResponseEntity<*> {
         val pageable: PageRequest = PageRequest.of(
-            page, size,
-            Sort.by("createdDt").descending().and(Sort.by("version").descending())
+            page,
+            size,
+            Sort.by("createdDt").descending().and(Sort.by("version").descending()),
         )
         val releasePage = releasesService.findAllRelease(pageable, categories)
         return BasicResponse.ok(assembler.toModel(releasePage))

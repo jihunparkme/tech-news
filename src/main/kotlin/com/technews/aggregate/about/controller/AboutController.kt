@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping
 @Controller
 @RequestMapping("/about")
 class AboutController {
-
     @GetMapping
     fun about() = "about"
 }

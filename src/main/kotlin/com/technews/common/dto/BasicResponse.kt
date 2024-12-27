@@ -37,7 +37,7 @@ class BasicResponse<T>(
         fun <T> created(data: List<T>): ResponseEntity<BasicResponse<List<T>>> =
             buildResponse(HttpStatus.CREATED, success = true, data = data, count = data.size)
 
-            private fun <T> buildResponse(
+        private fun <T> buildResponse(
             status: HttpStatus,
             message: String? = null,
             success: Boolean = false,
@@ -50,7 +50,7 @@ class BasicResponse<T>(
                 success = success,
                 message = message,
                 count = count,
-                data = data
+                data = data,
             )
             return ResponseEntity(basicResponse, status)
         }

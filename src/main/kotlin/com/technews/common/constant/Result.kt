@@ -4,5 +4,5 @@ enum class Result(
     val message: String,
 ) {
     FAIL("FAIL"),
-    SUCCESS("SUCCESS");
+    SUCCESS("SUCCESS"),
 }

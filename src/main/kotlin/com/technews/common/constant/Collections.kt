@@ -5,5 +5,4 @@ enum class Collections(
     val key: String,
 ) {
     RELEASES("spring-projects", "RELEASES"),
-    ;
 }

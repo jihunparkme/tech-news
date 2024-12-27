@@ -21,7 +21,6 @@ private val logger = KotlinLogging.logger {}
 
 @RestControllerAdvice(annotations = [RestController::class])
 class RestControllerExceptionHandler {
-
     @ExceptionHandler(MethodArgumentNotValidException::class)
     fun handleValidationExceptions(ex: MethodArgumentNotValidException): ResponseEntity<*> {
         val errorMessage = ex.bindingResult.allErrors.firstOrNull()?.defaultMessage ?: Result.FAIL.message

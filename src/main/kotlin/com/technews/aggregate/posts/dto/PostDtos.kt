@@ -31,7 +31,7 @@ data class SavePostRequest(
         } catch (e: DateTimeParseException) {
             logger.error(
                 "Invalid date format encountered. date: $date, lastPostDate: $lastPostDate, message: ${e.message}",
-                e
+                e,
             )
             false
         }
