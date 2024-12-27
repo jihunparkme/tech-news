@@ -18,14 +18,13 @@ class SaveReleaseRequestTest : StringSpec({
         }
     }
 
-    "" {
-        val request = createReleaseRequest(date = "Dec 25, 2024")
+    "마지막 릴리즈 버전인지 확인" {
+        val request = createReleaseRequest(version = "6.2.1")
 
         assertSoftly(request) {
-            request.isLatestDateVersion("").shouldBeTrue()
-            request.isLatestDateVersion("Dec 24, 2024").shouldBeTrue()
-            request.isLatestDateVersion("Dec 25, 2024").shouldBeFalse()
-            request.isLatestDateVersion("2024-12-25").shouldBeFalse()
+            request.isLatestVersion("").shouldBeTrue()
+            request.isLatestVersion("6.2.0").shouldBeTrue()
+            request.isLatestVersion("6.1.9").shouldBeTrue()
         }
     }
 })
