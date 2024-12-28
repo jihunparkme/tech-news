@@ -1,10 +1,12 @@
 package com.technews.aggregate.releases.domain
 
+import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 
 @Document(collection = "releases")
 class Release(
-    val id: String = "",
+    @Id
+    val id: String? = null,
     val project: String = "",
     val version: String = "",
     val date: String = "",

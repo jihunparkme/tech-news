@@ -27,7 +27,7 @@ class ReleasesService(
 
         return releasePage.map { release ->
             ReleaseResponse(
-                id = release.id,
+                id = release.id ?: "",
                 project = release.project,
                 version = release.version,
                 date = release.date,

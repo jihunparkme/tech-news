@@ -5,14 +5,11 @@ import com.technews.aggregate.posts.constant.PostSubjects
 import com.technews.aggregate.posts.dto.SavePostRequest
 import com.technews.aggregate.posts.service.PostsSchedulerService
 import com.technews.common.util.DateUtils
-import mu.KotlinLogging
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 import java.time.LocalDate
-
-private val logger = KotlinLogging.logger {}
 
 @Component
 class BlogJavaInsideScheduler(
@@ -25,7 +22,8 @@ class BlogJavaInsideScheduler(
 
     private fun searchJavaBlogPosts(subject: JavaBlogsSubject) {
         val lastPost = postsSchedulerService.findLastPost(subject.value)
-        posts.filter { it.isLatestDatePost(lastPost.date) }
+        posts.filter { it.isNotJobOpeningPost() }
+            .filter { it.isLatestDatePost(lastPost.date) }
             .forEach { postsSchedulerService.insertPost(it) }
     }
 
@@ -55,7 +53,8 @@ class BlogJavaInsideScheduler(
         }
 
         private fun getTitle(postElement: Element): String =
-            runCatching { postElement.select(".post-title").text() }.getOrDefault("")
+            runCatching { postElement.select(".post-title").text() }
+                .getOrDefault("Untitle")
 
         private fun getUrl(postElement: Element): String =
             runCatching {
@@ -67,13 +66,15 @@ class BlogJavaInsideScheduler(
             val info = postElement.select(".post-info").text()
             return runCatching {
                 val split = info.split(" on ")
-                if (split.size == 2) { PostInfo(split[0], split[1]) } else {
+                if (split.size == 2) {
+                    PostInfo(split[0], split[1])
+                } else {
                     PostInfo(
                         writer = "",
-                        date = split.getOrNull(0) ?: "",
+                        date = split.firstOrNull() ?: "",
                     )
                 }
-            }.getOrDefault(PostInfo(writer = "", date = ""))
+            }.getOrDefault(PostInfo())
         }
 
         private fun getTags(postElement: Element): List<String> =

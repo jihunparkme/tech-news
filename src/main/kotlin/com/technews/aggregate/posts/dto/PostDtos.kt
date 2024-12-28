@@ -48,6 +48,9 @@ data class SavePostRequest(
         shared = false,
         createdDt = this.createdDt,
     )
+
+    fun isNotJobOpeningPost(): Boolean =
+        !this.title.contains("Job Opening", ignoreCase = true)
 }
 
 data class PostResponse(

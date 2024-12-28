@@ -18,6 +18,6 @@ object DateUtils {
         LocalDate.parse(date, ENGLISH_FORMATTER).format(CREATED_FORMATTER)
     } catch (e: DateTimeParseException) {
         logger.error(e) { "Failed to parse date: $date" }
-        ""
+        LocalDate.now().format(CREATED_FORMATTER)
     }
 }

@@ -26,7 +26,7 @@ class PostsService(
 
         return postPage.map { post ->
             PostResponse(
-                id = post.id,
+                id = post.id ?: "",
                 subject = post.subject,
                 title = post.title,
                 url = post.url,

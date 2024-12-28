@@ -1,10 +1,12 @@
 package com.technews.aggregate.posts.domain
 
+import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 
 @Document(collection = "posts")
 class Post(
-    val id: String = "",
+    @Id
+    val id: String? = null,
     val subject: String = "",
     val title: String = "",
     val url: String = "",
