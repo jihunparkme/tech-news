@@ -5,11 +5,15 @@ import com.technews.aggregate.posts.constant.PostSubjects
 import com.technews.aggregate.posts.dto.SavePostRequest
 import com.technews.aggregate.posts.service.PostsSchedulerService
 import com.technews.common.util.DateUtils
+import com.technews.scheduler.dto.JavaInsidePostInfo
+import mu.KotlinLogging
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 import java.time.LocalDate
+
+private val logger = KotlinLogging.logger {}
 
 @Component
 class BlogJavaInsideScheduler(
@@ -36,6 +40,7 @@ class BlogJavaInsideScheduler(
                     .select(".post")
                     .map { getPost(it) }
             } catch (e: Exception) {
+                logger.error("Failed to fetch posts: ${e.message}", e)
                 emptyList()
             }
 
@@ -62,27 +67,22 @@ class BlogJavaInsideScheduler(
                 if (url.startsWith("http")) url else "$BLOG_URL$url"
             }.getOrDefault(BLOG_URL)
 
-        private fun getPostInfo(postElement: Element): PostInfo {
+        private fun getPostInfo(postElement: Element): JavaInsidePostInfo {
             val info = postElement.select(".post-info").text()
             return runCatching {
                 val split = info.split(" on ")
                 if (split.size == 2) {
-                    PostInfo(split[0], split[1])
+                    JavaInsidePostInfo(split[0], split[1])
                 } else {
-                    PostInfo(
+                    JavaInsidePostInfo(
                         writer = "",
                         date = split.firstOrNull() ?: "",
                     )
                 }
-            }.getOrDefault(PostInfo())
+            }.getOrDefault(JavaInsidePostInfo())
         }
 
         private fun getTags(postElement: Element): List<String> =
             postElement.select("span#post-tags .tag-small").map { it.text() }
     }
 }
-
-private data class PostInfo(
-    val writer: String = "",
-    val date: String = "",
-)

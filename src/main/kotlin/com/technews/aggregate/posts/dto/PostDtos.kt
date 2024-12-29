@@ -40,11 +40,11 @@ data class SavePostRequest(
     fun toPost(): Post = Post(
         subject = this.subject,
         title = this.title,
+        url = this.url,
         category = this.category,
         writer = this.writer,
         date = this.date,
         tags = this.tags,
-        url = this.url,
         shared = false,
         createdDt = this.createdDt,
     )

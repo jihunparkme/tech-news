@@ -4,6 +4,7 @@ import com.technews.aggregate.posts.constant.JavaBlogsSubject
 import com.technews.aggregate.posts.constant.PostSubjects
 import com.technews.aggregate.posts.dto.SavePostRequest
 import com.technews.aggregate.posts.service.PostsSchedulerService
+import com.technews.scheduler.dto.OracleJavaBlogPostInfo
 import mu.KotlinLogging
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
@@ -13,6 +14,7 @@ import java.time.LocalDate
 
 private val logger = KotlinLogging.logger {}
 
+@Deprecated("HTTP error fetching URL. Status=403, URL=[https://blogs.oracle.com/java/]")
 @Component
 class BlogOracleJavaScheduler(
     private val postsSchedulerService: PostsSchedulerService,
@@ -23,37 +25,8 @@ class BlogOracleJavaScheduler(
     }
 
     private fun searchOracleJavaBlogPosts() {
-        posts.filter { post ->
-            post.let { postsSchedulerService.isNotExistOracleJavaPosts(it.title) }
-        }.map { post ->
-            post.toSavePostRequest()
-        }.forEach { savePostRequest ->
-            postsSchedulerService.insertPost(savePostRequest)
-        }
-    }
-
-    data class OracleJavaBlogPost(
-        val subject: String,
-        val title: String,
-        val url: String,
-        val category: String,
-        val writer: String,
-        val date: String,
-        val tags: List<String>,
-        val createdDt: String,
-    ) {
-        fun toSavePostRequest(): SavePostRequest {
-            return SavePostRequest(
-                subject = subject,
-                title = title,
-                url = url,
-                category = category,
-                writer = writer,
-                date = date,
-                tags = tags,
-                createdDt = createdDt,
-            )
-        }
+        posts.filter { post -> postsSchedulerService.isNotExistOracleJavaPosts(post.title) }
+            .forEach { postsSchedulerService.insertPost(it) }
     }
 
     companion object {
@@ -61,38 +34,27 @@ class BlogOracleJavaScheduler(
         private val CATEGORIES = listOf("Product & Ecosystem", "Java Technology")
         private val SAVED_POST_TITLE: MutableSet<String> = mutableSetOf()
 
-        data class PostInfo(
-            val title: String = "",
-            val url: String = "",
-            val writer: String = "",
-        ) {
-            companion object {
-                val EMPTY = PostInfo()
-            }
-        }
-
-        private val posts: List<OracleJavaBlogPost>
+        private val posts: List<SavePostRequest>
             get() = runCatching {
                 Jsoup.connect(BLOG_BASE_URL)
                     .header("User-Agent", "PostmanRuntime/7.37.3")
                     .get()
                     .select(".with-category")
-                    .filter { categoryElement ->
-                        CATEGORIES.contains(categoryElement.select(".rw-ptitle").text())
-                    }.flatMap { categoryElement ->
-                        getPosts(categoryElement.select(".rw-ptitle").text(), categoryElement)
-                    }
+                    .filter { category -> category.hasCategory() }
+                    .flatMap { category -> category.getPostsForCategory() }
             }.getOrElse {
                 logger.error("Failed to fetch posts: ${it.message}", it)
                 emptyList()
             }
 
-        private fun getPosts(category: String, postElement: Element): List<OracleJavaBlogPost> {
+        private fun getPosts(category: String, postElement: Element): List<SavePostRequest> {
             return postElement.select(".cscroll-item-w1").mapNotNull { element ->
                 val postInfo = getPostInfo(element)
-                if (SAVED_POST_TITLE.contains(postInfo.title)) { null } else {
+                if (SAVED_POST_TITLE.contains(postInfo.title)) {
+                    null
+                } else {
                     SAVED_POST_TITLE.add(postInfo.title)
-                    OracleJavaBlogPost(
+                    SavePostRequest(
                         subject = PostSubjects.JAVA.value,
                         title = postInfo.title,
                         url = postInfo.url,
@@ -106,16 +68,25 @@ class BlogOracleJavaScheduler(
             }
         }
 
-        private fun getPostInfo(element: Element): PostInfo {
+        private fun getPostInfo(element: Element): OracleJavaBlogPostInfo {
             return runCatching {
                 val blogTile = element.select(".blogtile-w2")
                 val post = blogTile.select("a")
-                PostInfo(
+                OracleJavaBlogPostInfo(
                     title = post.getOrNull(2)?.text().orEmpty(),
                     url = BLOG_BASE_URL + post.getOrNull(2)?.attr("href").orEmpty(),
                     writer = post.getOrNull(3)?.text().orEmpty(),
                 )
-            }.getOrDefault(PostInfo.EMPTY)
+            }.getOrDefault(OracleJavaBlogPostInfo())
+        }
+
+        private fun Element.hasCategory(): Boolean {
+            return CATEGORIES.contains(this.select(".rw-ptitle").text())
+        }
+
+        private fun Element.getPostsForCategory(): List<SavePostRequest> {
+            val categoryName = this.select(".rw-ptitle").text()
+            return getPosts(categoryName, this)
         }
     }
 }
