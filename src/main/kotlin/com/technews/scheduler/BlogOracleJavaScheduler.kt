@@ -8,7 +8,6 @@ import com.technews.scheduler.dto.OracleJavaBlogPostInfo
 import mu.KotlinLogging
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
-import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 import java.time.LocalDate
 
@@ -19,7 +18,6 @@ private val logger = KotlinLogging.logger {}
 class BlogOracleJavaScheduler(
     private val postsSchedulerService: PostsSchedulerService,
 ) {
-    // @Scheduled(cron = "0 0 1 * * ?")
     fun runScheduled() {
         searchOracleJavaBlogPosts()
     }
