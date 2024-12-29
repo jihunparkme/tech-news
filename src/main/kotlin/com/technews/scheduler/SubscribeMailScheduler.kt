@@ -34,8 +34,8 @@ class SubscribeMailScheduler(
             return
         }
 
-        val subscriberMailContents = getSubscriberMailContents(releases, posts)
-        val subscriber: List<String> = subscribeService.findSubscriberEmail()
+        val subscriberMailContents = createSubscriberMailContents(releases, posts)
+        val subscriber = subscribeService.findSubscriberEmail()
         Events.raise(
             SendMailEvent(
                 subject = SUBJECT,
@@ -47,7 +47,7 @@ class SubscribeMailScheduler(
         updateShared(releases, posts)
     }
 
-    private fun getSubscriberMailContents(
+    private fun createSubscriberMailContents(
         releases: List<Release>,
         posts: List<Post>,
     ): SubscriberMailContents {
@@ -64,34 +64,34 @@ class SubscribeMailScheduler(
         )
     }
 
-    private fun getReleaseOfSpring(releases: List<Release>): List<Release> {
-        return releases.filter { SpringRepository.list().contains(it.project) }
-    }
+    private fun getReleaseOfSpring(releases: List<Release>): List<Release> =
+        releases.filter { SpringRepository.list().contains(it.project) }
 
-    private fun getReleaseOfJava(releases: List<Release>): List<Release> {
-        return releases.filter { JdkVersion.list().contains(it.project) }
-    }
+    private fun getReleaseOfJava(releases: List<Release>): List<Release> =
+        releases.filter { JdkVersion.list().contains(it.project) }
 
-    private fun getPostOfSpring(posts: List<Post>): List<Post> {
-        return posts.filter { PostSubjects.SPRING.value == it.subject }
-    }
+    private fun getPostOfSpring(posts: List<Post>): List<Post> =
+        posts.filter { PostSubjects.SPRING.value == it.subject }
 
-    private fun getPostOfJava(posts: List<Post>): List<Post> {
-        return posts.filter { PostSubjects.JAVA.value == it.subject }
-    }
+    private fun getPostOfJava(posts: List<Post>): List<Post> =
+        posts.filter { PostSubjects.JAVA.value == it.subject }
 
     private fun updateShared(
         releases: List<Release>,
         posts: List<Post>,
     ) {
-        releases.forEach {
-            it.share()
-            releasesRepository.save(it)
-        }
-        posts.forEach {
-            it.share()
-            postsRepository.save(it)
-        }
+        releases.forEach { it.updateShare() }
+        posts.forEach { it.updateShare() }
+    }
+
+    private fun Release.updateShare() {
+        this.share()
+        releasesRepository.save(this)
+    }
+
+    private fun Post.updateShare() {
+        this.share()
+        postsRepository.save(this)
     }
 
     companion object {
