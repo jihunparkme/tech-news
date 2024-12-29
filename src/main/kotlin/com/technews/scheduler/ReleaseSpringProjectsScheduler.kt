@@ -20,17 +20,19 @@ class ReleaseSpringProjectsScheduler(
 ) {
     @Scheduled(cron = "0 0 1 * * ?")
     fun runScheduler() {
-        searchSpringFramework(SpringRepository.SPRING_FRAMEWORK)
-        searchSpringFramework(SpringRepository.SPRING_BOOT)
-        searchSpringFramework(SpringRepository.SPRING_DATA_JPA)
-        searchSpringFramework(SpringRepository.SPRING_BATCH)
+        listOf(
+            SpringRepository.SPRING_FRAMEWORK,
+            SpringRepository.SPRING_BOOT,
+            SpringRepository.SPRING_DATA_JPA,
+            SpringRepository.SPRING_BATCH
+        ).forEach { searchSpringFramework(it) }
     }
 
     private fun searchSpringFramework(repository: SpringRepository) {
-        val springFrameworkLatestRelease = releasesSchedulerService.findLatestRelease(repository.value)
-        val springFrameworkReleaseInfo = getGitHubReleaseTags(repository.value)
-        springFrameworkReleaseInfo
-            .filter { it.isLatestDateVersion(springFrameworkLatestRelease.date) }
+        val latestRelease = releasesSchedulerService.findLatestRelease(repository.value)
+        val releaseInfo = getGitHubReleaseTags(repository.value)
+        releaseInfo
+            .filter { it.isLatestDateVersion(latestRelease.date) }
             .forEach { releasesSchedulerService.insertRelease(it) }
     }
 
@@ -48,13 +50,12 @@ class ReleaseSpringProjectsScheduler(
         private fun getGitHubReleaseTags(repository: String): List<SaveReleaseRequest> {
             val url = "$SPRING_PROJECT_REPOSITORY_URL$repository$SPRING_PROJECT_REPOSITORY_TAGS"
             return try {
-                val doc = Jsoup.connect(url).get()
-                val elements = doc.select(".Box-row")
-
-                elements.mapNotNull { element ->
-                    val trim = element.text().trim()
-                    getReleaseInfo(repository, trim)
-                }
+                Jsoup.connect(url).get()
+                    .select(".Box-row")
+                    .mapNotNull { element ->
+                        val trim = element.text().trim()
+                        getReleaseInfo(repository, trim)
+                    }
             } catch (e: IOException) {
                 logger.error("Jsoup.connect exception. url: $url, ${e.message}", e)
                 emptyList()
@@ -64,29 +65,25 @@ class ReleaseSpringProjectsScheduler(
             }
         }
 
-        private fun getReleaseInfo(repository: String, trim: String): SaveReleaseRequest {
-            val version = RELEASE_VERSION_PATTERN.matcher(trim).group(0)
-            val url = version?.let { generateReleaseUrl(repository, it) }
-
-            val date = RELEASE_DATE_PATTERN.matcher(trim).group(0)
-            val createdDt = date?.let { DateUtils.getFormattedDate(it) }
-
+        private fun getReleaseInfo(repository: String, trim: String): SaveReleaseRequest? {
+            val version = RELEASE_VERSION_PATTERN.toRegex().find(trim)?.value
+            val date = RELEASE_DATE_PATTERN.toRegex().find(trim)?.value
             if (version == null || date == null) {
                 logger.error("Not found matching version or date.")
+                return null
             }
 
             return SaveReleaseRequest(
                 project = repository,
-                tags = listOf(repository, "release"),
-                version = version?.let { "Release $it" } ?: "",
-                url = url ?: "",
-                date = date ?: "",
-                createdDt = createdDt ?: "",
+                tags = listOf(repository, "Release"),
+                version = version.let { "Release $it" },
+                url = version.let { generateReleaseUrl(repository, it) },
+                date = date,
+                createdDt = date.let { DateUtils.getFormattedDate(it) },
             )
         }
 
-        private fun generateReleaseUrl(repository: String, version: String): String {
-            return "$RELEASE_NOTE_BASE_URL$repository$RELEASE_NOTE_POSTFIX$version"
-        }
+        private fun generateReleaseUrl(repository: String, version: String): String =
+            "$RELEASE_NOTE_BASE_URL$repository$RELEASE_NOTE_POSTFIX$version"
     }
 }
