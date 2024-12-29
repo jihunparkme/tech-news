@@ -10,3 +10,9 @@ data class OracleJavaBlogPostInfo(
     val url: String = "",
     val writer: String = "",
 )
+
+data class SpringBlogMeta(
+    val category: String = "",
+    val writer: String = "",
+    val date: String = "",
+)

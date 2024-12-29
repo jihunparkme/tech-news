@@ -5,6 +5,7 @@ import com.technews.aggregate.posts.constant.SpringBlogsSubject
 import com.technews.aggregate.posts.dto.SavePostRequest
 import com.technews.aggregate.posts.service.PostsSchedulerService
 import com.technews.common.util.DateUtils
+import com.technews.scheduler.dto.SpringBlogMeta
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import org.springframework.scheduling.annotation.Scheduled
@@ -34,38 +35,32 @@ class BlogSpringScheduler(
         private const val CATEGORY_URL = "https://spring.io/blog/category/"
         private const val BLOG_URL = "https://spring.io"
 
-        data class Meta(
-            val category: String = "",
-            val writer: String = "",
-            val date: String = "",
-        ) {
-            companion object {
-                val EMPTY = Meta()
-            }
-        }
+        private fun getPostInfo(category: String): List<SavePostRequest> =
+            try {
+                val doc = Jsoup.connect("$CATEGORY_URL$category").get()
+                val elements = doc.select(".blog-post")
 
-        private fun getPostInfo(category: String): List<SavePostRequest> = try {
-            val doc = Jsoup.connect("$CATEGORY_URL$category").get()
-            val elements = doc.select(".blog-post")
-
-            elements.map { element ->
-                SavePostRequest(
-                    subject = PostSubjects.SPRING.value,
-                    title = getTitle(element),
-                    url = getPostUrl(element),
-                    category = category,
-                    writer = getMeta(element).writer,
-                    date = getMeta(element).date,
-                    tags = listOf(PostSubjects.SPRING.value, category),
-                    createdDt = LocalDate.now().format(DateUtils.CREATED_FORMATTER),
-                )
+                elements.map { element ->
+                    val meta = getMeta(element)
+                    SavePostRequest(
+                        subject = PostSubjects.SPRING.value,
+                        title = getTitle(element),
+                        url = getPostUrl(element),
+                        category = category,
+                        writer = meta.writer,
+                        date = meta.date,
+                        tags = listOf(PostSubjects.SPRING.value, category),
+                        createdDt = LocalDate.now().format(DateUtils.CREATED_FORMATTER),
+                    )
+                }
+            } catch (e: Exception) {
+                emptyList()
             }
-        } catch (e: Exception) {
-            emptyList()
-        }
 
         private fun getTitle(element: Element): String =
-            runCatching { element.select(".has-text-weight-medium").text() }.getOrDefault("")
+            runCatching {
+                element.select(".has-text-weight-medium").text()
+            }.getOrDefault("")
 
         private fun getPostUrl(element: Element): String =
             runCatching {
@@ -73,18 +68,18 @@ class BlogSpringScheduler(
                 "$BLOG_URL$url"
             }.getOrDefault("")
 
-        private fun getMeta(element: Element): Meta {
+        private fun getMeta(element: Element): SpringBlogMeta {
             val metaText = element.select(".meta").text()
             val metas = metaText.split("|").map { it.trim() }
-            if (metas.size < 3) return Meta.EMPTY
+            if (metas.size < 3) return SpringBlogMeta()
 
             return runCatching {
-                Meta(
+                SpringBlogMeta(
                     category = metas[0],
                     writer = metas[1],
                     date = DateUtils.getFormattedDate(metas[2]),
                 )
-            }.getOrDefault(Meta.EMPTY)
+            }.getOrDefault(SpringBlogMeta())
         }
     }
 }
