@@ -19,7 +19,7 @@ private val logger = KotlinLogging.logger {}
 class BlogOracleJavaScheduler(
     private val postsSchedulerService: PostsSchedulerService,
 ) {
-    @Scheduled(cron = "0 0 1 * * ?")
+    // @Scheduled(cron = "0 0 1 * * ?")
     fun runScheduled() {
         searchOracleJavaBlogPosts()
     }
