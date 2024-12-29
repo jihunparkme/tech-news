@@ -6,8 +6,10 @@ import com.technews.aggregate.subscribe.service.SubscribeService
 import io.kotest.core.spec.style.StringSpec
 import org.junit.jupiter.api.Disabled
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.transaction.annotation.Transactional
 
 @Disabled
+@Transactional
 @IntegrationTest
 class SubscribeMailSchedulerTest(
     @Autowired private val subscribeMailScheduler: SubscribeMailScheduler,

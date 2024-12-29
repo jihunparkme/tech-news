@@ -1,6 +1,7 @@
 package com.technews.common.event.service
 
 import com.technews.common.event.dto.SendMailEvent
+import jakarta.mail.Message.RecipientType
 import jakarta.mail.MessagingException
 import jakarta.mail.internet.InternetAddress
 import jakarta.mail.internet.MimeMessage
@@ -56,7 +57,7 @@ class SendMailEventService(
         }
 
         message.setRecipients(
-            jakarta.mail.Message.RecipientType.TO,
+            RecipientType.TO,
             InternetAddress.parse(recipientAddresses),
         )
     }
