@@ -6,11 +6,14 @@ import com.technews.aggregate.posts.dto.SavePostRequest
 import com.technews.aggregate.posts.service.PostsSchedulerService
 import com.technews.common.util.DateUtils
 import com.technews.scheduler.dto.SpringBlogMeta
+import mu.KotlinLogging
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 import java.time.LocalDate
+
+private val logger = KotlinLogging.logger {}
 
 @Component
 class BlogSpringScheduler(
@@ -54,6 +57,7 @@ class BlogSpringScheduler(
                     )
                 }
             } catch (e: Exception) {
+                logger.error("Failed to fetch posts: ${e.message}", e)
                 emptyList()
             }
 

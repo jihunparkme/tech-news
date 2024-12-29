@@ -24,7 +24,7 @@ class SendMailEventService(
     }
 
     fun sendMail(request: SendMailEvent) {
-        kotlin.runCatching {
+        runCatching {
             val message: MimeMessage = getMimeMessage(request)
             mailSender.send(message)
         }.onFailure { e ->

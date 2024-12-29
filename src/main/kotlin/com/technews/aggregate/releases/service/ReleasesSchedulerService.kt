@@ -15,7 +15,7 @@ class ReleasesSchedulerService(
 ) {
     @Transactional
     fun insertRelease(saveReleaseRequest: SaveReleaseRequest) {
-        kotlin.runCatching {
+        runCatching {
             releasesRepository.save<Release>(saveReleaseRequest.toRelease())
             logger.info("add new release version. ${saveReleaseRequest.version}")
         }.onFailure { e ->
