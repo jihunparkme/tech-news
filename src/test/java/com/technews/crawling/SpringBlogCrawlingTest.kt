@@ -56,7 +56,7 @@ class SpringBlogCrawlingTest : BehaviorSpec({
         private data class Post(
             val title: String,
             val meta: Meta,
-            val url: String,,
+            val url: String,
         )
 
         private data class Meta(
