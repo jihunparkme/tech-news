@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired
 @Disabled
 @IntegrationTest
 class BlogSpringSchedulerTest(
-    @Autowired private val blogSpringScheduler: BlogSpringScheduler
+    @Autowired private val blogSpringScheduler: BlogSpringScheduler,
 ) : StringSpec({
-    "scrape a spring blog post" {
-        blogSpringScheduler.runScheduler()
-    }
-})
+        "scrape a spring blog post" {
+            blogSpringScheduler.runScheduler()
+        }
+    })

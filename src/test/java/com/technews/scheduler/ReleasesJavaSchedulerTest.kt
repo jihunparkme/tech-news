@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired
 @Disabled
 @IntegrationTest
 class ReleasesJavaSchedulerTest(
-    @Autowired private val releasesJavaScheduler: ReleasesJavaScheduler
+    @Autowired private val releasesJavaScheduler: ReleasesJavaScheduler,
 ) : StringSpec({
-    "scrape a java release post" {
-        releasesJavaScheduler.runScheduler()
-    }
-})
+        "scrape a java release post" {
+            releasesJavaScheduler.runScheduler()
+        }
+    })

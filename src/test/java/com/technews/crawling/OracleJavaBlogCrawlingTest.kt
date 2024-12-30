@@ -53,7 +53,7 @@ class OracleJavaBlogCrawlingTest : BehaviorSpec({
                             writer = postInfo.writer,
                             date = LocalDate.now().toString(),
                             tags = listOf("oracle", category),
-                            createdDt = LocalDate.now().toString()
+                            createdDt = LocalDate.now().toString(),
                         )
                     } else {
                         null
@@ -68,7 +68,7 @@ class OracleJavaBlogCrawlingTest : BehaviorSpec({
                 PostInfo(
                     title = postLinks.getOrNull(2)?.text().orEmpty(),
                     url = BLOG_BASE_URL + postLinks.getOrNull(2)?.attr("href").orEmpty(),
-                    writer = postLinks.getOrNull(3)?.text().orEmpty()
+                    writer = postLinks.getOrNull(3)?.text().orEmpty(),
                 )
             }.getOrDefault(PostInfo())
         }

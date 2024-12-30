@@ -12,5 +12,4 @@ annotation class LocalEnvironment
 @Retention(AnnotationRetention.RUNTIME)
 @SpringBootTest
 @LocalEnvironment
-annotation class IntegrationTest {
-}
+annotation class IntegrationTest

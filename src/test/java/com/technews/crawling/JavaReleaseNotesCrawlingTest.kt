@@ -68,7 +68,7 @@ class JavaReleaseNotesCrawlingTest : BehaviorSpec({
                     version = version,
                     url = gaUrl,
                     tags = listOf(project, "java", "release"),
-                    createdDt = LocalDate.now().format(DateUtils.CREATED_FORMATTER)
+                    createdDt = LocalDate.now().format(DateUtils.CREATED_FORMATTER),
                 )
             }.getOrElse {
                 println("Failed to parse release for $project: ${it.message}")
@@ -81,7 +81,7 @@ class JavaReleaseNotesCrawlingTest : BehaviorSpec({
             val version: String,
             val url: String,
             val tags: List<String>,
-            val createdDt: String
+            val createdDt: String,
         )
     }
 }

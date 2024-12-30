@@ -16,7 +16,7 @@ fun createSubscriberMailContents(): SubscriberMailContents {
                 url = "www.google.com",
                 project = "spring-boot",
                 version = "Release v3.4.1",
-            )
+            ),
         ),
         springPosts = listOf(
             Post(
@@ -38,7 +38,7 @@ fun createSubscriberMailContents(): SubscriberMailContents {
                 url = "www.google.com",
                 project = "JDK 18",
                 version = "JDK 18.0.4",
-            )
+            ),
         ),
         javaPosts = listOf(
             Post(
@@ -49,6 +49,6 @@ fun createSubscriberMailContents(): SubscriberMailContents {
                 url = "www.google.com",
                 title = "DDD",
             ),
-        )
+        ),
     )
 }

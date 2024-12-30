@@ -35,7 +35,7 @@ class SpringBlogCrawlingTest : BehaviorSpec({
 
                         if (title != null && meta != null && url != null) {
                             Post(title, meta, url)
-                        } else null
+                        } else { null }
                     }
             }.getOrElse {
                 logger.error("Failed to fetch posts for category: $category, error: ${it.message}", it)
@@ -56,7 +56,7 @@ class SpringBlogCrawlingTest : BehaviorSpec({
         private data class Post(
             val title: String,
             val meta: Meta,
-            val url: String
+            val url: String,,
         )
 
         private data class Meta(

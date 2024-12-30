@@ -8,7 +8,7 @@ class JavaNewsCrawlingTest : BehaviorSpec({
     Given("Java News 정보 크롤링") {
         val doc = Jsoup.connect(BLOG_URL).get()
         val posts = doc.select(".post").mapNotNull { getPost(it) }
-        posts.forEach{ println(it) }
+        posts.forEach { println(it) }
     }
 }) {
     companion object {

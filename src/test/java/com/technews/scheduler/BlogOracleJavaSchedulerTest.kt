@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired
 class BlogOracleJavaSchedulerTest(
     @Autowired private val blogOracleJavaScheduler: BlogOracleJavaScheduler
 ) : StringSpec({
-    "scrape a oracle java blog post" {
-        blogOracleJavaScheduler.runScheduled()
-    }
-})
+        "scrape a oracle java blog post" {
+            blogOracleJavaScheduler.runScheduled()
+        }
+    })

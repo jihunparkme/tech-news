@@ -8,7 +8,7 @@ import jakarta.validation.Validation
 class SubscribeRequestTest : StringSpec({
     "이메일 형식이 비어있을 경우 validation 검사에 실패한다." {
         val subscribeRequest = SubscribeRequest(
-            email = ""
+            email = "",
         )
         val violations = Validation.buildDefaultValidatorFactory().validator.validate(subscribeRequest)
         violations.first().propertyPath.toString() shouldBe "email"
@@ -21,7 +21,7 @@ class SubscribeRequestTest : StringSpec({
 
     "이메일 형식이 맞지 않을 경우 validation 검사에 실패한다." {
         val subscribeRequest = SubscribeRequest(
-            email = "aaa"
+            email = "aaa",
         )
         val violations = Validation.buildDefaultValidatorFactory().validator.validate(subscribeRequest)
         val violation = violations.first()
@@ -29,5 +29,4 @@ class SubscribeRequestTest : StringSpec({
         violation.propertyPath.toString() shouldBe "email"
         violation.message shouldBe "Email is not valid."
     }
-
 })

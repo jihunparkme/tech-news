@@ -15,9 +15,9 @@ class SubscribeMailSchedulerTest(
     @Autowired private val subscribeMailScheduler: SubscribeMailScheduler,
     @Autowired private val subscribeService: SubscribeService,
 ) : StringSpec({
-    "subscribe mail" {
-        val request = SubscribeRequest("jihunpark.tech@gmail.com")
-        subscribeService.subscribe(request)
-        subscribeMailScheduler.runScheduler()
-    }
-})
+        "subscribe mail" {
+            val request = SubscribeRequest("jihunpark.tech@gmail.com")
+            subscribeService.subscribe(request)
+            subscribeMailScheduler.runScheduler()
+        }
+    })

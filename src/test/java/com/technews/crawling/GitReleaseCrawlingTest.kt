@@ -12,7 +12,7 @@ class GitReleaseCrawlingTest : BehaviorSpec({
             "spring-framework",
             "spring-boot",
             "spring-data-jpa",
-            "spring-batch"
+            "spring-batch",
         )
 
         repositories.forEach { repository ->
@@ -58,7 +58,7 @@ class GitReleaseCrawlingTest : BehaviorSpec({
                 project = repository,
                 version = "Release ${versionMatch.value}",
                 date = dateMatch?.value.orEmpty(),
-                url = generateReleaseUrl(repository, versionMatch.groupValues[1])
+                url = generateReleaseUrl(repository, versionMatch.groupValues[1]),
             )
         }
 
@@ -69,8 +69,7 @@ class GitReleaseCrawlingTest : BehaviorSpec({
             val project: String,
             val version: String,
             val date: String,
-            val url: String
+            val url: String,
         )
     }
 }
-

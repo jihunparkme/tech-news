@@ -9,7 +9,7 @@ import io.kotest.matchers.booleans.shouldBeTrue
 class SavePostRequestTest : StringSpec({
     "latest post should be return true" {
         val release = SavePostRequest(
-            date = "2024-04-30"
+            date = "2024-04-30",
         )
         assertSoftly(release) {
             release.isLatestDatePost("2024-04-29").shouldBeTrue()
@@ -19,7 +19,7 @@ class SavePostRequestTest : StringSpec({
 
     "not latest post should be return false" {
         val release = SavePostRequest(
-            date = "2024-04-30"
+            date = "2024-04-30",
         )
         assertSoftly(release) {
             release.isLatestDatePost("2024-04-30").shouldBeFalse()
@@ -27,3 +27,4 @@ class SavePostRequestTest : StringSpec({
         }
     }
 })
+
