@@ -4,6 +4,7 @@ import com.technews.aggregate.posts.domain.Post;
 import com.technews.aggregate.releases.domain.Release;
 import com.technews.aggregate.subscribe.dto.SubscriberMailContents;
 
+@Deprecated
 public class MailTemplateUtils {
 
     public static String generateContents(final SubscriberMailContents subscriberMailContents) {

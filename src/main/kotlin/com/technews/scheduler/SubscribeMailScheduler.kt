@@ -11,7 +11,6 @@ import com.technews.common.config.event.Events
 import com.technews.common.constant.JdkVersion
 import com.technews.common.constant.SpringRepository
 import com.technews.common.event.dto.SendMailEvent
-import com.technews.common.util.MailTemplateUtils
 import mu.KotlinLogging
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
@@ -39,7 +38,7 @@ class SubscribeMailScheduler(
         Events.raise(
             SendMailEvent(
                 subject = SUBJECT,
-                contents = MailTemplateUtils.generateContents(subscriberMailContents),
+                contents = subscriberMailContents,
                 addressList = subscriber,
             ),
         )
