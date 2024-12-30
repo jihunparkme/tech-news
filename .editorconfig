@@ -1,0 +1,23 @@
+# Standard rules
+# https://pinterest.github.io/ktlint/latest/rules/standard/
+root = true
+
+[*]
+insert_final_newline = true
+
+[*.{kt,kts}]
+# A multiline expression should start on a new line
+ktlint_standard_string-template-indent=disabled
+ktlint_standard_multiline-expression-wrapping=disabled
+
+# Newline expected before closing parenthesis
+# Newline expected before expression body
+# First line of body expression fits on same line as function signature
+# ...
+ktlint_standard_function-signature=disabled
+
+# Parameter should start on a newline
+ktlint_standard_parameter-list-wrapping=disabled
+
+
+
