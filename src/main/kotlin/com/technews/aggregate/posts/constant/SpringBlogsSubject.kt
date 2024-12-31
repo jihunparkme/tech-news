@@ -1,9 +1,9 @@
 package com.technews.aggregate.posts.constant
 
 enum class SpringBlogsSubject(val value: String) {
-    ENGINEERING("Engineering"),
-    RELEASES("Releases"),
-    NEWS("News"),
+    ENGINEERING("engineering"),
+    RELEASES("releases"),
+    NEWS("news"),
     ;
 
     companion object {
