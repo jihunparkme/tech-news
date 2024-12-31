@@ -8,7 +8,7 @@ import java.time.LocalDate
 
 private val logger = KotlinLogging.logger {}
 
-class OracleJavaBlogCrawlingTest : BehaviorSpec({
+class JavaOracleBlogCrawlingTest : BehaviorSpec({
     Given("Oracle Java Blog 정보 크롤링") {
         val posts = fetchPosts()
         println("posts.size = ${posts.size}")
@@ -20,7 +20,7 @@ class OracleJavaBlogCrawlingTest : BehaviorSpec({
         private val CATEGORIES = listOf("Product & Ecosystem", "Java Technology")
         private val SAVED_POST_TITLE: MutableSet<String> = mutableSetOf()
 
-        private fun fetchPosts(): List<OracleJavaBlogPost> {
+        private fun fetchPosts(): List<JavaOracleBlogPost> {
             return runCatching {
                 Jsoup.connect(BLOG_BASE_URL)
                     .header("User-Agent", "PostmanRuntime/7.37.3")
@@ -40,12 +40,12 @@ class OracleJavaBlogCrawlingTest : BehaviorSpec({
             }
         }
 
-        private fun getPosts(category: String, postElement: Element): List<OracleJavaBlogPost> {
+        private fun getPosts(category: String, postElement: Element): List<JavaOracleBlogPost> {
             return postElement.select(".cscroll-item-w1")
                 .mapNotNull { element ->
                     val postInfo = getPostInfo(element)
                     if (SAVED_POST_TITLE.add(postInfo.title)) {
-                        OracleJavaBlogPost(
+                        JavaOracleBlogPost(
                             subject = "java",
                             title = postInfo.title,
                             url = postInfo.url,
@@ -73,7 +73,7 @@ class OracleJavaBlogCrawlingTest : BehaviorSpec({
             }.getOrDefault(PostInfo())
         }
 
-        private data class OracleJavaBlogPost(
+        private data class JavaOracleBlogPost(
             val subject: String = "",
             val title: String = "",
             val url: String = "",
