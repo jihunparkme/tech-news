@@ -19,7 +19,6 @@ private val logger = KotlinLogging.logger {}
 class BlogSpringScheduler(
     private val postsSchedulerService: PostsSchedulerService,
 ) {
-
     @Scheduled(cron = "0 0 1 * * ?")
     fun runScheduler() {
         searchSpringBlogPosts(SpringBlogsSubject.ENGINEERING)
