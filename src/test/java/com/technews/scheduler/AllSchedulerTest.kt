@@ -13,6 +13,7 @@ class AllSchedulerTest(
     @Autowired private val blogSpringScheduler: BlogSpringScheduler,
     @Autowired private val blogJavaInsideScheduler: BlogJavaInsideScheduler,
     @Autowired private val subscribeMailScheduler: SubscribeMailScheduler,
+    @Autowired private val javaBlogOracleJavaRssScheduler: BlogOracleJavaRssScheduler,
 ) : StringSpec({
         "scrape all post" {
             releaseSpringProjectsScheduler.runScheduler()
@@ -20,5 +21,6 @@ class AllSchedulerTest(
             blogSpringScheduler.runScheduler()
             blogJavaInsideScheduler.runScheduled()
             subscribeMailScheduler.runScheduler()
+            javaBlogOracleJavaRssScheduler.runSchedule()
         }
     })
