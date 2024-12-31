@@ -16,11 +16,11 @@ class AllSchedulerTest(
     @Autowired private val javaBlogOracleJavaRssScheduler: BlogOracleJavaRssScheduler,
 ) : StringSpec({
         "scrape all post" {
-            releaseSpringProjectsScheduler.runScheduler()
-            releasesJavaScheduler.runScheduler()
-            blogSpringScheduler.runScheduler()
-            blogJavaInsideScheduler.runScheduled()
-            subscribeMailScheduler.runScheduler()
+            releaseSpringProjectsScheduler.runSchedule()
+            releasesJavaScheduler.runSchedule()
+            blogSpringScheduler.runSchedule()
+            blogJavaInsideScheduler.runSchedule()
+            subscribeMailScheduler.runSchedule()
             javaBlogOracleJavaRssScheduler.runSchedule()
         }
     })

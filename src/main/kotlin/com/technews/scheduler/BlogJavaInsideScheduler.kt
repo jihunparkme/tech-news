@@ -20,7 +20,7 @@ class BlogJavaInsideScheduler(
     private val postsSchedulerService: PostsSchedulerService,
 ) {
     @Scheduled(cron = "0 0 1 * * ?")
-    fun runScheduled() {
+    fun runSchedule() {
         searchJavaBlogPosts(JavaBlogsSubject.INSIDE)
     }
 

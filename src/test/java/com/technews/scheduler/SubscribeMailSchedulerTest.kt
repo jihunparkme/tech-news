@@ -18,6 +18,6 @@ class SubscribeMailSchedulerTest(
         "subscribe mail" {
             val request = SubscribeRequest("jihunpark.tech@gmail.com")
             subscribeService.subscribe(request)
-            subscribeMailScheduler.runScheduler()
+            subscribeMailScheduler.runSchedule()
         }
     })

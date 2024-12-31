@@ -11,6 +11,6 @@ class BlogSpringSchedulerTest(
     @Autowired private val blogSpringScheduler: BlogSpringScheduler,
 ) : StringSpec({
         "scrape a spring blog post" {
-            blogSpringScheduler.runScheduler()
+            blogSpringScheduler.runSchedule()
         }
     })

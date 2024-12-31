@@ -12,7 +12,7 @@ class BlogJavaInsideSchedulerTest(
     @Autowired private val blogJavaInsideScheduler: BlogJavaInsideScheduler,
 ) : StringSpec({
         "scrape java inside post" {
-            blogJavaInsideScheduler.runScheduled()
+            blogJavaInsideScheduler.runSchedule()
         }
 
         "parse the post writer and date" {

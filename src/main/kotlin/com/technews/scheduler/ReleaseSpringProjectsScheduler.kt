@@ -19,7 +19,7 @@ class ReleaseSpringProjectsScheduler(
     private val releasesSchedulerService: ReleasesSchedulerService,
 ) {
     @Scheduled(cron = "0 0 1 * * ?")
-    fun runScheduler() {
+    fun runSchedule() {
         listOf(
             SpringRepository.SPRING_FRAMEWORK,
             SpringRepository.SPRING_BOOT,

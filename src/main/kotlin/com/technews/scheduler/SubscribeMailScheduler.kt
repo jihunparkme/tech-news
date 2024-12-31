@@ -24,7 +24,7 @@ class SubscribeMailScheduler(
     private val subscribeService: SubscribeService,
 ) {
     @Scheduled(cron = "0 0 9 * * *")
-    fun runScheduler() {
+    fun runSchedule() {
         logger.info("[SubscribeMailScheduler] Start...")
         val releases = releasesRepository.findBySharedFalse()
         val posts = postsRepository.findBySharedFalse()

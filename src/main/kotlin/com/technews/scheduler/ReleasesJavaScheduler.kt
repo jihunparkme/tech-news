@@ -18,7 +18,7 @@ class ReleasesJavaScheduler(
     private val releasesSchedulerService: ReleasesSchedulerService,
 ) {
     @Scheduled(cron = "0 0 1 * * ?")
-    fun runScheduler() {
+    fun runSchedule() {
         listOf(
             JdkVersion.JDK_8,
             JdkVersion.JDK_11,

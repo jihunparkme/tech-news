@@ -20,7 +20,7 @@ class BlogSpringScheduler(
     private val postsSchedulerService: PostsSchedulerService,
 ) {
     @Scheduled(cron = "0 0 1 * * ?")
-    fun runScheduler() {
+    fun runSchedule() {
         searchSpringBlogPosts(SpringBlogsSubject.ENGINEERING)
         searchSpringBlogPosts(SpringBlogsSubject.RELEASES)
         searchSpringBlogPosts(SpringBlogsSubject.NEWS)

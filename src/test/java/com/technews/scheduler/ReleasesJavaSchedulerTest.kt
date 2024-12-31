@@ -11,6 +11,6 @@ class ReleasesJavaSchedulerTest(
     @Autowired private val releasesJavaScheduler: ReleasesJavaScheduler,
 ) : StringSpec({
         "scrape a java release post" {
-            releasesJavaScheduler.runScheduler()
+            releasesJavaScheduler.runSchedule()
         }
     })
