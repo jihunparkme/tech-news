@@ -1,4 +1,4 @@
-package com.technews.crawling
+package com.technews.crawling.blog
 
 import com.technews.common.util.DateUtils
 import io.kotest.core.spec.style.BehaviorSpec
@@ -54,5 +54,3 @@ class JavaOracleBlogRssCrawlingTest : BehaviorSpec({
             }
     }
 }
-
-

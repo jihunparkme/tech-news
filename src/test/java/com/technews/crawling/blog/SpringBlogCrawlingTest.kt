@@ -1,4 +1,4 @@
-package com.technews.crawling
+package com.technews.crawling.blog
 
 import io.kotest.core.spec.style.BehaviorSpec
 import mu.KotlinLogging
@@ -31,11 +31,14 @@ class SpringBlogCrawlingTest : BehaviorSpec({
                     .mapNotNull { element ->
                         val title = element.select(".has-text-weight-medium").text().ifEmpty { null }
                         val meta = parseMeta(element.select(".meta").text())
-                        val url = element.select(".button").attr("href").takeIf { it.isNotEmpty() }?.let { BLOG_URL + it }
+                        val url =
+                            element.select(".button").attr("href").takeIf { it.isNotEmpty() }?.let { BLOG_URL + it }
 
                         if (title != null && meta != null && url != null) {
                             Post(title, meta, url)
-                        } else { null }
+                        } else {
+                            null
+                        }
                     }
             }.getOrElse {
                 logger.error("Failed to fetch posts for category: $category, error: ${it.message}", it)
