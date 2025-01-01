@@ -1,4 +1,4 @@
-package com.technews.scheduler
+package com.technews.scheduler.blog
 
 import com.technews.IntegrationTest
 import io.kotest.core.spec.style.StringSpec

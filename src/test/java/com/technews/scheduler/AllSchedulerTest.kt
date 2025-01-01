@@ -1,6 +1,11 @@
 package com.technews.scheduler
 
 import com.technews.IntegrationTest
+import com.technews.scheduler.blog.BlogJavaInsideScheduler
+import com.technews.scheduler.blog.BlogOracleJavaRssScheduler
+import com.technews.scheduler.blog.BlogSpringScheduler
+import com.technews.scheduler.releases.ReleaseSpringProjectsScheduler
+import com.technews.scheduler.releases.ReleasesJavaScheduler
 import io.kotest.core.spec.style.StringSpec
 import org.junit.jupiter.api.Disabled
 import org.springframework.beans.factory.annotation.Autowired

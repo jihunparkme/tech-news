@@ -1,4 +1,4 @@
-package com.technews.scheduler
+package com.technews.scheduler.releases
 
 import com.technews.aggregate.releases.dto.SaveReleaseRequest
 import com.technews.aggregate.releases.service.ReleasesSchedulerService
@@ -10,7 +10,6 @@ import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 import java.io.IOException
 import java.util.regex.Pattern
-import java.util.regex.Pattern.compile
 
 private val logger = KotlinLogging.logger {}
 
@@ -44,8 +43,8 @@ class ReleaseSpringProjectsScheduler(
 
         private const val RELEASE_VERSION_REGEX = "^(.*?)(?=\\s+Toggle)"
         private const val RELEASE_DATE = "\\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\\s(\\d{1,2}),\\s(\\d{4})"
-        private val RELEASE_VERSION_PATTERN: Pattern = compile(RELEASE_VERSION_REGEX)
-        private val RELEASE_DATE_PATTERN: Pattern = compile(RELEASE_DATE)
+        private val RELEASE_VERSION_PATTERN: Pattern = Pattern.compile(RELEASE_VERSION_REGEX)
+        private val RELEASE_DATE_PATTERN: Pattern = Pattern.compile(RELEASE_DATE)
 
         private fun getGitHubReleaseTags(repository: String): List<SaveReleaseRequest> {
             val url = "$SPRING_PROJECT_REPOSITORY_URL$repository$SPRING_PROJECT_REPOSITORY_TAGS"

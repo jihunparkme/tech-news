@@ -1,4 +1,4 @@
-package com.technews.scheduler
+package com.technews.scheduler.blog
 
 import com.technews.IntegrationTest
 import io.kotest.core.spec.style.StringSpec
@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired
 
 @Disabled
 @IntegrationTest
-class ReleasesJavaSchedulerTest(
-    @Autowired private val releasesJavaScheduler: ReleasesJavaScheduler,
+class BlogOracleJavaSchedulerTest(
+    @Autowired private val blogOracleJavaScheduler: BlogOracleJavaScheduler
 ) : StringSpec({
-        "scrape a java release post" {
-            releasesJavaScheduler.runSchedule()
+        "scrape a oracle java blog post" {
+            blogOracleJavaScheduler.runScheduled()
         }
     })

@@ -1,4 +1,4 @@
-package com.technews.scheduler
+package com.technews.scheduler.releases
 
 import com.technews.aggregate.releases.dto.SaveReleaseRequest
 import com.technews.aggregate.releases.service.ReleasesSchedulerService
@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 import java.time.LocalDate
 
-private val logger = KotlinLogging.logger { }
+private val logger = KotlinLogging.logger {}
 
 @Component
 class ReleasesJavaScheduler(

@@ -1,4 +1,4 @@
-package com.technews.scheduler
+package com.technews.scheduler.blog
 
 import com.technews.aggregate.posts.constant.JavaBlogsSubject
 import com.technews.aggregate.posts.constant.PostSubjects
@@ -52,7 +52,7 @@ class BlogJavaInsideScheduler(
                 url = getUrl(postElement),
                 writer = getPostInfo(postElement).writer,
                 date = DateUtils.getFormattedDate(getPostInfo(postElement).date),
-                tags =  getTags(postElement) + listOf("Java"),
+                tags = getTags(postElement) + listOf("Java"),
                 createdDt = LocalDate.now().format(DateUtils.CREATED_FORMATTER),
             )
         }

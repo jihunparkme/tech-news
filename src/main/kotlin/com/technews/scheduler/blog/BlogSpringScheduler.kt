@@ -1,4 +1,4 @@
-package com.technews.scheduler
+package com.technews.scheduler.blog
 
 import com.technews.aggregate.posts.constant.PostSubjects
 import com.technews.aggregate.posts.constant.SpringBlogsSubject
