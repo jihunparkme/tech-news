@@ -1,4 +1,4 @@
-package com.technews.crawling
+package com.technews.crawling.release
 
 import com.technews.common.util.DateUtils
 import io.kotest.core.spec.style.BehaviorSpec

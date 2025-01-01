@@ -1,4 +1,4 @@
-package com.technews.crawling
+package com.technews.crawling.release
 
 import io.kotest.core.spec.style.BehaviorSpec
 import mu.KotlinLogging
