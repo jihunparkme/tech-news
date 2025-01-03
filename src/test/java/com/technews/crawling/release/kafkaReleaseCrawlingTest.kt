@@ -1,6 +1,7 @@
 package com.technews.crawling.release
 
 import com.technews.aggregate.posts.constant.PostSubjects
+import com.technews.common.util.DateUtils
 import io.kotest.core.spec.style.BehaviorSpec
 import mu.KotlinLogging
 import org.jsoup.Jsoup
@@ -45,9 +46,8 @@ class kafkaReleaseCrawlingTest : BehaviorSpec({
                     ?.selectFirst("ul")
                     ?.select("li") ?: emptyList()
 
-                // TODO empty 를 today 로 처리
                 // TODO 날짜 포맷 변경 yyy-mm-dd
-                val publishDate = listItems.getOrNull(0)?.text().orEmpty()
+                val publishDate = getPublishDate(listItems)
                 val url = listItems.getOrNull(1)
                     ?.selectFirst("a")
                     ?.attr("href")
@@ -59,28 +59,12 @@ class kafkaReleaseCrawlingTest : BehaviorSpec({
                 publishDate to url
             }.getOrElse {
                 logger.warn(it) { "Failed to extract post info for version: $version" }
-                LocalDateTime.now().toString() to "https://archive.apache.org/dist/kafka/$version/RELEASE_NOTES.html"
+                DateUtils.today() to "https://archive.apache.org/dist/kafka/$version/RELEASE_NOTES.html"
             }
-
-
-
-            // val select = it.nextElementSibling().select("ul").select("li")
-            // runCatching {
-            //     val publishDate = select.getOrNull(0) ?: LocalDateTime.now().toString()
-            //     println(publishDate)
-            //     val orElse = select.getOrNull(1)
-            //     val url = (orElse == null) ? "https://archive.apache.org/dist/kafka/$version/RELEASE_NOTES.html" : orElse.select("a").attr("href")
-            //     println(url)
-            //     return Pair(publishDate, url)
-            // }.getOrElse {
-            //     println("https://archive.apache.org/dist/kafka/$version/RELEASE_NOTES.html")
-            //
-            //     return Pair(
-            //         LocalDateTime.now().toString(),
-            //         "https://archive.apache.org/dist/kafka/$version/RELEASE_NOTES.html"
-            //     )
-            // }
         }
+
+        private fun getPublishDate(listItems: List<Element>) =
+            listItems.getOrNull(0)?.text()?.takeIf { it.isNotBlank() } ?: DateUtils.today()
 
         private data class Releases(
             val project: String,

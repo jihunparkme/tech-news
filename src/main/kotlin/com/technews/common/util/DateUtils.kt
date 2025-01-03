@@ -23,7 +23,7 @@ object DateUtils {
         LocalDate.parse(date, ENGLISH_FORMATTER).format(CREATED_FORMATTER)
     } catch (e: DateTimeParseException) {
         logger.error(e) { "Failed to parse date: $date" }
-        LocalDate.now().format(CREATED_FORMATTER)
+        today()
     }
 
     fun gmtToSeoul(date: String): String = try {
@@ -32,6 +32,9 @@ object DateUtils {
         withZoneSameInstant.format(CREATED_FORMATTER)
     } catch (e: DateTimeParseException) {
         logger.error(e) { "Failed to parse date: $date" }
-        LocalDate.now().format(CREATED_FORMATTER)
+        today()
     }
+
+    fun today(): String =
+        LocalDate.now().format(CREATED_FORMATTER)
 }
