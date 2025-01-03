@@ -6,7 +6,6 @@ import io.kotest.core.spec.style.BehaviorSpec
 import mu.KotlinLogging
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
-import java.time.LocalDateTime
 
 private val logger = KotlinLogging.logger {}
 
@@ -21,6 +20,11 @@ class kafkaReleaseCrawlingTest : BehaviorSpec({
 }) {
     companion object {
         private const val BASE_RELEASES_URL = "https://kafka.apache.org/downloads"
+        private val monthMap = mapOf(
+            "Sept" to "September",
+            "Jul" to "July",
+            "Jun" to "June",
+        )
 
         private fun Element.toPostOrNull(): Releases? =
             runCatching {
@@ -46,7 +50,6 @@ class kafkaReleaseCrawlingTest : BehaviorSpec({
                     ?.selectFirst("ul")
                     ?.select("li") ?: emptyList()
 
-                // TODO 날짜 포맷 변경 yyy-mm-dd
                 val publishDate = getPublishDate(listItems)
                 val url = listItems.getOrNull(1)
                     ?.selectFirst("a")
@@ -58,13 +61,27 @@ class kafkaReleaseCrawlingTest : BehaviorSpec({
 
                 publishDate to url
             }.getOrElse {
-                logger.warn(it) { "Failed to extract post info for version: $version" }
+                logger.error(it) { "Failed to extract post info for version: $version" }
                 DateUtils.today() to "https://archive.apache.org/dist/kafka/$version/RELEASE_NOTES.html"
             }
         }
 
-        private fun getPublishDate(listItems: List<Element>) =
-            listItems.getOrNull(0)?.text()?.takeIf { it.isNotBlank() } ?: DateUtils.today()
+        private fun getPublishDate(listItems: List<Element>): String {
+            val publishDate = listItems.firstOrNull()?.text().orEmpty()
+            if (publishDate.isBlank()) DateUtils.today()
+
+            runCatching {
+                val date = publishDate.split("Released ")[1]
+                    .replace(Regex("(\\d+)(st|nd|rd|th|ed)"), "$1")
+                    .replace(Regex("\\b[A-Za-z]*")) { matchResult ->
+                        monthMap[matchResult.value] ?: matchResult.value
+                    }
+                println("date :: $date")
+                return DateUtils.getFormattedDate(date)
+            }.getOrElse {
+                return DateUtils.today()
+            }
+        }
 
         private data class Releases(
             val project: String,
