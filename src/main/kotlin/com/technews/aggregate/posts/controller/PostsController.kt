@@ -1,6 +1,6 @@
 package com.technews.aggregate.posts.controller
 
-import com.technews.aggregate.posts.constant.PostSubjects
+import com.technews.common.dto.Project
 import com.technews.aggregate.posts.dto.PostResponse
 import com.technews.aggregate.posts.service.PostsService
 import com.technews.common.dto.BasicResponse
@@ -30,7 +30,7 @@ class PostsController(
             size,
             Sort.by("createdDt").descending().and(Sort.by("date").descending()),
         )
-        val releasePage = postsService.findAllRelease(PostSubjects.SPRING, pageable, categories)
+        val releasePage = postsService.findAllRelease(Project.SPRING, pageable, categories)
         return BasicResponse.ok(assembler.toModel(releasePage))
     }
 
@@ -46,7 +46,7 @@ class PostsController(
             size,
             Sort.by("createdDt").descending().and(Sort.by("date").descending()),
         )
-        val releasePage = postsService.findAllRelease(PostSubjects.JAVA, pageable, categories)
+        val releasePage = postsService.findAllRelease(Project.JAVA, pageable, categories)
         return BasicResponse.ok(assembler.toModel(releasePage))
     }
 }

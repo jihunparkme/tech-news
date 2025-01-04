@@ -1,7 +1,7 @@
 package com.technews.scheduler.blog
 
 import com.technews.aggregate.posts.constant.JavaBlogsSubject
-import com.technews.aggregate.posts.constant.PostSubjects
+import com.technews.common.dto.Project
 import com.technews.aggregate.posts.dto.SavePostRequest
 import com.technews.aggregate.posts.service.PostsSchedulerService
 import com.technews.scheduler.dto.OracleJavaBlogPostInfo
@@ -53,7 +53,7 @@ class BlogOracleJavaScheduler(
                 } else {
                     SAVED_POST_TITLE.add(postInfo.title)
                     SavePostRequest(
-                        subject = PostSubjects.JAVA.value,
+                        subject = Project.JAVA.value,
                         title = postInfo.title,
                         url = postInfo.url,
                         category = JavaBlogsSubject.ORACLE.value,

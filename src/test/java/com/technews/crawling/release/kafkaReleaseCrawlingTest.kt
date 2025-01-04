@@ -1,6 +1,6 @@
 package com.technews.crawling.release
 
-import com.technews.aggregate.posts.constant.PostSubjects
+import com.technews.common.dto.Project
 import com.technews.common.util.DateUtils
 import io.kotest.core.spec.style.BehaviorSpec
 import mu.KotlinLogging
@@ -33,7 +33,7 @@ class kafkaReleaseCrawlingTest : BehaviorSpec({
             val postInfo = getPostInfo(version)
 
             Releases(
-                project = PostSubjects.KAFKA.value,
+                project = Project.KAFKA.value,
                 version = version,
                 publishDate = postInfo.first,
                 url = postInfo.second,

@@ -1,6 +1,6 @@
 package com.technews.scheduler.blog
 
-import com.technews.aggregate.posts.constant.PostSubjects
+import com.technews.common.dto.Project
 import com.technews.aggregate.posts.constant.SpringBlogsSubject
 import com.technews.aggregate.posts.dto.SavePostRequest
 import com.technews.aggregate.posts.service.PostsSchedulerService
@@ -45,13 +45,13 @@ class BlogSpringScheduler(
                 elements.map { element ->
                     val meta = getMeta(element)
                     SavePostRequest(
-                        subject = PostSubjects.SPRING.value,
+                        subject = Project.SPRING.value,
                         title = getTitle(element),
                         url = getPostUrl(element),
                         category = category,
                         writer = meta.writer,
                         date = meta.date,
-                        tags = listOf(PostSubjects.SPRING.value, category),
+                        tags = listOf(Project.SPRING.value, category),
                         createdDt = LocalDate.now().format(DateUtils.CREATED_FORMATTER),
                     )
                 }

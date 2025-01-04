@@ -1,7 +1,7 @@
 package com.technews.scheduler.blog
 
 import com.technews.aggregate.posts.constant.JavaBlogsSubject
-import com.technews.aggregate.posts.constant.PostSubjects
+import com.technews.common.dto.Project
 import com.technews.aggregate.posts.dto.SavePostRequest
 import com.technews.aggregate.posts.service.PostsSchedulerService
 import com.technews.common.util.DateUtils
@@ -52,7 +52,7 @@ class BlogOracleJavaRssScheduler(
         private fun Element.toPostOrNull(): SavePostRequest? =
             runCatching {
                 SavePostRequest(
-                    subject = PostSubjects.JAVA.value,
+                    subject = Project.JAVA.value,
                     title = select("title").text(),
                     url = select("link").text(),
                     category = JavaBlogsSubject.ORACLE.value,

@@ -1,6 +1,6 @@
 package com.technews.aggregate.posts.service
 
-import com.technews.aggregate.posts.constant.PostSubjects
+import com.technews.common.dto.Project
 import com.technews.aggregate.posts.domain.repository.PostsRepository
 import com.technews.aggregate.posts.dto.PostResponse
 import org.springframework.data.domain.Page
@@ -14,7 +14,7 @@ class PostsService(
 ) {
     @Transactional(readOnly = true)
     fun findAllRelease(
-        subject: PostSubjects,
+        subject: Project,
         pageable: PageRequest,
         categories: List<String>? = emptyList(),
     ): Page<PostResponse> {

@@ -1,7 +1,7 @@
 package com.technews.scheduler.blog
 
 import com.technews.aggregate.posts.constant.JavaBlogsSubject
-import com.technews.aggregate.posts.constant.PostSubjects
+import com.technews.common.dto.Project
 import com.technews.aggregate.posts.dto.SavePostRequest
 import com.technews.aggregate.posts.service.PostsSchedulerService
 import com.technews.common.util.DateUtils
@@ -46,7 +46,7 @@ class BlogJavaInsideScheduler(
 
         private fun getPost(postElement: Element): SavePostRequest {
             return SavePostRequest(
-                subject = PostSubjects.JAVA.value,
+                subject = Project.JAVA.value,
                 category = JavaBlogsSubject.INSIDE.value,
                 title = getTitle(postElement),
                 url = getUrl(postElement),

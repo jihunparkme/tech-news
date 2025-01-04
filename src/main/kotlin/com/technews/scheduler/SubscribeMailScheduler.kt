@@ -1,6 +1,6 @@
 package com.technews.scheduler
 
-import com.technews.aggregate.posts.constant.PostSubjects
+import com.technews.common.dto.Project
 import com.technews.aggregate.posts.domain.Post
 import com.technews.aggregate.posts.domain.repository.PostsRepository
 import com.technews.aggregate.releases.domain.Release
@@ -70,10 +70,10 @@ class SubscribeMailScheduler(
         releases.filter { JdkVersion.list().contains(it.project) }
 
     private fun getPostOfSpring(posts: List<Post>): List<Post> =
-        posts.filter { PostSubjects.SPRING.value == it.subject }
+        posts.filter { Project.SPRING.value == it.subject }
 
     private fun getPostOfJava(posts: List<Post>): List<Post> =
-        posts.filter { PostSubjects.JAVA.value == it.subject }
+        posts.filter { Project.JAVA.value == it.subject }
 
     private fun updateShared(
         releases: List<Release>,
