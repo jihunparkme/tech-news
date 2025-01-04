@@ -5,41 +5,44 @@ Tech News 는 Java, Spring 의 Releases 정보, Blog 게시물들을 수집하�
 
 ## Tech Stack
 
-- JDK 21
-- Spring Boot 3.2.5
+- JDK 21 / Kotlin 1.9.20 / ktlint
+- Spring Boot 3.4.0
 - Spring Web
 - jsoup 1.17.1
 - Thymeleaf
-- Junit 5
+- kotest
+- mockk
 - Mongodb
 - AWS EC2
 - Docker
 
-## 주요 기능
+## Data
 
-### 데이터 수집
+### Releases
 
-Spring Project 의 Release 소식은 [spring-projects](https://github.com/spring-projects) 에서 수집하고 있습니다.
-
+👉🏻 **[Spring](https://github.com/spring-projects)**
 - [spring-framework](https://github.com/spring-projects/spring-framework/releases)
 - [spring-boot](https://github.com/spring-projects/spring-boot/releases)
 - [spring-data-jpa](https://github.com/spring-projects/spring-data-jpa/releases)
 - [spring-batch](https://github.com/spring-projects/spring-batch/releases)
 
-Spring News 는 [Spring Blog](https://spring.io/blog) 에서 수집하고 있습니다.
-
-JDK Release 소식은 [ORACLE](https://www.oracle.com/) 홈페이지에서 LTS 버전(`JDK 8`, `JDK 11`, `JDK 17`, `JDK 21`)을 수집하고 있습니다.
-
+👉🏻 **[JDK LTS](https://www.oracle.com/)**
 - [JDK 8 Release Notes](https://www.oracle.com/java/technologies/javase/8u-relnotes.html)
 - [JDK 11 Release notes](https://www.oracle.com/java/technologies/javase/11u-relnotes.html)
 - [JDK 17 Release notes](https://www.oracle.com/java/technologies/javase/17u-relnotes.html)
 - [JDK 21 Release notes](https://www.oracle.com/java/technologies/javase/21u-relnotes.html)
+- [JDK 23 Release notes](https://www.oracle.com/java/technologies/javase/23u-relnotes.html)
 
-Java News 는 [Inside Java](https://inside.java/), [Oracle Java](https://blogs.oracle.com/java/) 에서 수집하고 있습니다.
+### Blog
 
-> 수집에 포함시키고 싶으신 페이지가 있으시다면 구독 시 발송되는 메일로 페이지 정보를 알려주세요 :)
+👉🏻 **Spring**
+- **[Spring Blog](https://spring.io/blog)**
 
-### 구독
+👉🏻 **Java News**
+- [Inside Java](https://inside.java/)
+- [Oracle Java](https://blogs.oracle.com/java/)
+
+## Subscribe
 
 Java, Spring 의 새로운 소식을 구독하고 싶으시다면<br/>
 페이지의 헤더에서 `If you would like to subscribe or unsubscribe, please enter your email.` 문구를 찾아주세요.<br/>
