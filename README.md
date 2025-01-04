@@ -33,14 +33,28 @@ Tech News 는 Java, Spring 의 Releases 정보, Blog 게시물들을 수집하�
 - [JDK 21 Release notes](https://www.oracle.com/java/technologies/javase/21u-relnotes.html)
 - [JDK 23 Release notes](https://www.oracle.com/java/technologies/javase/23u-relnotes.html)
 
+👉🏻 **[Kotlin]()**
+
+👉🏻 **[Kafka](https://kafka.apache.org/)**
+- [Supported releases](https://kafka.apache.org/downloads)
+
+👉🏻 **[MongoDB]()**
+
 ### Blog
 
 👉🏻 **Spring**
 - **[Spring Blog](https://spring.io/blog)**
 
-👉🏻 **Java News**
+👉🏻 **Java**
 - [Inside Java](https://inside.java/)
 - [Oracle Java](https://blogs.oracle.com/java/)
+
+👉🏻 **Kotlin**
+
+👉🏻 **Kafka**
+- [Blog](https://kafka.apache.org/blog)
+
+👉🏻 **MongoDB**
 
 ## Subscribe
 
