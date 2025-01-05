@@ -56,7 +56,7 @@ class BlogOracleJavaRssScheduler(
                     title = select("title").text(),
                     url = select("link").text(),
                     category = JavaBlogsSubject.ORACLE.value,
-                    date = DateUtils.gmtToSeoul(select("pubDate").text()),
+                    date = DateUtils.parseGreenwichToSeoul(select("pubDate").text()),
                     tags = listOf(JavaBlogsSubject.ORACLE.value),
                     createdDt = LocalDate.now().toString(),
                 )

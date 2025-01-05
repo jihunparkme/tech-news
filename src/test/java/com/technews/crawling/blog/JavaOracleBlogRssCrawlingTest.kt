@@ -46,7 +46,7 @@ class JavaOracleBlogRssCrawlingTest : BehaviorSpec({
                     title = select("title").text(),
                     description = select("description").text(),
                     link = select("link").text(),
-                    publishDate = DateUtils.gmtToSeoul(select("pubDate").text()),
+                    publishDate = DateUtils.parseGreenwichToSeoul(select("pubDate").text()),
                 )
             }.getOrElse {
                 logger.error(it) { "Failed to parse post: ${it.message}" }

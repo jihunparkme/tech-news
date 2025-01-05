@@ -89,7 +89,7 @@ class ReleasesKafkaScheduler(
                             .replace(Regex("\\b[A-Za-z]*")) { matchResult ->
                                 monthMap[matchResult.value] ?: matchResult.value
                             }
-                            .let { DateUtils.getFormattedDate(it) }
+                            .let { DateUtils.parseEnglishDateFormat(it) }
                     }.getOrElse {
                         DateUtils.today()
                     }

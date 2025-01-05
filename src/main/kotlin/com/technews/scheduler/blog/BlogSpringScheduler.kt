@@ -80,7 +80,7 @@ class BlogSpringScheduler(
                 SpringBlogMeta(
                     category = metas[0],
                     writer = metas[1],
-                    date = DateUtils.getFormattedDate(metas[2]),
+                    date = DateUtils.parseEnglishDateFormat(metas[2]),
                 )
             }.getOrDefault(SpringBlogMeta())
         }

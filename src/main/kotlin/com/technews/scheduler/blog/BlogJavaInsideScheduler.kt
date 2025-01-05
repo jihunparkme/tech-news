@@ -51,7 +51,7 @@ class BlogJavaInsideScheduler(
                 title = getTitle(postElement),
                 url = getUrl(postElement),
                 writer = getPostInfo(postElement).writer,
-                date = DateUtils.getFormattedDate(getPostInfo(postElement).date),
+                date = DateUtils.parseEnglishDateFormat(getPostInfo(postElement).date),
                 tags = getTags(postElement) + listOf("Java"),
                 createdDt = LocalDate.now().format(DateUtils.CREATED_FORMATTER),
             )

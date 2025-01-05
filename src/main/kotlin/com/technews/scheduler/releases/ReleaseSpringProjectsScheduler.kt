@@ -78,7 +78,7 @@ class ReleaseSpringProjectsScheduler(
                 version = version.let { "Release $it" },
                 url = version.let { generateReleaseUrl(repository, it) },
                 date = date,
-                createdDt = date.let { DateUtils.getFormattedDate(it) },
+                createdDt = date.let { DateUtils.parseEnglishDateFormat(it) },
             )
         }
 
