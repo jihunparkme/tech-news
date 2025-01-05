@@ -9,7 +9,7 @@ import org.jsoup.nodes.Element
 
 private val logger = KotlinLogging.logger {}
 
-class kafkaReleaseCrawlingTest : BehaviorSpec({
+class KafkaReleaseCrawlingTest : BehaviorSpec({
     Given("kafka releases 정보 크롤링") {
         Jsoup.connect(BASE_RELEASES_URL)
             .get()

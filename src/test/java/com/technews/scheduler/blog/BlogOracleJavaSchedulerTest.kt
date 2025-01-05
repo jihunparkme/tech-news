@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 @Disabled
 @IntegrationTest
 class BlogOracleJavaSchedulerTest(
-    @Autowired private val blogOracleJavaScheduler: BlogOracleJavaScheduler
+    @Autowired private val blogOracleJavaScheduler: BlogOracleJavaScheduler,
 ) : StringSpec({
         "scrape a oracle java blog post" {
             blogOracleJavaScheduler.runScheduled()

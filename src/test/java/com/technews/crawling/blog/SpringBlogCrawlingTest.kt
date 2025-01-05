@@ -65,7 +65,7 @@ class SpringBlogCrawlingTest : BehaviorSpec({
         private data class Meta(
             val category: String,
             val writer: String,
-            val date: String
+            val date: String,
         )
     }
 }

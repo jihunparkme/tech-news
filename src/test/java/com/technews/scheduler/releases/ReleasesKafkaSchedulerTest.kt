@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Disabled
 class ReleasesKafkaSchedulerTest(
     private val releasesKafkaScheduler: ReleasesKafkaScheduler,
 ) : StringSpec({
-    "scrap a kafka release post" {
-        releasesKafkaScheduler.runSchedule()
-    }
-})
+        "scrap a kafka release post" {
+            releasesKafkaScheduler.runSchedule()
+        }
+    })

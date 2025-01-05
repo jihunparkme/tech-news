@@ -19,5 +19,8 @@ ktlint_standard_function-signature=disabled
 # Parameter should start on a newline
 ktlint_standard_parameter-list-wrapping=disabled
 
+# Exceeded max line length (140)
+ktlint_standard_max-line-length=disabled
+
 
 
