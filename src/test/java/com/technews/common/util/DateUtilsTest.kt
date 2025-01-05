@@ -30,6 +30,9 @@ class DateUtilsTest : StringSpec({
 
         result = parseEnglishDateFormat("21 July 2023")
         result shouldBe "2023-07-21"
+
+        result = parseEnglishDateFormat("10 Oct 2023")
+        result shouldBe "2023-10-10"
     }
 
     "when_input_greenwich_date_parse_then_true" {

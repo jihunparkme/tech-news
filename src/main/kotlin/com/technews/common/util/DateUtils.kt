@@ -12,7 +12,7 @@ private val logger = KotlinLogging.logger {}
 
 object DateUtils {
     val ENGLISH_FORMATTER: DateTimeFormatter =
-        DateTimeFormatter.ofPattern("[MMMM dd, yyyy][MMMM d, yyyy][MMM dd, yyyy][MMM d, yyyy][d MMMM yyyy]", Locale.ENGLISH)
+        DateTimeFormatter.ofPattern("[MMMM dd, yyyy][MMMM d, yyyy][MMM dd, yyyy][MMM d, yyyy][d MMMM yyyy][d MMM yyyy", Locale.ENGLISH)
 
     val GREENWICH_FORMATTER: DateTimeFormatter =
         DateTimeFormatter.ofPattern("[EEE, dd MMM yyyy HH:mm:ss z][EEE, d MMM yyyy HH:mm:ss z]", Locale.ENGLISH)

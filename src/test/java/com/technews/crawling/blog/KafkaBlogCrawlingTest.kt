@@ -1,9 +1,14 @@
 package com.technews.crawling.blog
 
+import com.technews.aggregate.posts.dto.SavePostRequest
+import com.technews.common.dto.Project
+import com.technews.common.util.DateUtils
 import io.kotest.core.spec.style.BehaviorSpec
 import mu.KotlinLogging
 import org.jsoup.Jsoup
+import org.jsoup.nodes.Element
 import org.jsoup.nodes.TextNode
+import java.time.LocalDate
 
 private val logger = KotlinLogging.logger {}
 
@@ -12,18 +17,29 @@ class KafkaBlogCrawlingTest : BehaviorSpec({
         Jsoup.connect(BASE_BLOG_URL)
             .get()
             .select("article")
-            .map {
-                println("title : " + it.select("h2").text())
-                println("url : " + BASE_BLOG_URL + it.select("h2").select("a").attr("href"))
-                val postInfo = it.childNodes().filterIsInstance<TextNode>().get(1).text().trim()
-                println("writer : " + postInfo.split(" - ")[0])
-                println("date : " + postInfo.split(" - ")[1].replace(" (", ""))
-                // TODO: date -> yyyy-mm-dd
-                println()
-            }
+            .mapNotNull { it.toPostOrNull() }
+            .forEach { println(it) }
     }
 }) {
     companion object {
         private const val BASE_BLOG_URL = "https://kafka.apache.org/blog"
+
+        private fun Element.toPostOrNull(): SavePostRequest? = runCatching {
+            val postInfo = childNodes().filterIsInstance<TextNode>().get(1).text().trim().split(" - ")
+
+            SavePostRequest(
+                subject = Project.KAFKA.value,
+                title = select("h2").text(),
+                url = BASE_BLOG_URL + select("h2").select("a").attr("href"),
+                category = Project.KAFKA.value,
+                writer = postInfo[1].replace(" (", ""),
+                date = DateUtils.parseEnglishDateFormat(postInfo[0]),
+                tags = listOf(Project.KAFKA.value, "Blog"),
+                createdDt = LocalDate.now().toString(),
+            )
+        }.getOrElse {
+            logger.error(it) { "Failed to parse post" }
+            null
+        }
     }
 }
