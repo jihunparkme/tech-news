@@ -1,8 +1,8 @@
 package com.technews.aggregate.posts.service
 
-import com.technews.aggregate.posts.constant.JavaBlogsSubject
 import com.technews.aggregate.posts.createPost
 import com.technews.aggregate.posts.domain.repository.PostsRepository
+import com.technews.common.constant.JavaBlogsSubject
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every

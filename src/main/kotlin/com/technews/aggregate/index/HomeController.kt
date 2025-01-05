@@ -1,8 +1,8 @@
 package com.technews.aggregate.index
 
-import com.technews.aggregate.posts.constant.JavaBlogsSubject
-import com.technews.aggregate.posts.constant.SpringBlogsSubject
 import com.technews.aggregate.releases.constant.Categories
+import com.technews.common.constant.JavaBlogsSubject
+import com.technews.common.constant.SpringBlogsSubject
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set

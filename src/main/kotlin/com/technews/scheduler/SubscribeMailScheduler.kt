@@ -8,8 +8,8 @@ import com.technews.aggregate.subscribe.dto.SubscriberMailContents
 import com.technews.aggregate.subscribe.service.SubscribeService
 import com.technews.common.config.event.Events
 import com.technews.common.constant.JdkVersion
+import com.technews.common.constant.Project
 import com.technews.common.constant.SpringRepository
-import com.technews.common.dto.Project
 import com.technews.common.event.dto.SendMailEvent
 import mu.KotlinLogging
 import org.springframework.scheduling.annotation.Scheduled

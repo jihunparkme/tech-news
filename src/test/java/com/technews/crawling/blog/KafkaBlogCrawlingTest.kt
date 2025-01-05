@@ -1,7 +1,7 @@
 package com.technews.crawling.blog
 
 import com.technews.aggregate.posts.dto.SavePostRequest
-import com.technews.common.dto.Project
+import com.technews.common.constant.Project
 import com.technews.common.util.DateUtils
 import io.kotest.core.spec.style.BehaviorSpec
 import mu.KotlinLogging

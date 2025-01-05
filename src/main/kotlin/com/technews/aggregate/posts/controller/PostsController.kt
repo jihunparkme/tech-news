@@ -3,7 +3,7 @@ package com.technews.aggregate.posts.controller
 import com.technews.aggregate.posts.dto.PostResponse
 import com.technews.aggregate.posts.service.PostsService
 import com.technews.common.dto.BasicResponse
-import com.technews.common.dto.Project
+import com.technews.common.constant.Project
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.data.web.PagedResourcesAssembler

@@ -2,7 +2,7 @@ package com.technews.aggregate.posts.service
 
 import com.technews.aggregate.posts.domain.repository.PostsRepository
 import com.technews.aggregate.posts.dto.PostResponse
-import com.technews.common.dto.Project
+import com.technews.common.constant.Project
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service

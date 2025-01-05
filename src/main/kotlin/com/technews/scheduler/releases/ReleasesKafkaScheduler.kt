@@ -2,7 +2,7 @@ package com.technews.scheduler.releases
 
 import com.technews.aggregate.releases.dto.SaveReleaseRequest
 import com.technews.aggregate.releases.service.ReleasesSchedulerService
-import com.technews.common.dto.Project
+import com.technews.common.constant.Project
 import com.technews.common.util.DateUtils
 import mu.KotlinLogging
 import org.jsoup.Jsoup

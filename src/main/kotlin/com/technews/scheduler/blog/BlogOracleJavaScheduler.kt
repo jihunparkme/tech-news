@@ -1,9 +1,9 @@
 package com.technews.scheduler.blog
 
-import com.technews.aggregate.posts.constant.JavaBlogsSubject
 import com.technews.aggregate.posts.dto.SavePostRequest
 import com.technews.aggregate.posts.service.PostsSchedulerService
-import com.technews.common.dto.Project
+import com.technews.common.constant.JavaBlogsSubject
+import com.technews.common.constant.Project
 import com.technews.scheduler.dto.OracleJavaBlogPostInfo
 import mu.KotlinLogging
 import org.jsoup.Jsoup
