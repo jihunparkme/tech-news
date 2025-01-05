@@ -45,8 +45,8 @@ class SendMailEventService(
                     InternetAddress.parse(
                         request.addressList.takeIf { it.isNotEmpty() }
                             ?.joinToString(",")
-                            ?: adminAddress
-                    )
+                            ?: adminAddress,
+                    ),
                 )
                 setFrom(InternetAddress("no-reply@technews.com", MimeUtility.encodeText("tech-news", "UTF-8", "B")))
                 setContent(createTemplate(request.contents), "text/html;charset=UTF-8")

@@ -23,7 +23,7 @@ class ReleaseSpringProjectsScheduler(
             SpringRepository.SPRING_FRAMEWORK,
             SpringRepository.SPRING_BOOT,
             SpringRepository.SPRING_DATA_JPA,
-            SpringRepository.SPRING_BATCH
+            SpringRepository.SPRING_BATCH,
         ).forEach { searchSpringFramework(it) }
     }
 

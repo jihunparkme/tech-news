@@ -24,7 +24,7 @@ class ReleasesJavaScheduler(
             JdkVersion.JDK_11,
             JdkVersion.JDK_17,
             JdkVersion.JDK_21,
-            JdkVersion.JDK_23
+            JdkVersion.JDK_23,
         ).forEach { searchJdkReleases(it) }
     }
 

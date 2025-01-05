@@ -1,9 +1,9 @@
 package com.technews.scheduler.blog
 
 import com.technews.aggregate.posts.constant.JavaBlogsSubject
-import com.technews.common.dto.Project
 import com.technews.aggregate.posts.dto.SavePostRequest
 import com.technews.aggregate.posts.service.PostsSchedulerService
+import com.technews.common.dto.Project
 import com.technews.common.util.DateUtils
 import mu.KotlinLogging
 import org.jsoup.Jsoup
@@ -38,7 +38,7 @@ class BlogOracleJavaRssScheduler(
                     .header("User-Agent", "PostmanRuntime/7.37.3")
                     .header(
                         "Cookie",
-                        "AK_NETWORKTYPE=ESSL; akaalb_BLOGS_PROD_OCI=1735649402~op=Blogs_OCE:oceSitesProdOrigin|~rv=48~m=oceSitesProdOrigin:0|~os=4ea2ebfe4dd25685ddb20c6059d0cd0a~id=bc25bd30e64280e2785e4dcf77d70f51"
+                        "AK_NETWORKTYPE=ESSL; akaalb_BLOGS_PROD_OCI=1735649402~op=Blogs_OCE:oceSitesProdOrigin|~rv=48~m=oceSitesProdOrigin:0|~os=4ea2ebfe4dd25685ddb20c6059d0cd0a~id=bc25bd30e64280e2785e4dcf77d70f51",
                     )
                     .get()
                     .select("item")

@@ -1,9 +1,9 @@
 package com.technews.scheduler.blog
 
-import com.technews.common.dto.Project
 import com.technews.aggregate.posts.constant.SpringBlogsSubject
 import com.technews.aggregate.posts.dto.SavePostRequest
 import com.technews.aggregate.posts.service.PostsSchedulerService
+import com.technews.common.dto.Project
 import com.technews.common.util.DateUtils
 import com.technews.scheduler.dto.SpringBlogMeta
 import mu.KotlinLogging
