@@ -2,15 +2,13 @@ package com.technews.scheduler.blog
 
 import com.technews.IntegrationTest
 import io.kotest.core.spec.style.StringSpec
-import org.junit.jupiter.api.Disabled
 import org.springframework.beans.factory.annotation.Autowired
 
-@Disabled
 @IntegrationTest
 class BlogOracleJavaSchedulerTest(
     @Autowired private val blogOracleJavaScheduler: BlogOracleJavaScheduler,
 ) : StringSpec({
-        "scrape a oracle java blog post" {
+        "scrape a oracle java blog post".config(enabled = false) {
             blogOracleJavaScheduler.runScheduled()
         }
     })

@@ -3,15 +3,13 @@ package com.technews.scheduler.blog
 import com.technews.IntegrationTest
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
-import org.junit.jupiter.api.Disabled
 import org.springframework.beans.factory.annotation.Autowired
 
-@Disabled
 @IntegrationTest
 class BlogJavaInsideSchedulerTest(
     @Autowired private val blogJavaInsideScheduler: BlogJavaInsideScheduler,
 ) : StringSpec({
-        "scrape java inside post" {
+        "scrape java inside post".config(enabled = false) {
             blogJavaInsideScheduler.runSchedule()
         }
 
