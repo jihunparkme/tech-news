@@ -43,6 +43,6 @@ class DateUtilsTest : StringSpec({
         result shouldBe "2024-10-16"
 
         result = parseGreenwichToSeoul("Tue, 7 Nov 2023 18:30:00 GMT")
-        result shouldBe "2024-11-08"
+        result shouldBe "2023-11-08"
     }
 })
