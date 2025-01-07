@@ -7,10 +7,8 @@ import com.technews.common.event.dto.SendMailEvent
 import io.kotest.core.spec.style.ExpectSpec
 import io.kotest.extensions.spring.SpringTestExtension
 import io.kotest.extensions.spring.SpringTestLifecycleMode
-import org.junit.jupiter.api.Disabled
 import org.springframework.beans.factory.annotation.Autowired
 
-@Disabled
 @IntegrationTest
 class SendMailEventServiceTest(
     @Autowired private val sendMailEventService: SendMailEventService,
@@ -24,7 +22,7 @@ class SendMailEventServiceTest(
                 addressList = listOf("jihunpark.tech@gmail.com"),
             )
 
-            expect("메일이 발송된다") {
+            expect("메일이 발송된다").config(enabled = false) {
                 Events.raise(
                     sendMailEvent,
                 )
@@ -34,7 +32,7 @@ class SendMailEventServiceTest(
         context("SubscriberMailContents를 전달하면") {
             val contents = createSubscriberMailContents()
 
-            expect("메일 템플릿을 생성한다") {
+            expect("메일 템플릿을 생성한다").config(enabled = false) {
                 val template = sendMailEventService.createTemplate(contents)
                 print(template)
             }
