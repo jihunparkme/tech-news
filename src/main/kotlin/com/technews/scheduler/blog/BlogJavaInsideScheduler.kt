@@ -21,11 +21,11 @@ class BlogJavaInsideScheduler(
 ) {
     @Scheduled(cron = "0 0 1 * * ?")
     fun runSchedule() {
-        searchJavaBlogPosts(JavaBlogsSubject.INSIDE)
+        searchJavaBlogPosts()
     }
 
-    private fun searchJavaBlogPosts(subject: JavaBlogsSubject) {
-        val lastPost = postsSchedulerService.findLastPost(subject.value)
+    private fun searchJavaBlogPosts() {
+        val lastPost = postsSchedulerService.findLastPost(JavaBlogsSubject.INSIDE.value)
         posts.filter { it.isNotJobOpeningPost() }
             .filter { it.isLatestDatePost(lastPost.date) }
             .forEach { postsSchedulerService.insertPost(it) }
