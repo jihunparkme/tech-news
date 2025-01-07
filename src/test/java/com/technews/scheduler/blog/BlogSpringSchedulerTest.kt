@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 class BlogSpringSchedulerTest(
     @Autowired private val blogSpringScheduler: BlogSpringScheduler,
 ) : StringSpec({
-        "scrape a spring blog post".config(enabled = false) {
+        "scrape a spring blog post" {
             blogSpringScheduler.runSchedule()
         }
     })

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 class BlogOracleJavaRssSchedulerTest(
     @Autowired private val blogOracleJavaRssScheduler: BlogOracleJavaRssScheduler,
 ) : StringSpec({
-        "scrape a oracle java blog rss".config(enabled = false) {
+        "scrape a oracle java blog rss" {
             blogOracleJavaRssScheduler.runSchedule()
         }
     })

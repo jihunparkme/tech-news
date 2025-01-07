@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 class BlogKafkaSchedulerTest(
     @Autowired private val blogKafkaScheduler: BlogKafkaScheduler,
 ): StringSpec({
-    "scrape a kafka blog post".config(enabled = false) {
+    "scrape a kafka blog post" {
         blogKafkaScheduler.runSchedule()
     }
 })

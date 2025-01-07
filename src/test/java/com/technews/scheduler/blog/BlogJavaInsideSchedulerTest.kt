@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired
 class BlogJavaInsideSchedulerTest(
     @Autowired private val blogJavaInsideScheduler: BlogJavaInsideScheduler,
 ) : StringSpec({
-        "scrape java inside post".config(enabled = false) {
+        "scrape java inside post" {
             blogJavaInsideScheduler.runSchedule()
         }
 

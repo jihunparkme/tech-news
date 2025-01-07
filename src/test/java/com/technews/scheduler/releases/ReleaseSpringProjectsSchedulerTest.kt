@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 class ReleaseSpringProjectsSchedulerTest(
     @Autowired private val releaseSpringProjectsScheduler: ReleaseSpringProjectsScheduler,
 ) : StringSpec({
-        "scrape a spring project releases post".config(enabled = false) {
+        "scrape a spring project releases post" {
             releaseSpringProjectsScheduler.runSchedule()
         }
     })

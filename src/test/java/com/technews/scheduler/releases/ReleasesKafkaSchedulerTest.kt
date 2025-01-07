@@ -7,7 +7,7 @@ import io.kotest.core.spec.style.StringSpec
 class ReleasesKafkaSchedulerTest(
     private val releasesKafkaScheduler: ReleasesKafkaScheduler,
 ) : StringSpec({
-        "scrap a kafka release post".config(enabled = false) {
+        "scrap a kafka release post" {
             releasesKafkaScheduler.runSchedule()
         }
     })
