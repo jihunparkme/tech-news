@@ -17,7 +17,6 @@ class KotlinReleasesCrawlingTest : BehaviorSpec({
                 println("label : " + it.select(".Box-body").select("flex-column"))
                 println("url : " + GITHUB_URL + it.select(".Box-body").select("a").select(".Link--primary").attr("href"))
                 println()
-                println()
             }
             .forEach { println(it) }
     }
